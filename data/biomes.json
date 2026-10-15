@@ -1,0 +1,30 @@
+{
+  "$comment": "Planet Zoo 2 biomes. 'ground' colours are OUR design choices (not game assets) and were contrast-checked against the casing ink #13201A (all >= 3:1). See docs/07-design-system.md.",
+  "schemaVersion": 1,
+  "lastReviewed": "2026-10-15",
+  "source": [
+    { "url": "https://wikily.gg/planet-zoo-2/biomes", "kind": "community" },
+    { "url": "https://pz2tools.wiki/", "kind": "community" }
+  ],
+  "biomes": [
+    { "id": "grassland", "label": "Grassland", "aka": ["Savannah"], "type": "land", "mapGround": true, "verified": false, "ground": "#5BAB4E", "pathFill": "#E8ECED", "isDefault": true },
+    { "id": "tropical", "label": "Tropical", "aka": ["Rainforest"], "type": "land", "mapGround": true, "verified": false, "ground": "#2E7D46", "pathFill": "#E8ECED" },
+    { "id": "temperate", "label": "Temperate", "aka": [], "type": "land", "mapGround": true, "verified": false, "ground": "#4F9A5A", "pathFill": "#E8ECED" },
+    { "id": "desert", "label": "Desert", "aka": [], "type": "land", "mapGround": true, "verified": false, "ground": "#D9BC7E", "pathFill": "#4A4F55" },
+    { "id": "taiga", "label": "Taiga", "aka": [], "type": "land", "mapGround": true, "verified": false, "ground": "#5E8566", "pathFill": "#E8ECED" },
+    { "id": "tundra", "label": "Tundra", "aka": [], "type": "land", "mapGround": true, "verified": false, "ground": "#DCE4E2", "pathFill": "#4A4F55" },
+    { "id": "wetlands", "label": "Wetlands", "aka": [], "type": "water-wetland", "mapGround": true, "verified": false, "ground": "#5E9A7A", "pathFill": "#E8ECED", "notes": "Unverified whether Wetlands is selectable as a map biome in PZ2. Show with an 'unverified' note." },
+    { "id": "lakes-rivers", "label": "Lakes and Rivers", "aka": [], "type": "water-wetland", "mapGround": false, "verified": false },
+    { "id": "reef", "label": "Reef", "aka": [], "type": "water-wetland", "mapGround": false, "verified": false },
+    { "id": "estuarine", "label": "Estuarine", "aka": [], "type": "water-wetland", "mapGround": false, "verified": false },
+    { "id": "open-sea", "label": "Open Sea", "aka": [], "type": "water-wetland", "mapGround": false, "verified": false },
+    { "id": "mangrove", "label": "Mangrove", "aka": [], "type": "water-wetland", "mapGround": false, "verified": false }
+  ],
+  "regions": {
+    "$comment": "Continent and ocean names as used by the official Zoopedia's region filter (it says 'Australasia' where one community site said 'Oceania').",
+    "verified": true,
+    "source": "https://www.planetzoogame.com/2/zoopedia",
+    "land": ["Africa", "Asia", "Australasia", "Europe", "North America", "South America", "Arctic"],
+    "ocean": ["Pacific Ocean", "Indian Ocean", "Atlantic Ocean", "Arctic Ocean", "Southern Ocean"]
+  }
+}

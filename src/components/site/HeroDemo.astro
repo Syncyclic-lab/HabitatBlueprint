@@ -1,0 +1,175 @@
+---
+/**
+ * Landing hero: a habitat is traced point by point and its area counts up.
+ * The static HTML is the finished state, so it works with JavaScript off and under reduced
+ * motion. The script (hero-demo.ts) replays the drawing once on load, in under 5 seconds, with a
+ * visible Pause/Replay button (WCAG 2.2.2). Coordinates are meters, like the planner.
+ */
+import { en } from '../../i18n/en';
+import {
+  DEFAULT_BIOME,
+  OBJECT_TYPES,
+  getBuildingType,
+  getSubZoneStyle,
+  getSwatch,
+} from '../../data/index';
+import { ICONS } from '../../assets/icons/icons';
+
+const t = en.landing.demo;
+const casing = OBJECT_TYPES.casing;
+const ground = DEFAULT_BIOME.ground ?? '#5BAB4E';
+const pathFill = DEFAULT_BIOME.pathFill ?? '#E8ECED';
+const gold = getSwatch('savanna')?.fill ?? '#DBB34D';
+const forest = getSwatch('forest')?.fill ?? '#20602A';
+const water = getSubZoneStyle('water')?.fill ?? '#3FB7E0';
+const guest = getBuildingType('guest-building')?.fill ?? '#EF37AF';
+const facility = getBuildingType('restrooms')?.fill ?? '#EF7837';
+
+// The habitat being drawn: exactly 1,842 m² (a 40 × 36 m rectangle plus a 12 m tall trapezoid).
+const points: Array<[number, number]> = [
+  [96, 6],
+  [136, 6],
+  [136, 42],
+  [123, 54],
+  [96, 54],
+];
+const polygon = points.map((p) => p.join(',')).join(' ');
+
+// Background shapes, each drawn three times: fill, dark casing, light casing (docs/07).
+const shapes = [
+  { d: 'M0 58 H140 V62 H0 Z M88 0 H92 V100 H88 Z', fill: pathFill },
+  { d: 'M6 6 H44 Q50 6 50 12 V40 H6 Z', fill: gold },
+  { d: 'M25 28 a9 6 0 1 0 18 0 a9 6 0 1 0 -18 0 Z', fill: water, pattern: true },
+  { d: 'M6 68 H40 L48 76 V94 H6 Z', fill: forest },
+  { d: 'M54 66 H70 V80 H54 Z', fill: guest },
+  { d: 'M74 66 H84 V74 H74 Z', fill: facility },
+];
+const numberFmt = new Intl.NumberFormat('en-US');
+---
+
+<figure class="demo" data-hero-demo data-points={JSON.stringify(points)} data-final={t.finalArea}>
+  <div class="demo-stage">
+    <div class="demo-plate">
+      <svg
+        viewBox="0 0 140 100"
+        role="img"
+        aria-labelledby="hero-demo-title hero-demo-desc"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <title id="hero-demo-title">{t.title}</title>
+        <desc id="hero-demo-desc">{t.desc}</desc>
+        <defs>
+          <pattern id="hero-waves" width="6" height="3" patternUnits="userSpaceOnUse">
+            <path
+              d="M0 1.5 Q1.5 0 3 1.5 T6 1.5"
+              fill="none"
+              stroke="#000000"
+              stroke-opacity="0.4"
+              stroke-width="0.4"
+            ></path>
+          </pattern>
+        </defs>
+        <rect width="140" height="100" fill={ground}></rect>
+
+        {shapes.map((s) => (
+          <g>
+            <path d={s.d} fill={s.fill} />
+            {s.pattern && <path d={s.d} fill="url(#hero-waves)" />}
+            <path d={s.d} class="casing-outer" stroke={casing.outer} />
+            <path d={s.d} class="casing-inner" stroke={casing.inner} />
+          </g>
+        ))}
+        <path
+          d={ICONS.person.d}
+          fill="#000000"
+          fill-rule="evenodd"
+          transform="translate(56.6 67.6) scale(0.45)"
+        ></path>
+        <path
+          d={ICONS.restroom.d}
+          fill="#000000"
+          fill-rule="evenodd"
+          transform="translate(76.2 67.2) scale(0.24)"
+        ></path>
+
+        <!-- The habitat being drawn. Static HTML shows the finished, closed shape. -->
+        <g data-demo-shape>
+          <polygon points={polygon} fill={gold}></polygon>
+          <polygon points={polygon} class="casing-outer" stroke={casing.outer}></polygon>
+          <polygon points={polygon} class="casing-inner" stroke={casing.inner}></polygon>
+        </g>
+        <polyline
+          data-demo-line
+          points=""
+          class="demo-line"
+          stroke={casing.outer}
+          visibility="hidden"
+        ></polyline>
+        <g data-demo-vertices>
+          {points.map(([x, y]) => (
+            <circle cx={x} cy={y} r="1.3" class="demo-vertex" />
+          ))}
+        </g>
+      </svg>
+    </div>
+    <p class="readout-tag">
+      <span class="readout-name">{t.habitatLabel}</span>
+      <span class="readout-value">
+        <span data-demo-area>{numberFmt.format(t.finalArea)}</span>&#8201;m²
+      </span>
+      <span>{t.finalPct}</span>
+    </p>
+  </div>
+  <div class="demo-controls">
+    <button
+      type="button"
+      class="btn btn-small"
+      data-demo-toggle
+      data-label-pause={t.pause}
+      data-label-replay={t.replay}
+      data-label-play={t.play}
+      hidden
+    >
+      {t.replay}
+    </button>
+  </div>
+</figure>
+
+<style>
+  .casing-outer,
+  .casing-inner,
+  .demo-line {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+  }
+
+  .casing-outer,
+  .demo-line {
+    stroke-width: 3.5px;
+  }
+
+  .casing-inner {
+    stroke-width: 1px;
+  }
+
+  .demo-vertex {
+    fill: #ffffff;
+    stroke: #13201a;
+    stroke-width: 1.5px;
+    vector-effect: non-scaling-stroke;
+  }
+
+  @media (forced-colors: active) {
+    .casing-outer,
+    .casing-inner,
+    .demo-line {
+      stroke: CanvasText;
+    }
+  }
+</style>
+
+<script>
+  import { initHeroDemo } from './hero-demo';
+  initHeroDemo();
+</script>

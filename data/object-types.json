@@ -1,0 +1,68 @@
+{
+  "$comment": "Map object types and their default styling. Colours were sampled from Kyle's reference images (reference/*.png) and contrast-checked. 'ink' is the label/icon colour with the higher contrast against the fill (all >= 4.5:1). Every fill is drawn with the two-tone casing from docs/07-design-system.md so its edge is >= 3:1 against any neighbour. Patterns give a non-colour cue (WCAG 1.4.1).",
+  "schemaVersion": 1,
+  "lastReviewed": "2026-10-15",
+  "casing": { "outer": "#13201A", "inner": "#FFF8C9", "outerWidthPx": 1.5, "innerWidthPx": 1, "nonScaling": true },
+  "habitatKinds": [
+    { "id": "habitat", "label": "Habitat", "defaultFill": "#DBB34D", "ink": "#000000", "pattern": "none", "hasFlyingArea": false },
+    { "id": "aviary", "label": "Aviary", "defaultFill": "#DBB34D", "ink": "#000000", "pattern": "mesh", "hasFlyingArea": true, "notes": "Mesh pattern overlay signals the roof." },
+    { "id": "aquarium", "label": "Aquarium", "defaultFill": "#37ECEF", "ink": "#000000", "pattern": "waves", "hasFlyingArea": false },
+    { "id": "exhibit", "label": "Exhibit", "defaultFill": "#DBB34D", "ink": "#000000", "pattern": "none", "hasFlyingArea": false, "notes": "Small enclosure, usually inside an animal house." }
+  ],
+  "subZones": [
+    { "id": "water", "label": "Water", "fill": "#3FB7E0", "ink": "#000000", "pattern": "waves" },
+    { "id": "deepWater", "label": "Deep water", "fill": "#1F6FA8", "ink": "#FFFFFF", "pattern": "waves-dense" },
+    { "id": "climbing", "label": "Climbing area", "fill": "#8A6A3B", "ink": "#FFFFFF", "pattern": "crosshatch", "phase": "P2" },
+    { "id": "shelter", "label": "Shelter footprint", "fill": "#4B5C60", "ink": "#FFFFFF", "pattern": "none", "phase": "P2" },
+    { "id": "flying", "label": "Flying area", "fill": "#A8D4EE", "ink": "#000000", "pattern": "mesh", "phase": "P2" }
+  ],
+  "buildingTypes": [
+    { "id": "animal-house", "label": "Animal house", "fill": "#EF37AF", "ink": "#000000", "icon": "building-animal-house", "pattern": "none" },
+    { "id": "guest-building", "label": "Guest building", "fill": "#EF37AF", "ink": "#000000", "icon": "person", "pattern": "dots" },
+    { "id": "shop", "label": "Shop", "fill": "#EF7837", "ink": "#000000", "icon": "gift" },
+    { "id": "food", "label": "Restaurant / food", "fill": "#EF7837", "ink": "#000000", "icon": "food" },
+    { "id": "drinks", "label": "Drinks", "fill": "#EF7837", "ink": "#000000", "icon": "drink" },
+    { "id": "restrooms", "label": "Restrooms", "fill": "#EF7837", "ink": "#000000", "icon": "restroom" },
+    { "id": "information", "label": "Information", "fill": "#EF7837", "ink": "#000000", "icon": "info" },
+    { "id": "staff", "label": "Staff facility", "fill": "#4B5C60", "ink": "#FFFFFF", "icon": "staff", "pattern": "diagonal" },
+    { "id": "research", "label": "Research / education", "fill": "#5B2C6F", "ink": "#FFFFFF", "icon": "research" },
+    { "id": "vet", "label": "Quarantine / vet", "fill": "#4B5C60", "ink": "#FFFFFF", "icon": "vet", "pattern": "cross" },
+    { "id": "entrance", "label": "Entrance", "fill": "#EF7837", "ink": "#000000", "icon": "entrance" },
+    { "id": "transport-station", "label": "Transport station", "fill": "#5F5252", "ink": "#FFFFFF", "icon": "transport" },
+    { "id": "other", "label": "Other building", "fill": "#A3ABAF", "ink": "#000000", "icon": null }
+  ],
+  "pathTypes": [
+    { "id": "guest", "label": "Guest path", "fill": "#E8ECED", "defaultWidthM": 4, "suggestedWidthRangeM": [2, 10], "suggestionSource": "community, unverified", "dash": null },
+    { "id": "staff", "label": "Staff path", "fill": "#A3ABAF", "defaultWidthM": 3, "suggestedWidthRangeM": [2, 6], "suggestionSource": "community, unverified", "dash": null },
+    { "id": "queue", "label": "Queue path", "fill": "#F2D9A0", "defaultWidthM": 2, "suggestedWidthRangeM": [2, 4], "suggestionSource": "community, unverified", "dash": null },
+    { "id": "elevated", "label": "Elevated path", "fill": "#E8ECED", "defaultWidthM": 4, "suggestedWidthRangeM": [2, 8], "suggestionSource": "community, unverified", "dash": [6, 4] },
+    { "id": "road", "label": "Road", "fill": "#5F5252", "defaultWidthM": 8, "suggestedWidthRangeM": [4, 20], "suggestionSource": "design default", "dash": null },
+    { "id": "transport", "label": "Transport ride line", "fill": "#13201A", "defaultWidthM": 2, "suggestedWidthRangeM": [1, 4], "suggestionSource": "design default", "dash": [2, 2], "phase": "P2" }
+  ],
+  "widthLimitsM": { "min": 1, "max": 20 },
+  "otherTypes": [
+    { "id": "plaza", "label": "Plaza", "fill": "#CFCFBE", "ink": "#000000" },
+    { "id": "water-feature", "label": "Water feature", "fill": "#3FB7E0", "ink": "#000000", "pattern": "waves" },
+    { "id": "planting", "label": "Planting", "fill": "#3E8E41", "ink": "#000000", "pattern": "leaf-dots", "phase": "P2" },
+    { "id": "barrier", "label": "Barrier line", "stroke": "#13201A", "strokeWidthPx": 3, "phase": "P2" },
+    { "id": "label", "label": "Label", "ink": "#13201A", "halo": "#FFFFFF" },
+    { "id": "measure", "label": "Measurement", "stroke": "#0033CC", "halo": "#FFFFFF" }
+  ],
+  "areaPalette": {
+    "$comment": "Colours users pick for themed areas (e.g. 'African grasslands'). Each has a distinct pattern for the 'patterns on' mode. Ordered so neighbours in the list are easy to tell apart.",
+    "swatches": [
+      { "id": "savanna", "label": "Savanna gold", "fill": "#DBB34D", "ink": "#000000", "pattern": "none" },
+      { "id": "forest", "label": "Forest green", "fill": "#20602A", "ink": "#FFFFFF", "pattern": "diagonal" },
+      { "id": "lagoon", "label": "Lagoon cyan", "fill": "#37ECEF", "ink": "#000000", "pattern": "waves" },
+      { "id": "orchid", "label": "Orchid", "fill": "#B879D6", "ink": "#000000", "pattern": "dots" },
+      { "id": "meadow", "label": "Meadow green", "fill": "#52C42B", "ink": "#000000", "pattern": "horizontal" },
+      { "id": "brick", "label": "Brick red", "fill": "#B34A4A", "ink": "#FFFFFF", "pattern": "crosshatch" },
+      { "id": "marsh", "label": "Marsh olive", "fill": "#99B247", "ink": "#000000", "pattern": "vertical" },
+      { "id": "glacier", "label": "Glacier blue", "fill": "#A8D4EE", "ink": "#000000", "pattern": "grid" },
+      { "id": "plum", "label": "Plum", "fill": "#5B2C6F", "ink": "#FFFFFF", "pattern": "zigzag" },
+      { "id": "sand", "label": "Sand", "fill": "#E8C987", "ink": "#000000", "pattern": "stipple" },
+      { "id": "teal", "label": "Teal", "fill": "#1E8C86", "ink": "#000000", "pattern": "chevron" },
+      { "id": "rose", "label": "Rose", "fill": "#F4A7B9", "ink": "#000000", "pattern": "rings" }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+---
+/** Site header: name (home link) and the primary navigation, identical on every page. */
+import { en } from '../../i18n/en';
+import { withBase } from '../../config/site';
+import LogoMark from './LogoMark.astro';
+
+const links = [
+  { href: withBase('/planner'), label: en.nav.planner },
+  { href: withBase('/help'), label: en.nav.help },
+  { href: withBase('/accessibility'), label: en.nav.accessibility },
+];
+
+const current = Astro.url.pathname.replace(/\/+$/, '');
+const isCurrent = (href: string) => current === href.replace(/\/+$/, '');
+---
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-name" href={withBase('/')} aria-label={en.site.homeLinkLabel}>
+      <LogoMark />
+      <span>{en.site.name}</span>
+    </a>
+    <nav aria-label={en.site.primaryNavLabel}>
+      <ul class="site-nav" role="list">
+        {links.map((link) => (
+          <li>
+            <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

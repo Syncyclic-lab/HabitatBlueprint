@@ -1,0 +1,36 @@
+---
+/** Decorative icon from the shared set. Always aria-hidden: name the control or text next to it. */
+import { ICONS, type IconId } from '../../assets/icons/icons';
+
+interface Props {
+  id: IconId;
+  size?: number;
+  class?: string;
+}
+
+const { id, size = 24, class: className } = Astro.props;
+const def = ICONS[id];
+const stroke = 'stroke' in def && def.stroke;
+---
+
+<svg
+  class:list={['icon', className]}
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  aria-hidden="true"
+  focusable="false"
+>
+  {stroke ? (
+    <path
+      d={def.d}
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  ) : (
+    <path d={def.d} fill="currentColor" fill-rule="evenodd" />
+  )}
+</svg>

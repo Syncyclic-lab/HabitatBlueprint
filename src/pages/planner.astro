@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { en } from '../i18n/en';
+
+const t = en.pages.planner;
+---
+
+<BaseLayout title={t.title} description={t.description} variant="app">
+  <div class="page">
+    <h1>{t.title}</h1>
+    <p>{t.loading}</p>
+  </div>
+</BaseLayout>

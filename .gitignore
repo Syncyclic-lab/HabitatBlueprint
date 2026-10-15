@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+src/generated/
+
+# test output
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+
+# env & local
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp.html
+
+# Kyle's reference screenshots stay out of the public repo (they may contain third-party art).
+# The notes in reference/README.md are committed.
+reference/*.png

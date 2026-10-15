@@ -1,0 +1,18 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import Blocks from '../components/site/Blocks.astro';
+import { en } from '../i18n/en';
+import { terms } from '../i18n/en-content';
+---
+
+<ContentLayout
+  title={en.pages.terms.title}
+  description={en.pages.terms.description}
+  lead={terms.lead}
+  updated={terms.updated}
+>
+  <p class="notice" slot="header">
+    {terms.draftNote}
+  </p>
+  <Blocks blocks={terms.blocks} />
+</ContentLayout>

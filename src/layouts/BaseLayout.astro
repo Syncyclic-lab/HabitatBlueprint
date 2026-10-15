@@ -1,0 +1,59 @@
+---
+import '@fontsource/atkinson-hyperlegible-next/400.css';
+import '@fontsource/atkinson-hyperlegible-next/500.css';
+import '@fontsource/atkinson-hyperlegible-next/700.css';
+import '@fontsource/atkinson-hyperlegible-next/800.css';
+import '@fontsource/atkinson-hyperlegible-mono/400.css';
+import '@fontsource/atkinson-hyperlegible-mono/700.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/site.css';
+import { en } from '../i18n/en';
+import { SITE_DESCRIPTION, withBase } from '../config/site';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+
+interface Props {
+  /** Page name. The site name is appended unless `fullTitle` is set. */
+  title: string;
+  description?: string;
+  /** Use `title` as the whole <title> (the home page). */
+  fullTitle?: boolean;
+  /** "content" pages scroll normally; "app" gives the planner the full viewport. */
+  variant?: 'content' | 'app';
+}
+
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  fullTitle = false,
+  variant = 'content',
+} = Astro.props;
+const documentTitle = fullTitle ? title : `${title}${en.site.titleSuffix}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body class={`layout-${variant}`}>
+    <a class="skip-link" href="#main">
+      {en.site.skipLink}
+    </a>
+    <SiteHeader />
+    <main id="main" tabindex="-1" class={`main main-${variant}`}>
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

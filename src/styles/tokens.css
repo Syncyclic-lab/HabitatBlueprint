@@ -1,0 +1,149 @@
+/*
+ * Design tokens. Values and contrast checks come from docs/07-design-system.md.
+ * Map colours live in data/*.json, not here.
+ */
+
+/* Metric-matched fallbacks so text doesn't shift when the web fonts arrive. */
+@font-face {
+  font-family: 'Atkinson Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 120.75%;
+  ascent-override: 81.49%;
+  descent-override: 26.17%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Atkinson Mono Fallback';
+  src: local('Courier New'), local('Courier');
+  size-adjust: 105.3%;
+  ascent-override: 93.45%;
+  descent-override: 30.01%;
+  line-gap-override: 0%;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* Chrome colours (light) */
+  --paper: #f2f5ee;
+  --surface: #ffffff;
+  --ink: #13201a;
+  --ink-muted: #4a5a50;
+  --line: #7c8a80;
+  --keeper: #1e5631;
+  --keeper-ink: #ffffff;
+  --keeper-hover: #174427;
+  --grass: #5bab4e;
+  --savanna: #dbb34d;
+  --on-savanna: #13201a;
+  --danger: #b3261e;
+  --danger-ink: #ffffff;
+  --danger-hover: #95201a;
+  --measure: #0033cc;
+  --selection: #13201a;
+  --selection-halo: #ffffff;
+  --focus-ring: #13201a;
+  --focus-halo: #ffffff;
+  --tint: #e3ebdc;
+
+  /* Typography */
+  --font-sans: 'Atkinson Hyperlegible Next', 'Atkinson Fallback', system-ui, sans-serif;
+  --font-mono: 'Atkinson Hyperlegible Mono', 'Atkinson Mono Fallback', ui-monospace, monospace;
+  --t-display: clamp(2.5rem, 4.2vw + 1rem, 4.25rem);
+  --t-h1: 2.441rem;
+  --t-h2: 1.953rem;
+  --t-h3: 1.563rem;
+  --t-h4: 1.25rem;
+  --t-lead: 1.25rem;
+  --t-body: 1rem;
+  --t-body-content: 1.125rem;
+  --t-small: 0.875rem;
+  --t-readout: 2rem;
+  --t-readout-hero: 3.5rem;
+
+  /* Spacing (rem) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* Shape */
+  --r-control: 8px;
+  --r-panel: 12px;
+  --border: 1px solid var(--line);
+  --border-strong: 2px solid var(--ink);
+  --target-min: 24px;
+  --target-primary: 44px;
+
+  /* Motion */
+  --dur-panel: 150ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Map casing (docs/07 casing rule) */
+  --casing-outer: #13201a;
+  --casing-inner: #fff8c9;
+  --casing-outer-width: 1.5px;
+}
+
+/* Dark theme: follows the system unless the user picked a theme in the planner. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #14211a;
+    --surface: #1c2b23;
+    --ink: #e8efe9;
+    --ink-muted: #a9b8ae;
+    --line: #6f8577;
+    --keeper: #8fd49a;
+    --keeper-ink: #13201a;
+    --keeper-hover: #a8dfb1;
+    --danger: #ff8a80;
+    --danger-ink: #13201a;
+    --danger-hover: #ffa69e;
+    --focus-ring: #e8efe9;
+    --focus-halo: #13201a;
+    --tint: #24372d;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #14211a;
+  --surface: #1c2b23;
+  --ink: #e8efe9;
+  --ink-muted: #a9b8ae;
+  --line: #6f8577;
+  --keeper: #8fd49a;
+  --keeper-ink: #13201a;
+  --keeper-hover: #a8dfb1;
+  --danger: #ff8a80;
+  --danger-ink: #13201a;
+  --danger-hover: #ffa69e;
+  --focus-ring: #e8efe9;
+  --focus-halo: #13201a;
+  --tint: #24372d;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* More contrast: muted text and lines become full ink; the map casing widens. */
+@media (prefers-contrast: more) {
+  :root {
+    --ink-muted: var(--ink);
+    --line: var(--ink);
+    --casing-outer-width: 2.5px;
+  }
+}
+
+@media (min-width: 60rem) {
+  :root {
+    --t-readout-hero: 3.5rem;
+  }
+}

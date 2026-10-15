@@ -1,0 +1,194 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { en } from '../i18n/en';
+import { withBase } from '../config/site';
+import { BARRIERS, BIOMES, MAPS, SPECIES } from '../data/index';
+import manifest from '../assets/icons/manifest.json';
+import { ICONS, type IconId } from '../assets/icons/icons';
+
+interface LicenceEntry {
+  name: string;
+  version: string;
+  license: string;
+  kind: 'runtime' | 'build';
+}
+
+// Written by `node scripts/licenses.mjs --write`, which `npm run build` runs first.
+const generated = import.meta.glob<{ default: LicenceEntry[] }>('../generated/licenses.json', {
+  eager: true,
+});
+const licences: LicenceEntry[] = Object.values(generated)[0]?.default ?? [];
+const runtime = licences.filter((l) => l.kind === 'runtime');
+const build = licences.filter((l) => l.kind === 'build');
+
+const t = en.pages.credits;
+const iconPath = (id: string) => ICONS[id as IconId];
+
+const dataSources = [
+  {
+    label: 'Species list (136 species)',
+    url: SPECIES.source.url,
+    note: 'Official Planet Zoo 2 Zoopedia',
+  },
+  ...BIOMES.source.map((s) => ({
+    label: 'Biome names',
+    url: s.url,
+    note: 'Community wiki, unverified',
+  })),
+  {
+    label: 'Barrier names and grades',
+    url: BARRIERS.source.url,
+    note: 'Community wiki, unverified',
+  },
+  ...(MAPS.presets[0]?.source ?? []).map((s) => ({
+    label: 'Map size evidence',
+    url: s.url,
+    note: s.claim,
+  })),
+];
+---
+
+<ContentLayout title={t.title} description={t.description}>
+  <h2 id="software">{t.softwareHeading}</h2>
+  <p>{t.softwareIntro}</p>
+  <div class="table-wrap">
+    <table>
+      <caption>{t.softwareCaption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t.tablePackage}</th>
+          <th scope="col">{t.tableVersion}</th>
+          <th scope="col">{t.tableLicence}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {runtime.map((l) => (
+          <tr>
+            <th scope="row">{l.name}</th>
+            <td>{l.version}</td>
+            <td>{l.license}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="build-tools">{t.buildHeading}</h2>
+  <p>{t.buildIntro}</p>
+  <div class="table-wrap">
+    <table>
+      <caption>{t.buildCaption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t.tablePackage}</th>
+          <th scope="col">{t.tableVersion}</th>
+          <th scope="col">{t.tableLicence}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {build.map((l) => (
+          <tr>
+            <th scope="row">{l.name}</th>
+            <td>{l.version}</td>
+            <td>{l.license}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="fonts">{t.fontsHeading}</h2>
+  <p>{t.fontsBody}</p>
+  <ul>
+    <li>
+      <a href={withBase('/licenses/atkinson-hyperlegible-next-OFL.txt')}>
+        Atkinson Hyperlegible Next licence (SIL OFL 1.1)
+      </a>
+    </li>
+    <li>
+      <a href={withBase('/licenses/atkinson-hyperlegible-mono-OFL.txt')}>
+        Atkinson Hyperlegible Mono licence (SIL OFL 1.1)
+      </a>
+    </li>
+  </ul>
+
+  <h2 id="icons">{t.iconsHeading}</h2>
+  <p>{t.iconsIntro}</p>
+  <div class="table-wrap">
+    <table class="icon-table">
+      <caption>{t.iconsCaption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t.tableIcon}</th>
+          <th scope="col">{t.tableAuthor}</th>
+          <th scope="col">{t.tableLicence}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {manifest.icons.map((icon) => {
+          const def = iconPath(icon.id);
+          return (
+            <tr>
+              <th scope="row">
+                <span class="icon-cell">
+                  {def && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      {'stroke' in def && def.stroke ? (
+                        <path d={def.d} class="icon-stroke" />
+                      ) : (
+                        <path d={def.d} class="icon-fill" />
+                      )}
+                    </svg>
+                  )}
+                  {icon.label}
+                </span>
+              </th>
+              <td>{icon.author}</td>
+              <td>{icon.licence === 'OWN' ? t.ownWork : icon.licence}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="data">{t.dataHeading}</h2>
+  <ul>
+    {dataSources.map((s) => (
+      <li>
+        <a href={s.url} rel="noopener noreferrer">
+          {s.label}
+        </a>
+        : {s.note}
+      </li>
+    ))}
+  </ul>
+</ContentLayout>
+
+<style>
+  .icon-cell {
+    display: inline-flex;
+    gap: var(--s-3);
+    align-items: center;
+    font-weight: 400;
+  }
+
+  .icon-fill {
+    fill: currentColor;
+    fill-rule: evenodd;
+  }
+
+  .icon-stroke {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

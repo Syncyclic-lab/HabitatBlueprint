@@ -1,0 +1,14 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import Blocks from '../../components/site/Blocks.astro';
+import { en } from '../../i18n/en';
+import { accessibilityStatement } from '../../i18n/en-content';
+---
+
+<ContentLayout
+  title={en.pages.accessibility.title}
+  description={en.pages.accessibility.description}
+  lead={accessibilityStatement.lead}
+>
+  <Blocks blocks={accessibilityStatement.blocks} />
+</ContentLayout>

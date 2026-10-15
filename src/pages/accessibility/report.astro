@@ -1,0 +1,113 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { en } from '../../i18n/en';
+import { acr } from '../../i18n/en-content';
+
+const t = en.pages.accessibilityReport;
+const tables = [acr.tableA, acr.tableAA];
+---
+
+<ContentLayout title={t.title} description={t.description} lead={acr.lead}>
+  <p class="notice" slot="header">
+    {acr.draftNote}
+  </p>
+
+  <h2 id="product">{acr.productHeading}</h2>
+  <dl class="acr-product">
+    {acr.product.map(([k, v]) => (
+      <div>
+        <dt>{k}</dt>
+        <dd>{v}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <h2 id="terms">{acr.termsHeading}</h2>
+  <dl class="acr-product">
+    {acr.terms.map(([k, v]) => (
+      <div>
+        <dt>{k}</dt>
+        <dd>{v}</dd>
+      </div>
+    ))}
+  </dl>
+
+  {tables.map((table) => (
+    <>
+      <h2>{table.heading}</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>{table.caption}</caption>
+          <thead>
+            <tr>
+              {acr.head.map((h) => (
+                <th scope="col">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {table.rows.map((row) => (
+              <tr>
+                <th scope="row">
+                  {row.sc} {row.name}
+                </th>
+                <td>{row.level}</td>
+                <td>{row.remarks}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+  <p>{acr.obsoleteNote}</p>
+
+  <h2 id="en-301-549">{acr.enHeading}</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>{acr.enHeading}</caption>
+      <thead>
+        <tr>
+          {acr.head.map((h) => (
+            <th scope="col">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {acr.en.map(([clause, level, remarks]) => (
+          <tr>
+            <th scope="row">{clause}</th>
+            <td>{level}</td>
+            <td>{remarks}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</ContentLayout>
+
+<style>
+  .acr-product {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .acr-product div {
+    display: grid;
+    gap: var(--s-1);
+  }
+
+  .acr-product dt {
+    font-weight: 700;
+  }
+
+  .acr-product dd {
+    margin: 0;
+  }
+
+  @media (min-width: 40rem) {
+    .acr-product div {
+      grid-template-columns: 12rem 1fr;
+    }
+  }
+</style>

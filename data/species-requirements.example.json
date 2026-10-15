@@ -1,0 +1,77 @@
+{
+  "$comment": "DEV/TEST FIXTURE ONLY. Shows the shape of a species-library entry (docs/05-data-model.md → SpeciesRequirement) and gives realistic numbers for unit tests of the requirement check. Do NOT ship this file in the production bundle or present it as a reference list. That needs the legal review in docs/10-legal-and-ip.md §4. Values were reported by a community wiki and are unverified.",
+  "schemaVersion": 1,
+  "devFixtureOnly": true,
+  "source": { "url": "https://wikily.gg/planet-zoo-2/habitat-requirements", "kind": "community", "retrieved": "2026-10-15" },
+  "species": [
+    {
+      "id": "fixture-aardvark",
+      "commonName": "Aardvark",
+      "kind": "habitat",
+      "category": "Other",
+      "regions": ["Africa"],
+      "requirements": {
+        "land": { "baseM2": 160, "perExtraM2": 80 },
+        "water": null,
+        "deepWater": null,
+        "climbing": null,
+        "flying": null
+      },
+      "includedInBase": 1,
+      "groupSize": { "min": 1, "max": 2 },
+      "temperatureC": { "min": 14, "max": 36 },
+      "barrierGrade": 2,
+      "verified": false,
+      "origin": "fixture"
+    },
+    {
+      "id": "fixture-sumatran-tiger",
+      "commonName": "Sumatran Tiger",
+      "kind": "habitat",
+      "category": "Predators",
+      "regions": ["Asia"],
+      "requirements": {
+        "land": { "baseM2": 705, "perExtraM2": 110 },
+        "water": { "baseM2": 40, "perExtraM2": 10 },
+        "deepWater": null,
+        "climbing": { "baseM2": 30, "perExtraM2": 10 },
+        "flying": null
+      },
+      "includedInBase": 1,
+      "groupSize": { "min": 1, "max": 2 },
+      "temperatureC": { "min": 18, "max": 33 },
+      "barrierGrade": 3,
+      "verified": false,
+      "origin": "fixture"
+    },
+    {
+      "id": "fixture-golden-eagle",
+      "commonName": "Golden Eagle",
+      "kind": "aviary",
+      "category": "Birds",
+      "regions": ["Europe", "Asia", "North America"],
+      "requirements": {
+        "land": { "baseM2": 400, "perExtraM2": 200 },
+        "water": null,
+        "deepWater": null,
+        "climbing": null,
+        "flying": { "baseM2": 50, "perExtraM2": 50 }
+      },
+      "includedInBase": 1,
+      "groupSize": { "min": 1, "max": 2 },
+      "temperatureC": { "min": -30, "max": 30 },
+      "barrierGrade": 2,
+      "verified": false,
+      "origin": "fixture"
+    }
+  ],
+  "testExpectations": {
+    "$comment": "Use in Vitest. required = (base + max(0, count - includedInBase) * perExtra) * (1 + buffer).",
+    "cases": [
+      { "speciesId": "fixture-sumatran-tiger", "count": 2, "buffer": 0, "expect": { "land": 815, "water": 50, "climbing": 40 } },
+      { "speciesId": "fixture-sumatran-tiger", "count": 2, "buffer": 0.1, "expect": { "land": 896.5, "water": 55, "climbing": 44 } },
+      { "speciesId": "fixture-aardvark", "count": 1, "buffer": 0, "expect": { "land": 160 } },
+      { "speciesId": "fixture-golden-eagle", "count": 2, "buffer": 0, "expect": { "land": 600, "flying": 100 } }
+    ]
+  }
+}

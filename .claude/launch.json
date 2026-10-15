@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--env-file=astro.env", "node_modules/astro/bin/astro.mjs", "dev", "--port", "4322"],
+      "port": 4322
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve.mjs", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}

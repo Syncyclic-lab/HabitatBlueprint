@@ -1,0 +1,581 @@
+{
+  "$comment": "Source and licence of every icon in icons.ts. /credits is generated from this file. Allowed licences: CC0-1.0, CC-BY-3.0, CC-BY-4.0, PDM, OWN (drawn for this project). See docs/10-legal-and-ip.md §3.",
+  "icons": [
+    {
+      "id": "restroom",
+      "label": "Restrooms",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "food",
+      "label": "Food",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "drink",
+      "label": "Drinks",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "gift",
+      "label": "Gift shop",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "info",
+      "label": "Information",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "first-aid",
+      "label": "First aid",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "staff",
+      "label": "Staff",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "entrance",
+      "label": "Entrance",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "exit",
+      "label": "Exit",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "transport",
+      "label": "Transport stop",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "viewing",
+      "label": "Viewing point",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "education",
+      "label": "Education talk",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "bench",
+      "label": "Bench",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "photo",
+      "label": "Photo spot",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "trash",
+      "label": "Trash can",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "atm",
+      "label": "Cash machine",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "person",
+      "label": "Guest building",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "building-animal-house",
+      "label": "Animal house",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "research",
+      "label": "Research and education",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "vet",
+      "label": "Quarantine and vet",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "paw",
+      "label": "Animal (generic)",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tree",
+      "label": "Tree",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "water-drop",
+      "label": "Water treatment",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "fountain",
+      "label": "Fountain",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "ticket",
+      "label": "Ticket booth",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-herbivore",
+      "label": "Herbivore silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-predator",
+      "label": "Predator silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-primate",
+      "label": "Primate silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-bird",
+      "label": "Bird silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-reptile",
+      "label": "Reptile silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-amphibian",
+      "label": "Amphibian silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-fish",
+      "label": "Fish silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "sil-invertebrate",
+      "label": "Invertebrate silhouette",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-select",
+      "label": "Select tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-habitat",
+      "label": "Habitat tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-building",
+      "label": "Building tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-path",
+      "label": "Path tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-barrier",
+      "label": "Barrier tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-water",
+      "label": "Water tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-planting",
+      "label": "Planting tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-icon",
+      "label": "Icon tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-label",
+      "label": "Label tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "tool-measure",
+      "label": "Measure tool",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "undo",
+      "label": "Undo",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "redo",
+      "label": "Redo",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "plus",
+      "label": "Plus",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "minus",
+      "label": "Minus",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "fit",
+      "label": "Fit to view",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "menu",
+      "label": "Menu",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "close",
+      "label": "Close",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "chevron-down",
+      "label": "Chevron down",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "chevron-right",
+      "label": "Chevron right",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "more",
+      "label": "More",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "lock",
+      "label": "Locked",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "unlock",
+      "label": "Unlocked",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "eye",
+      "label": "Visible",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "eye-off",
+      "label": "Hidden",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "copy",
+      "label": "Duplicate",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "check",
+      "label": "Check mark",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "warning",
+      "label": "Warning",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "error",
+      "label": "Error",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "question",
+      "label": "Help",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "settings",
+      "label": "Settings",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "download",
+      "label": "Download",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "upload",
+      "label": "Upload",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "share",
+      "label": "Share",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "layers",
+      "label": "Layers",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "north",
+      "label": "North arrow",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "crosshair",
+      "label": "Crosshair",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "folder",
+      "label": "Plans",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "image",
+      "label": "Image",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    },
+    {
+      "id": "print",
+      "label": "Print",
+      "author": "HabitatBlueprint contributors",
+      "sourceUrl": "https://github.com/Syncyclic-lab/HabitatBlueprint/blob/main/src/assets/icons/icons.ts",
+      "licence": "OWN",
+      "modified": false
+    }
+  ]
+}

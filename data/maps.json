@@ -1,0 +1,41 @@
+{
+  "$comment": "Map presets for the planner. The app must read map size ONLY from here. See docs/04-game-data-and-map-scale.md §1 before changing anything.",
+  "schemaVersion": 1,
+  "lastReviewed": "2026-10-15",
+  "units": "meters",
+  "origin": "top-left (north-west) corner; +x east, +y south",
+  "presets": [
+    {
+      "id": "pz2-flat-standard",
+      "label": "Standard flat map",
+      "modes": ["sandbox", "franchise"],
+      "widthM": 1000,
+      "heightM": 1000,
+      "buildableInsetM": 0,
+      "verified": false,
+      "verifiedOn": null,
+      "verifiedBy": null,
+      "method": null,
+      "confidence": "medium",
+      "source": [
+        {
+          "claim": "Planet Zoo 1 sandbox/franchise maps measured by players at about 1000 x 1000 m (1 km²).",
+          "url": "https://steamcommunity.com/app/703080/discussions/0/4514380459604688962",
+          "kind": "community"
+        },
+        {
+          "claim": "Planet Zoo 1 heightmap guide: 1024 x 1024 px heightmap corresponds to a 1000 x 990 m map.",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=2619426990",
+          "kind": "community"
+        },
+        {
+          "claim": "Planet Coaster 2 maximum map size reported as 1 km x 1 km.",
+          "url": "https://forums.frontier.co.uk/threads/map-size.628755/",
+          "kind": "community"
+        }
+      ],
+      "notes": "Default carried over from Planet Zoo 1 / Planet Coaster 2 evidence. No official Planet Zoo 2 figure has been published as of 2026-10-15. Verify in-game using the procedure in docs/04 §1.1, then set verified=true and fill verifiedOn/verifiedBy/method. If the game's buildable area is smaller than the visible map, set widthM/heightM to the BUILDABLE size."
+    }
+  ],
+  "defaultPresetId": "pz2-flat-standard"
+}

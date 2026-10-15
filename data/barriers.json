@@ -1,0 +1,26 @@
+{
+  "$comment": "Barrier names and resistance grades as reported by a community wiki that appears to draw on in-game data. Facts only (name + grade); no game art. Height, climbability and watertightness per barrier are NOT confirmed, so they're omitted. Verify in-game before marking verified=true.",
+  "schemaVersion": 1,
+  "lastReviewed": "2026-10-15",
+  "source": { "url": "https://wikily.gg/planet-zoo-2/barriers", "kind": "community" },
+  "verified": false,
+  "gradeRange": [1, 6],
+  "barriers": [
+    { "id": "fabric-netting", "label": "Fabric Netting", "grade": 1, "visibility": "transparent" },
+    { "id": "hedge", "label": "Hedge", "grade": 1, "visibility": "opaque" },
+    { "id": "one-way-glass", "label": "1-Way Glass", "grade": 2, "visibility": "one-way" },
+    { "id": "chain-link", "label": "Chain Link", "grade": 2, "visibility": "semi-transparent" },
+    { "id": "corrugated", "label": "Corrugated", "grade": 2, "visibility": "opaque" },
+    { "id": "rope-netting", "label": "Rope Netting", "grade": 2, "visibility": "transparent" },
+    { "id": "glass", "label": "Glass", "grade": 3, "visibility": "transparent" },
+    { "id": "wire-netting", "label": "Wire Netting", "grade": 3, "visibility": "transparent" },
+    { "id": "wood-logs", "label": "Wood Logs", "grade": 3, "visibility": "opaque" },
+    { "id": "acrylic", "label": "Acrylic", "grade": 4, "visibility": "transparent" },
+    { "id": "steel-mesh", "label": "Steel Mesh", "grade": 4, "visibility": "semi-transparent" },
+    { "id": "thick-glass", "label": "Thick Glass", "grade": 4, "visibility": "transparent" },
+    { "id": "brick", "label": "Brick", "grade": 5, "visibility": "opaque" },
+    { "id": "concrete", "label": "Concrete", "grade": 5, "visibility": "opaque" },
+    { "id": "gabion", "label": "Gabion", "grade": 5, "visibility": "opaque" },
+    { "id": "electric", "label": "Electric", "grade": 6, "visibility": "semi-transparent" }
+  ]
+}

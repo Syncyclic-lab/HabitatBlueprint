@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { en } from '../i18n/en';
+import { withBase } from '../config/site';
+
+const t = en.pages.notFound;
+---
+
+<BaseLayout title={t.title}>
+  <div class="page">
+    <header class="page-header">
+      <h1>{t.heading}</h1>
+      <p>{t.body}</p>
+    </header>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={withBase('/planner')}>
+        {t.planner}
+      </a>
+      <a class="text-link" href={withBase('/')}>
+        {t.home}
+      </a>
+    </div>
+  </div>
+</BaseLayout>

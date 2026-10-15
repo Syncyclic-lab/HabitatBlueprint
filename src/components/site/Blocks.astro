@@ -1,0 +1,113 @@
+---
+/**
+ * Renders structured page content from src/i18n/en-content.ts as plain, semantic HTML.
+ * Root-relative links are prefixed with the deploy base; external links open in the same tab
+ * with rel="noopener noreferrer".
+ */
+import { withBase } from '../../config/site';
+import type { Block, Inline } from '../../i18n/content-types';
+
+interface Props {
+  blocks: readonly Block[];
+}
+
+const { blocks } = Astro.props;
+
+const href = (h: string) => (h.startsWith('/') ? withBase(h) : h);
+const isExternal = (h: string) => /^https?:/.test(h);
+const asArray = (inline: Inline | readonly Inline[]): readonly Inline[] =>
+  Array.isArray(inline) ? (inline as readonly Inline[]) : [inline as Inline];
+---
+
+{blocks.map((block) => {
+  if ('h2' in block) return <h2 id={block.id}>{block.h2}</h2>;
+  if ('h3' in block) return <h3 id={block.id}>{block.h3}</h3>;
+  if ('p' in block)
+    return (
+      <p>
+        {asArray(block.p).map((part) =>
+          typeof part === 'string' ? (
+            part
+          ) : 'href' in part ? (
+            <a
+              href={href(part.href)}
+              rel={isExternal(part.href) ? 'noopener noreferrer' : undefined}
+            >
+              {part.text}
+            </a>
+          ) : 'kbd' in part ? (
+            <kbd>{part.kbd}</kbd>
+          ) : 'strong' in part ? (
+            <strong>{part.strong}</strong>
+          ) : (
+            <code>{part.code}</code>
+          ),
+        )}
+      </p>
+    );
+  if ('ul' in block || 'ol' in block) {
+    const items = 'ul' in block ? block.ul : block.ol;
+    const List = 'ul' in block ? 'ul' : 'ol';
+    return (
+      <List>
+        {items.map((item) => (
+          <li>
+            {asArray(item).map((part) =>
+              typeof part === 'string' ? (
+                part
+              ) : 'href' in part ? (
+                <a
+                  href={href(part.href)}
+                  rel={isExternal(part.href) ? 'noopener noreferrer' : undefined}
+                >
+                  {part.text}
+                </a>
+              ) : 'kbd' in part ? (
+                <kbd>{part.kbd}</kbd>
+              ) : 'strong' in part ? (
+                <strong>{part.strong}</strong>
+              ) : (
+                <code>{part.code}</code>
+              ),
+            )}
+          </li>
+        ))}
+      </List>
+    );
+  }
+  if ('table' in block)
+    return (
+      <div class="table-wrap">
+        <table>
+          <caption>{block.table.caption}</caption>
+          <thead>
+            <tr>
+              {block.table.head.map((h) => (
+                <th scope="col">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.table.rows.map((row) => (
+              <tr>
+                {row.map((cell, i) => (i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  if ('notice' in block)
+    return (
+      <p class="notice">
+        {asArray(block.notice).map((part) =>
+          typeof part === 'string' ? (
+            part
+          ) : 'href' in part ? (
+            <a href={href(part.href)}>{part.text}</a>
+          ) : null,
+        )}
+      </p>
+    );
+  return null;
+})}

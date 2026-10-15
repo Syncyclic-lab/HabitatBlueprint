@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Blocks from '../components/site/Blocks.astro';
+import { en } from '../i18n/en';
+import { help } from '../i18n/en-content';
+import { DEFAULT_PRESET, MAPS } from '../data/index';
+import { SHORTCUTS, formatKeys } from '../planner/a11y/shortcuts';
+
+const t = en.pages.help;
+const numberFmt = new Intl.NumberFormat('en-US');
+const preset = DEFAULT_PRESET;
+const mapSize = `${numberFmt.format(preset.widthM)} × ${numberFmt.format(preset.heightM)} m`;
+const mapArea = `${numberFmt.format(preset.widthM * preset.heightM)} m²`;
+const sections = help.sections;
+---
+
+<BaseLayout title={t.title} description={t.description}>
+  <div class="page page-grid">
+    <div class="page-body">
+      <header class="page-header">
+        <h1>{t.title}</h1>
+        <p>{help.lead}</p>
+      </header>
+      <div class="prose">
+        {sections.map((section) => (
+          <section aria-labelledby={section.id}>
+            <h2 id={section.id}>{section.title}</h2>
+            <Blocks blocks={section.blocks} />
+            {section.id === 'map-size' && (
+              <>
+                <div class="table-wrap">
+                  <table>
+                    <caption>{help.mapSize.caption}</caption>
+                    <tbody>
+                      <tr>
+                        <th scope="row">{help.mapSize.size}</th>
+                        <td>{mapSize}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">{help.mapSize.area}</th>
+                        <td>{mapArea}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">{help.mapSize.status}</th>
+                        <td>
+                          {preset.verified
+                            ? help.mapSize.verified(preset.verifiedOn ?? '', preset.method ?? '')
+                            : help.mapSize.unverified}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">{help.mapSize.lastReviewed}</th>
+                        <td>{MAPS.lastReviewed}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                {!preset.verified && <p class="notice">{help.mapSize.unverifiedNotice}</p>}
+              </>
+            )}
+            {section.id === 'shortcuts' && (
+              <div class="table-wrap">
+                <table>
+                  <caption>{help.shortcutsCaption}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">{help.shortcutsKey}</th>
+                      <th scope="col">{help.shortcutsAction}</th>
+                      <th scope="col">{help.shortcutsWhere}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SHORTCUTS.map((s) => (
+                      <tr>
+                        <th scope="row">
+                          <kbd>{formatKeys(s.keys)}</kbd>
+                        </th>
+                        <td>{en.shortcuts[s.id]}</td>
+                        <td>{s.scope === 'map' ? help.scopeMap : help.scopeAnywhere}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        ))}
+      </div>
+    </div>
+    <nav class="page-aside" aria-labelledby="toc-heading">
+      <div class="toc">
+        <h2 id="toc-heading">{help.tocHeading}</h2>
+        <ul>
+          {sections.map((section) => (
+            <li>
+              <a href={`#${section.id}`}>{section.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</BaseLayout>

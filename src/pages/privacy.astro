@@ -1,0 +1,15 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import Blocks from '../components/site/Blocks.astro';
+import { en } from '../i18n/en';
+import { privacy } from '../i18n/en-content';
+---
+
+<ContentLayout
+  title={en.pages.privacy.title}
+  description={en.pages.privacy.description}
+  lead={privacy.lead}
+  updated={privacy.updated}
+>
+  <Blocks blocks={privacy.blocks} />
+</ContentLayout>

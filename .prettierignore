@@ -1,0 +1,16 @@
+dist/
+.astro/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+package-lock.json
+src/generated/
+# Hand-authored docs, data and reference material keep their own layout.
+*.md
+data/
+reference/
+setup/
+.claude/
+tests/fixtures/

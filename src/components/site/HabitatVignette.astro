@@ -1,0 +1,134 @@
+---
+/**
+ * A habitat with water and deep-water zones and its measurements, drawn in the planner's palette.
+ * The numbers are the golden test case from docs/12: 40 × 40 m habitat, 10 × 10 m water,
+ * 5 × 5 m deep water inside the water → total 1,600, water 100, deep 25, land 1,500 m².
+ */
+import { en } from '../../i18n/en';
+import { DEFAULT_BIOME, OBJECT_TYPES, getSubZoneStyle, getSwatch } from '../../data/index';
+
+const t = en.landing.vignette;
+const casing = OBJECT_TYPES.casing;
+const ground = DEFAULT_BIOME.ground ?? '#5BAB4E';
+const gold = getSwatch('savanna')?.fill ?? '#DBB34D';
+const water = getSubZoneStyle('water')?.fill ?? '#3FB7E0';
+const deep = getSubZoneStyle('deepWater')?.fill ?? '#1F6FA8';
+const shapes = [
+  { d: 'M6 6 H46 V46 H6 Z', fill: gold, pattern: null },
+  { d: 'M28 24 H38 V34 H28 Z', fill: water, pattern: 'url(#vig-waves)' },
+  { d: 'M31 27 H36 V32 H31 Z', fill: deep, pattern: 'url(#vig-waves-dense)' },
+];
+---
+
+<figure class="feature-figure vignette">
+  <svg viewBox="0 0 52 52" role="img" aria-labelledby="vig-title">
+    <title id="vig-title">{t.title}</title>
+    <defs>
+      <pattern id="vig-waves" width="4" height="2" patternUnits="userSpaceOnUse">
+        <path
+          d="M0 1 Q1 0 2 1 T4 1"
+          fill="none"
+          stroke="#000000"
+          stroke-opacity="0.4"
+          stroke-width="0.25"
+        ></path>
+      </pattern>
+      <pattern id="vig-waves-dense" width="2" height="1.2" patternUnits="userSpaceOnUse">
+        <path
+          d="M0 .6 Q.5 0 1 .6 T2 .6"
+          fill="none"
+          stroke="#FFFFFF"
+          stroke-opacity="0.6"
+          stroke-width="0.2"
+        ></path>
+      </pattern>
+    </defs>
+    <rect width="52" height="52" fill={ground}></rect>
+    {shapes.map((s) => (
+      <g>
+        <path d={s.d} fill={s.fill} />
+        {s.pattern && <path d={s.d} fill={s.pattern} />}
+        <path d={s.d} class="v-casing-outer" stroke={casing.outer} />
+        <path d={s.d} class="v-casing-inner" stroke={casing.inner} />
+      </g>
+    ))}
+  </svg>
+  <figcaption>
+    <dl class="measure-list">
+      {t.rows.map((row) => (
+        <div>
+          <dt>{row.label}</dt>
+          <dd>{row.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </figcaption>
+</figure>
+
+<style>
+  .vignette {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    background: var(--surface);
+  }
+
+  .vignette svg {
+    background: var(--grass);
+  }
+
+  .measure-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: var(--s-4);
+  }
+
+  .measure-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding-block: var(--s-2);
+    border-block-end: 1px solid var(--line);
+  }
+
+  .measure-list div:last-child {
+    border-block-end: 0;
+  }
+
+  .measure-list dt {
+    font-weight: 700;
+  }
+
+  .measure-list dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .v-casing-outer,
+  .v-casing-inner {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .v-casing-outer {
+    stroke-width: 3.5px;
+  }
+
+  .v-casing-inner {
+    stroke-width: 1px;
+  }
+
+  @media (min-width: 40rem) {
+    .vignette {
+      grid-template-columns: 3fr 2fr;
+      align-items: center;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .v-casing-outer,
+    .v-casing-inner {
+      stroke: CanvasText;
+    }
+  }
+</style>
