@@ -5,6 +5,13 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # TypeScript 7 (native compiler) isn't supported by typescript-eslint or @astrojs/check yet.
+      - dependency-name: typescript
+        versions: ['>=7']
+      # Node types must match the Node LTS line in .nvmrc (24).
+      - dependency-name: '@types/node'
+        versions: ['>=25']
   - package-ecosystem: github-actions
     directory: /
     schedule:

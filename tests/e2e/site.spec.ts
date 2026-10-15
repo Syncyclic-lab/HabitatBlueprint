@@ -58,6 +58,27 @@ for (const route of CONTENT_ROUTES) {
   });
 }
 
+test('content pages keep layout shift under 0.1 @perf', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Layout Instability API is Chromium-only');
+  for (const route of CONTENT_ROUTES) {
+    await page.goto(route.path);
+    await page.waitForLoadState('networkidle');
+    const cls = await page.evaluate(
+      () =>
+        new Promise<number>((resolve) => {
+          let total = 0;
+          new PerformanceObserver((list) => {
+            for (const entry of list.getEntries() as PerformanceEntry[] & { value: number }[]) {
+              total += (entry as unknown as { value: number }).value;
+            }
+          }).observe({ type: 'layout-shift', buffered: true });
+          setTimeout(() => resolve(total), 500);
+        }),
+    );
+    expect(cls, `CLS on ${route.name}`).toBeLessThan(0.1);
+  }
+});
+
 test('page titles are unique', async ({ page }) => {
   const titles = new Set<string>();
   for (const route of CONTENT_ROUTES) {

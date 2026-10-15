@@ -8,6 +8,10 @@ import '@fontsource/atkinson-hyperlegible-mono/700.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/site.css';
+// Preload the two faces used above the fold (regular and bold, Latin), so text doesn't shift
+// when they arrive (docs/12 budget: at most two preloaded fonts).
+import fontRegular from '@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-400-normal.woff2?url';
+import fontBold from '@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-700-normal.woff2?url';
 import { en } from '../i18n/en';
 import { SITE_DESCRIPTION, withBase } from '../config/site';
 import SiteHeader from '../components/site/SiteHeader.astro';
@@ -40,6 +44,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="no-referrer" />
     <title>{documentTitle}</title>
+    <link rel="preload" href={fontRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fontBold} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
     <link rel="canonical" href={canonical.href} />

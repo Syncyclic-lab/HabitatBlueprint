@@ -6,7 +6,10 @@
 /* Metric-matched fallbacks so text doesn't shift when the web fonts arrive. */
 @font-face {
   font-family: 'Atkinson Fallback';
-  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  /* Arial and its metric-compatible twins (Liberation Sans on Linux, Arimo on ChromeOS). */
+  src:
+    local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Arimo'),
+    local('Helvetica Neue'), local('Helvetica');
   size-adjust: 120.75%;
   ascent-override: 81.49%;
   descent-override: 26.17%;
@@ -15,7 +18,7 @@
 
 @font-face {
   font-family: 'Atkinson Mono Fallback';
-  src: local('Courier New'), local('Courier');
+  src: local('Courier New'), local('Liberation Mono'), local('Cousine'), local('Courier');
   size-adjust: 105.3%;
   ascent-override: 93.45%;
   descent-override: 30.01%;
