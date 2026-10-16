@@ -6,7 +6,7 @@
  * true area (π·rx·ry) while no point strays more than the chord tolerance from the curve.
  */
 import { CHORD_TOLERANCE_M, EPS, type Poly, type Ring, type Shape, type Vec2 } from './types.ts';
-import { add, distance, dot, length, rotateAround, scale, sub } from './vec.ts';
+import { add, dot, length, rotateAround, scale, sub } from './vec.ts';
 import { dedupeRing, normalizePoly } from './polygon.ts';
 
 const MIN_SEGMENTS = 16;
@@ -151,10 +151,11 @@ export function shapeToPoly(shape: Shape): Poly {
 }
 
 /**
- * Uniform Catmull–Rom curve through the points, flattened to short straight pieces
- * (about every 0.5 m, at least 2 and at most 64 per span). Used for smoothed paths.
+ * Uniform Catmull–Rom curve through the points, flattened into straight pieces that stray no
+ * more than `tol` from the curve (at most 64 per span; a straight span stays one piece). Used
+ * for smoothed paths. Fewer pieces on gentle curves keep path surfaces quick to compute.
  */
-export function catmullRom(points: readonly Vec2[]): Vec2[] {
+export function catmullRom(points: readonly Vec2[], tol = CHORD_TOLERANCE_M): Vec2[] {
   const n = points.length;
   if (n < 3) return [...points];
   const out: Vec2[] = [];
@@ -163,7 +164,15 @@ export function catmullRom(points: readonly Vec2[]): Vec2[] {
     const p1 = points[i] as Vec2;
     const p2 = points[i + 1] as Vec2;
     const p3 = points[Math.min(n - 1, i + 2)] as Vec2;
-    const steps = Math.min(64, Math.max(2, Math.ceil(distance(p1, p2) / 0.5)));
+    // The curve's second derivative is c2 + 3·c3·t, so its size peaks at t = 0 or t = 1. A chord
+    // spanning Δt of the parameter strays at most Δt² · max|C''| / 8 from the curve.
+    const c2 = {
+      x: 2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x,
+      y: 2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y,
+    };
+    const c3 = { x: -p0.x + 3 * p1.x - 3 * p2.x + p3.x, y: -p0.y + 3 * p1.y - 3 * p2.y + p3.y };
+    const bend = Math.max(length(c2), length(add(c2, scale(c3, 3))));
+    const steps = Math.min(64, Math.max(1, Math.ceil(Math.sqrt(bend / (8 * tol)))));
     for (let s = 0; s < steps; s++) {
       const t = s / steps;
       const t2 = t * t;

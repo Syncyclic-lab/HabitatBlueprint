@@ -3,7 +3,12 @@ import { collinearOverlap, sharedEdgeLength } from '../../../src/geometry/shared
 import type { Ring, Vec2 } from '../../../src/geometry/types';
 
 const v = (x: number, y: number): Vec2 => ({ x, y });
-const sq = (x: number, y: number, w: number, h: number): Ring => [v(x, y), v(x + w, y), v(x + w, y + h), v(x, y + h)];
+const sq = (x: number, y: number, w: number, h: number): Ring => [
+  v(x, y),
+  v(x + w, y),
+  v(x + w, y + h),
+  v(x, y + h),
+];
 
 describe('collinearOverlap', () => {
   it('measures overlap of collinear segments in either direction', () => {

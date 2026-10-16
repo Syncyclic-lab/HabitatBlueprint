@@ -33,7 +33,11 @@ export function sharedEdgeLength(ringA: Ring, ringB: Ring, tol = 0.01): number {
       const c = ringB[j] as Vec2;
       const d = ringB[(j + 1) % nb] as Vec2;
       // Cheap rejection: segments far apart can't overlap.
-      if (distanceToSegment(c, a, b) > tol && distanceToSegment(d, a, b) > tol && distanceToSegment(a, c, d) > tol) {
+      if (
+        distanceToSegment(c, a, b) > tol &&
+        distanceToSegment(d, a, b) > tol &&
+        distanceToSegment(a, c, d) > tol
+      ) {
         continue;
       }
       sum += collinearOverlap(a, b, c, d, tol);

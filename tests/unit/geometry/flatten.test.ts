@@ -173,4 +173,64 @@ describe('catmullRom', () => {
     for (const p of pts) expect(out).toContainEqual(p);
     expect(out.length).toBeGreaterThan(pts.length);
   });
+
+  it('keeps straight lines straight, with one piece where the curve has no bend', () => {
+    const line = [
+      { x: 0, y: 0 },
+      { x: 10, y: 0 },
+      { x: 20, y: 0 },
+      { x: 30, y: 0 },
+    ];
+    const out = catmullRom(line);
+    expect(out.every((p) => p.y === 0)).toBe(true);
+    // The middle span (evenly spaced neighbours on both sides) has no bend at all.
+    expect(out.filter((p) => p.x > 10 && p.x < 20)).toEqual([]);
+  });
+
+  it('never strays more than the chord tolerance from the true curve', () => {
+    const pts: Vec2[] = [
+      { x: 0, y: 0 },
+      { x: 30, y: 25 },
+      { x: 60, y: -10 },
+      { x: 62, y: 40 },
+      { x: 120, y: 30 },
+    ];
+    const out = catmullRom(pts);
+    // Sample the exact curve densely and check each sample is near the flattened polyline.
+    const n = pts.length;
+    const nearest = (p: Vec2) => {
+      let best = Infinity;
+      for (let i = 1; i < out.length; i++) {
+        const a = out[i - 1] as Vec2;
+        const b = out[i] as Vec2;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const t = Math.max(
+          0,
+          Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy)),
+        );
+        best = Math.min(best, distance(p, { x: a.x + dx * t, y: a.y + dy * t }));
+      }
+      return best;
+    };
+    for (let i = 0; i < n - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)] as Vec2;
+      const p1 = pts[i] as Vec2;
+      const p2 = pts[i + 1] as Vec2;
+      const p3 = pts[Math.min(n - 1, i + 2)] as Vec2;
+      for (let s = 0; s <= 50; s++) {
+        const t = s / 50;
+        const f = (a: number, b: number, c: number, d: number) =>
+          0.5 *
+          (2 * b +
+            (-a + c) * t +
+            (2 * a - 5 * b + 4 * c - d) * t * t +
+            (-a + 3 * b - 3 * c + d) * t * t * t);
+        const p = { x: f(p0.x, p1.x, p2.x, p3.x), y: f(p0.y, p1.y, p2.y, p3.y) };
+        expect(nearest(p)).toBeLessThanOrEqual(CHORD_TOLERANCE_M + 1e-9);
+      }
+    }
+    // Far fewer pieces than one every half metre.
+    expect(out.length).toBeLessThan(150);
+  });
 });
