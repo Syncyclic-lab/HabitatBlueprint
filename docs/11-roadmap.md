@@ -34,62 +34,62 @@ Work top to bottom. A milestone is done only when every box is ticked **and** th
 - [ ] **Accept:** landing LCP < 2.5 s on simulated mid-tier mobile, CLS < 0.1, total JS on `/` < 30 kB gz, 0 axe violations, keyboard and screen-reader smoke test of every page
 
 ## M2 · Planner shell and true-scale map
-- [ ] `/planner` island. Layout regions per `03-planner-tools.md` §1, F6 cycling
-- [ ] Store slices: plan, view, tool, selection, prefs
-- [ ] SVG viewport reading the map size from `maps.json`: ground colour from biome, boundary, grid (auto-thinning), scale bar, north arrow
-- [ ] Pan/zoom: wheel, pinch, keyboard, buttons, fit, minimap (click to jump)
-- [ ] Status bar: cursor coordinates (m), zoom, grid, snap, map area, planned area
-- [ ] New plan dialog (name, mode, biome, preset). Map settings dialog (biome, grid, units, style, patterns, shortcuts on/off)
-- [ ] Live announcer (polite + assertive, throttled)
-- [ ] Responsive behaviour < 1024 px and < 640 px
+- [x] `/planner` island. Layout regions per `03-planner-tools.md` §1, F6 cycling
+- [x] Store slices: plan, view, tool, selection, prefs
+- [x] SVG viewport reading the map size from `maps.json`: ground colour from biome, boundary, grid (auto-thinning), scale bar, north arrow
+- [x] Pan/zoom: wheel, pinch, keyboard, buttons, fit, minimap (click to jump)
+- [x] Status bar: cursor coordinates (m), zoom, grid, snap, map area, planned area
+- [x] New plan dialog (name, mode, biome, preset). Map settings dialog (biome, grid, units, style, patterns, shortcuts on/off)
+- [x] Live announcer (polite + assertive, throttled)
+- [x] Responsive behaviour < 1024 px and < 640 px
 - [ ] **Accept:** the scale bar reads correctly at every zoom (unit test against `maps.json`), 60 fps pan/zoom on an empty map, keyboard-only E2E covers create plan → pan → zoom → change grid, 0 axe violations
 
 ## M3 · Geometry core, habitat tool, area readouts (Kyle's headline feature)
-- [ ] `src/geometry/`: shoelace area, perimeter, flatten (ellipse/rounded/smooth), clip to map, union/intersection (polygon-clipping), self-intersection check, point-in-polygon, resize-to-area. **100% branch coverage** + property tests
-- [ ] Habitat tool: polygon, rectangle, ellipse. Pointer + keyboard crosshair + "Add habitat by size…"
-- [ ] Live readouts while drawing (follows cursor without covering it, status bar mirror, throttled announcements)
-- [ ] On completion: Inspector shows total, land, water, deep water, perimeter, % of map, % of planned zoo
-- [ ] Water and deep-water sub-zones, clipped to the habitat
-- [ ] "Show areas on map" labels
-- [ ] Inspector numeric geometry editing incl. vertex table. "Resize to area…"
+- [x] `src/geometry/`: shoelace area, perimeter, flatten (ellipse/rounded/smooth), clip to map, union/intersection (polygon-clipping), self-intersection check, point-in-polygon, resize-to-area. **100% branch coverage** + property tests
+- [x] Habitat tool: polygon, rectangle, ellipse. Pointer + keyboard crosshair + "Add habitat by size…"
+- [x] Live readouts while drawing (follows cursor without covering it, status bar mirror, throttled announcements)
+- [x] On completion: Inspector shows total, land, water, deep water, perimeter, % of map, % of planned zoo
+- [x] Water and deep-water sub-zones, clipped to the habitat
+- [x] "Show areas on map" labels
+- [x] Inspector numeric geometry editing incl. vertex table. "Resize to area…"
 - [ ] Objects panel (decide tree grid vs nested lists after a quick NVDA + VoiceOver check)
-- [ ] Undo/redo (≥ 200 steps, labelled). Autosave to IndexedDB. Plans list (open, duplicate, rename, delete)
-- [ ] **Accept:** the area cases in `03-planner-tools.md` §3.1 pass to the stated precision. The keyboard-only E2E "draw a 50 × 40 m habitat, add a pond, read the land area" passes. Totals for 150 objects compute in < 16 ms
+- [x] Undo/redo (≥ 200 steps, labelled). Autosave to IndexedDB. Plans list (open, duplicate, rename, delete)
+- [x] **Accept:** the area cases in `03-planner-tools.md` §3.1 pass to the stated precision. The keyboard-only E2E "draw a 50 × 40 m habitat, add a pond, read the land area" passes. Totals for 150 objects compute in < 16 ms
 
 ## M4 · The rest of the MVP drawing kit
-- [ ] Select/move/rotate/resize with handles + keyboard + dialogs (Move by…). Multi-select, marquee, duplicate, delete, mirror, z-order, lock/hide
+- [x] Select/move/rotate/resize with handles + keyboard + dialogs (Move by…). Multi-select, marquee, duplicate, delete, mirror, z-order, lock/hide
 - [ ] Snapping: grid, vertex, edge, angle, guides, Alt to suspend. Shared-wall detection
-- [ ] Building tool (types from `object-types.json`)
-- [ ] Path tool (types, widths, smooth, round/flat caps, union rendering, length + area). Plaza mode
-- [ ] Water tool. Icon tool (facility icons, screen/map sizing). Label tool. Measure tool (distance, area)
-- [ ] Context menu (right-click, Shift+F10, ⋯ button)
-- [ ] Shortcuts dialog (`?`). Remap/disable single-key shortcuts
-- [ ] JSON save/open (validated) and "Delete all my data"
+- [x] Building tool (types from `object-types.json`)
+- [x] Path tool (types, widths, smooth, round/flat caps, union rendering, length + area). Plaza mode
+- [x] Water tool. Icon tool (facility icons, screen/map sizing). Label tool. Measure tool (distance, area)
+- [x] Context menu (right-click, Shift+F10, ⋯ button)
+- [x] Shortcuts dialog (`?`). Remap/disable single-key shortcuts
+- [x] JSON save/open (validated) and "Delete all my data"
 - [ ] **Accept:** the path area test cases pass. Every tool has a keyboard-only E2E. A 150-object fixture plan pans at 60 fps. 0 axe violations across 12 planner states
 
 ## M5 · Zoo content: areas, animals, requirements, stats
-- [ ] Themed areas + area palette + patterns (subtle by default)
-- [ ] Animals per habitat (♂/♀/juveniles), silhouettes with auto black/white ink, accessible names
+- [x] Themed areas + area palette + patterns (subtle by default)
+- [x] Animals per habitat (♂/♀/juveniles), silhouettes with auto black/white ink, accessible names
 - [ ] Species library (user-entered) + requirement check with buffer % (tests from `species-requirements.example.json`)
-- [ ] Aviary flying area. Climbing and shelter zones
+- [x] Aviary flying area. Climbing and shelter zones
 - [ ] Barriers on habitats (type, grade, edge overrides, viewing edges). Free-standing barrier tool
-- [ ] Stats panel (tables with "view as table" for charts). Checks panel with "Go to"
+- [x] Stats panel (tables with "view as table" for charts). Checks panel with "Go to"
 - [ ] Planting tool. Boolean shape ops. Align/distribute/array. Build phases + phase filter
 - [ ] **Accept:** the requirement maths matches the fixtures. The Checks panel finds the seeded problems in the test plan. Screen-reader task "find which habitat is too small and fix it" passes
 
 ## M6 · Legend, export and sharing
 - [ ] Legend generator in the reference poster's structure (area blocks → categories → species, plus a Guest services block). Title block with zoo name, subtitle and local logo
-- [ ] Clear/Poster styles
+- [x] Clear/Poster styles
 - [ ] PNG (1×/2×/4×, ≤ 8192 px), SVG (title/desc/text legend, escaped text), print poster (Letter, Tabloid, A3, A2 landscape)
-- [ ] Text summary export (HTML/CSV/Markdown)
-- [ ] Share link (fragment, lz-string, size warning, "save a copy" on open)
+- [x] Text summary export (HTML/CSV/Markdown)
+- [x] Share link (fragment, lz-string, size warning, "save a copy" on open)
 - [ ] **Accept:** the export of the fixture plan visually matches the layout of `reference/example-3-full-poster-with-legend.png` (Kyle signs off). SVG passes an XSS fuzz test (names with `<script>`, `&`, quotes). Share link round-trips losslessly
 
 ## M7 · Tracing underlay and templates
 - [ ] Import image (local only), opacity, lock, hide, two-point and four-corner calibration
 - [ ] Optional inclusion in file export (re-encoded, EXIF stripped). Never in share links
-- [ ] Starter templates: roundabout with fountain, entrance plaza, exhibit house, standard habitats
-- [ ] Snapshots (named versions, restore)
+- [x] Starter templates: roundabout with fountain, entrance plaza, exhibit house, standard habitats
+- [x] Snapshots (named versions, restore)
 - [ ] **Accept:** calibrating a 500 m known distance gives < 0.5% scale error. Image bytes never appear in any network request
 
 ## M8 · Hardening and launch
@@ -112,3 +112,6 @@ Coverage rings · guest route distance · staff-access check · user-saved templ
 - 2026-10-15 · Kit prepared. Map size defaults to 1000 × 1000 m, **unverified** for PZ2.
 - 2026-10-15 · M0 + M1 built. Repo `Syncyclic-lab/HabitatBlueprint`, working copy `C:\dev\HabitatBlueprint`. Name: HabitatBlueprint. Hosting: GitHub Pages under `/HabitatBlueprint/` (Cloudflare later); CSP is a hashed `<meta>` per page + header policy in `dist/_headers` (see 09). Astro 7.4 (not 6) and TypeScript 6.0 (TS 7 not yet supported by the lint/check tools). `eslint-plugin-jsx-a11y-x` replaces `eslint-plugin-jsx-a11y` (ESLint 10 support). Added `data/species.json` (all 136 PZ2 species from the official Zoopedia, no requirement numbers). Long-form page prose lives in `src/i18n/en-content.ts`.
 - 2026-10-15 · Deferred: Firefox and Lighthouse can't launch on Kyle's PC under the agent sandbox ("spawn UNKNOWN"); both run in CI. The M0/M1 **Accept** boxes stay open until the first CI run shows Lighthouse scores. Chromium and WebKit E2E pass locally (78 tests).
+- 2026-10-15 · Planner (M2–M7 build-out) wired up and published. Fixed: every screen-reader announcement threw an error in browsers and cut off the action that made it (e.g. the zone menu stayed open and locked the page); keyboard-drawn shapes snapped to nearby corners and vanished; popovers closed themselves when the panel scrolled (now modal, with React Aria's iOS style allowed by hash); a polygon-clipping failure on a long curved path blanked the planner (paths now merge in stages, loops get a join instead of caps, a plain fallback outline exists, and a crash panel offers "Save plan file"). Unit tests now use polygon-clipping's ES-module build, the one browsers run. E2E now fails on any uncaught page error.
+- 2026-10-15 · Performance (500-object fixture, Chromium, slowed CPU ×4 in brackets): open 0.6 s (2.6 s, was 8.7 s), pan 57 fps (54, was 26), zoom 60 fps (42, was 35), edit → readout ≈ 60 ms (≈ 300 ms, was 1.6 s). Totals after an edit: 0.4 ms for 150 objects. How: curved paths flatten only to the 0.05 m tolerance and joins add only the missing wedge; plan totals union only clusters of overlapping shapes (cached); the map is drawn with a 25% margin and slides on the GPU while dragging; per-shape path strings are cached. Initial planner JS ≈ 248 kB gz (+3 kB Astro loader); dialogs, the non-Inspector tabs and plan-file code load on demand and are prefetched when idle. Loading screen shows exact bytes (total written at build).
+- 2026-10-15 · Still open from M2–M7: Accept lines; Objects panel is a grouped table (the tree-grid vs list AT check is for M8); snapping guides; requirement-check unit tests from `species-requirements.example.json`; barrier edge-override UI; boolean shape ops, align/distribute/array; legend title block with logo; print paper sizes; four-corner tracing calibration. Keyboard-only E2E exists for habitat, zone, vertex, path, undo/redo, file round trip and F6, not yet for every tool.

@@ -121,6 +121,10 @@ export interface PlannerState {
   constrain: boolean;
   /** Blob URL of the tracing image, if one is loaded. */
   tracingUrl: string | null;
+  /** A plan was just opened: fit it to the view as soon as the viewport has a size. */
+  fitPending: boolean;
+  /** True once the map viewport has been measured. */
+  viewportMeasured: boolean;
 }
 
 export interface HistoryEntry {
@@ -187,6 +191,8 @@ export function initialState(): PlannerState {
     draftIssue: null,
     constrain: false,
     tracingUrl: null,
+    fitPending: true,
+    viewportMeasured: false,
   };
 }
 

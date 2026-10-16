@@ -100,12 +100,16 @@ Every mutation is a named command (`createObject`, `moveObjects`, `editVertex`, 
 - Patterns are `<pattern>` defs in user-space units, scaled so they stay readable at common zooms.
 - Hit-testing uses DOM events on shapes, plus a geometry-based fallback for thin paths (stroke hit areas widened to 24 px).
 - Performance budget: **pan/zoom at 60 fps with 500 objects** on a mid-range laptop (4-core, integrated GPU). If SVG misses it, profile first. The fix order is memoization → `content-visibility`/culling of off-screen groups → rasterize the static layer to an `<image>` while panning. Moving to canvas is a last resort and needs Kyle's sign-off.
+- What's in place (2026-10-15, measured with `scripts/perf-probe.mjs`): objects are culled to the view and memoized, and per-shape path strings are cached by identity. Profiling showed the remaining pan cost was **raster** (painting the SVG), not JavaScript, so the `<svg>` is drawn 25% larger than the viewport on every side and kept on its own GPU layer; a pan drag only slides it with a CSS transform, and the view is committed (one redraw) when the drag ends or the margin runs out. Edge casings are the most expensive layer to paint; they stay because they carry the non-colour boundary cue.
+- Code splitting: dialogs other than "New plan", the non-Inspector panel tabs and the plan-file/share-link module load on demand and are prefetched when the browser is idle. The loading screen's total comes from `data-boot-bytes`, which `scripts/postbuild.mjs` computes from the island's static import graph.
 
 ### Geometry module rules
 - Pure functions, no globals, no DOM.
 - Polygons are normalized to clockwise outer rings and counter-clockwise holes, and duplicate consecutive points are removed.
 - Flatten curves with a max chord error of 0.05 m. Rounded corners, ellipses and smoothed paths all go through one `flatten()` function.
-- Path surfaces = union of segment quads + round joins/caps (circle polygons, 32 segments), clipped to the map.
+- Path surfaces = union of segment quads + round joins/caps, clipped to the map. Where both neighbouring segments are at least half the width long, a join adds only the wedge outside the turn (the quads already cover the rest of its circle). A path that ends where it starts is a loop: a join there, no caps. If polygon-clipping fails on the one-shot union, pieces are merged in pairs, then pairs of pairs. Smoothed paths are flattened to the 0.05 m chord tolerance, not at a fixed spacing.
+- Plan totals use `unionArea` (`src/geometry/union-area.ts`): shapes are grouped by touching bounding boxes, lone shapes are measured directly, only clusters are unioned, and each cluster's area is cached by the identity of its members.
+- Unit tests alias `polygon-clipping` to its ES-module build (the one browsers get). Its CommonJS build uses different arithmetic and passed inputs that fail in the browser.
 - Use a tolerance-aware comparison with ε = 1e-6 m.
 - Property-based tests (fast-check) cover: area is translation/rotation invariant, union area ≤ sum of areas, clip result ⊆ input, and resize-to-area hits the target within 0.01 m².
 

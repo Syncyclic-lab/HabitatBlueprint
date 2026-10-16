@@ -17,7 +17,9 @@ function tile(id: PatternId, s: number, stroke: string): React.ReactNode {
     case 'grid':
       return <path d={`M0 0H${s}M0 0V${s}`} {...common} />;
     case 'waves':
-      return <path d={`M0 ${s / 2} Q${s / 4} ${s / 4} ${s / 2} ${s / 2} T${s} ${s / 2}`} {...common} />;
+      return (
+        <path d={`M0 ${s / 2} Q${s / 4} ${s / 4} ${s / 2} ${s / 2} T${s} ${s / 2}`} {...common} />
+      );
     case 'waves-dense':
       return (
         <path
@@ -28,12 +30,19 @@ function tile(id: PatternId, s: number, stroke: string): React.ReactNode {
     case 'crosshatch':
       return <path d={`M0 0L${s} ${s}M${s} 0L0 ${s}`} {...common} />;
     case 'diagonal':
-      return <path d={`M0 ${s}L${s} 0M${-s / 2} ${s / 2}L${s / 2} ${-s / 2}M${s / 2} ${s * 1.5}L${s * 1.5} ${s / 2}`} {...common} />;
+      return (
+        <path
+          d={`M0 ${s}L${s} 0M${-s / 2} ${s / 2}L${s / 2} ${-s / 2}M${s / 2} ${s * 1.5}L${s * 1.5} ${s / 2}`}
+          {...common}
+        />
+      );
     case 'dots':
     case 'stipple':
       return <circle cx={s / 2} cy={s / 2} r={id === 'dots' ? s / 7 : s / 12} fill={stroke} />;
     case 'cross':
-      return <path d={`M${s / 2} ${s * 0.2}V${s * 0.8}M${s * 0.2} ${s / 2}H${s * 0.8}`} {...common} />;
+      return (
+        <path d={`M${s / 2} ${s * 0.2}V${s * 0.8}M${s * 0.2} ${s / 2}H${s * 0.8}`} {...common} />
+      );
     case 'leaf-dots':
       return (
         <>
@@ -46,7 +55,12 @@ function tile(id: PatternId, s: number, stroke: string): React.ReactNode {
     case 'vertical':
       return <path d={`M${s / 2} 0V${s}`} {...common} />;
     case 'zigzag':
-      return <path d={`M0 ${s * 0.7}L${s / 4} ${s * 0.3}L${s / 2} ${s * 0.7}L${(3 * s) / 4} ${s * 0.3}L${s} ${s * 0.7}`} {...common} />;
+      return (
+        <path
+          d={`M0 ${s * 0.7}L${s / 4} ${s * 0.3}L${s / 2} ${s * 0.7}L${(3 * s) / 4} ${s * 0.3}L${s} ${s * 0.7}`}
+          {...common}
+        />
+      );
     case 'chevron':
       return <path d={`M0 ${s * 0.7}L${s / 2} ${s * 0.3}L${s} ${s * 0.7}`} {...common} />;
     case 'rings':
@@ -68,7 +82,13 @@ export const Patterns = memo(function Patterns({ zoom }: PatternsProps) {
     <>
       {PATTERN_IDS.filter((id) => id !== 'none').flatMap((id) =>
         (['b', 'w'] as const).map((ink) => (
-          <pattern key={`${id}-${ink}`} id={`pat-${id}-${ink}`} width={s} height={s} patternUnits="userSpaceOnUse">
+          <pattern
+            key={`${id}-${ink}`}
+            id={`pat-${id}-${ink}`}
+            width={s}
+            height={s}
+            patternUnits="userSpaceOnUse"
+          >
             {tile(id, s, ink === 'b' ? '#000000' : '#FFFFFF')}
           </pattern>
         )),

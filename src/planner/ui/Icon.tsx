@@ -22,7 +22,14 @@ export function Icon({ id, size = 20, className }: IconProps) {
       focusable="false"
     >
       {stroke ? (
-        <path d={def.d} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d={def.d}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       ) : (
         <path d={def.d} fill="currentColor" fillRule="evenodd" />
       )}

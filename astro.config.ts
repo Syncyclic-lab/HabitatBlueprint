@@ -16,7 +16,18 @@ export default defineConfig({
     // External stylesheets keep `style-src` simple; Astro hashes anything it still inlines.
     inlineStylesheets: 'never',
   },
-  integrations: [react()],
+  integrations: [
+    react(),
+    {
+      // client:progress downloads the planner with a real progress bar before hydrating it.
+      name: 'habitat-blueprint-progress',
+      hooks: {
+        'astro:config:setup': ({ addClientDirective }) => {
+          addClientDirective({ name: 'progress', entrypoint: './src/planner/boot/directive.ts' });
+        },
+      },
+    },
+  ],
   // Shiki writes inline styles, which the CSP forbids. No page needs code highlighting.
   markdown: { syntaxHighlight: false },
   devToolbar: { enabled: false },
@@ -38,6 +49,14 @@ export default defineConfig({
         "base-uri 'none'",
         "form-action 'none'",
       ],
+      styleDirective: {
+        hashes: [
+          // React Aria adds this one <style> rule on iPhone and iPad while a menu is open, to stop
+          // the page scrolling behind it. Allowing its exact hash keeps 'unsafe-inline' off.
+          // Text: "@layer {\n  * {\n    overscroll-behavior: contain;\n  }\n}" (react-aria usePreventScroll).
+          'sha256-gYiS/BvZvRcK27JIXTuwhZ3hs2+VJ1X+2gUlE+farlg=',
+        ],
+      },
     },
   },
   vite: {

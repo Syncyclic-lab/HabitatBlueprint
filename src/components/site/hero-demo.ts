@@ -48,7 +48,7 @@ export function initHeroDemo(): void {
   };
 
   const render = (ms: number) => {
-    const progress = Math.min(ms / SEGMENT_MS, segments);
+    const progress = Math.min(Math.max(ms, 0) / SEGMENT_MS, segments);
     const whole = Math.floor(progress);
     const frac = progress - whole;
     const drawn: Point[] = points.slice(0, Math.min(whole + 1, points.length));
@@ -70,7 +70,8 @@ export function initHeroDemo(): void {
 
   const tick = (now: number) => {
     if (state !== 'playing') return;
-    elapsed += now - last;
+    // A frame's timestamp can be slightly earlier than performance.now() at start().
+    elapsed += Math.max(0, now - last);
     last = now;
     render(elapsed);
     if (elapsed >= total) {

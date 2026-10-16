@@ -50,7 +50,7 @@ export function ContextMenu({ at, onClose }: ContextMenuProps) {
   const single = objects.length === 1 ? objects[0] : undefined;
   const allLocked = objects.length > 0 && objects.every((o) => o.locked);
   const allHidden = objects.length > 0 && objects.every((o) => o.hidden);
-  const canResize = single && ('shape' in single) && !single.locked;
+  const canResize = single && 'shape' in single && !single.locked;
 
   const run = (key: ActionKey) => {
     onClose();
@@ -113,7 +113,14 @@ export function ContextMenu({ at, onClose }: ContextMenuProps) {
         placement="bottom start"
         className="pl-popover"
       >
-        <Menu aria-label={en.planner.menu.label} className="pl-menu" onAction={(key) => run(key as ActionKey)} autoFocus="first">
+        {/* A menu opened from the keyboard must focus its first item (APG menu pattern). */}
+        <Menu
+          aria-label={en.planner.menu.label}
+          className="pl-menu"
+          onAction={(key) => run(key as ActionKey)}
+          // eslint-disable-next-line jsx-a11y-x/no-autofocus -- see the comment above
+          autoFocus="first"
+        >
           {item('duplicate', t.duplicate, 'Mod+d', allLocked)}
           {item('delete', t.delete, 'Delete', allLocked)}
           <Separator className="pl-menu-sep" />

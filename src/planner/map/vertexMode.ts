@@ -29,13 +29,16 @@ function current(): { o: MapObject; points: Vec2[]; index: number; zoneId: strin
 }
 
 /** Minimum points for the object's kind: 3 for areas, 2 for lines. */
-const minPoints = (o: MapObject): number => ('shape' in o ? 3 : o.type === 'measure' && o.mode === 'area' ? 3 : 2);
+const minPoints = (o: MapObject): number =>
+  'shape' in o ? 3 : o.type === 'measure' && o.mode === 'area' ? 3 : 2;
 
 function announceVertex(): void {
   const c = current();
   if (!c) return;
   const p = c.points[c.index] as Vec2;
-  announce(t.selection.vertex(c.index + 1, c.points.length, formatNumber(p.x, 1), formatNumber(p.y, 1)));
+  announce(
+    t.selection.vertex(c.index + 1, c.points.length, formatNumber(p.x, 1), formatNumber(p.y, 1)),
+  );
 }
 
 /** Writes new points back into the object (or its zone). */

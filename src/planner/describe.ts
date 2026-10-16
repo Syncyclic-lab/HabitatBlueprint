@@ -47,7 +47,11 @@ export function animalsSummary(animals: readonly AnimalEntry[]): string {
 }
 
 /** Full accessible name for an object. */
-export function describeObject(o: MapObject, plan: Plan, units: Units = plan.settings.units): string {
+export function describeObject(
+  o: MapObject,
+  plan: Plan,
+  units: Units = plan.settings.units,
+): string {
   const parts = [t.describe.object(o.name, typeLabel(o))];
   const area = o.type === 'path' ? null : objectArea(o);
   const length = objectLength(o);

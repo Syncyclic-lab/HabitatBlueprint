@@ -6,13 +6,27 @@ import { getState, setState, type ViewState } from './store.ts';
 
 function setView(next: ViewState): void {
   const plan = getState().plan;
-  setState({ view: plan ? clampCenter(next, plan.settings.mapWidthM, plan.settings.mapHeightM) : next });
+  setState({
+    view: plan ? clampCenter(next, plan.settings.mapWidthM, plan.settings.mapHeightM) : next,
+  });
 }
 
 export function setViewportSize(width: number, height: number): void {
-  const v = getState().view;
-  if (v.width === width && v.height === height) return;
-  setState({ view: { ...v, width, height } });
+  const s = getState();
+  const v = s.view;
+  if (width <= 0 || height <= 0) return;
+  if (v.width !== width || v.height !== height || !s.viewportMeasured) {
+    setState({ view: { ...v, width, height }, viewportMeasured: true });
+  }
+  applyPendingFit();
+}
+
+/** Fits a newly opened plan once the viewport has a real size. */
+export function applyPendingFit(): void {
+  const s = getState();
+  if (!s.fitPending || !s.viewportMeasured || !s.plan) return;
+  setState({ fitPending: false });
+  fitMap();
 }
 
 /** Pans by a screen distance in pixels (positive = view moves east/south). */
@@ -65,4 +79,18 @@ export function revealBox(box: BBox): void {
   }
   revealPoint({ x: box.minX, y: box.minY });
   revealPoint({ x: box.maxX, y: box.maxY });
+}
+
+/**
+ * Where the view would be after panning by (dx, dy) screen pixels, clamped like panBy, as the
+ * on-screen shift of the map in pixels. Used to slide the drawn map during a drag (MapView).
+ */
+export function panPreview(dxPx: number, dyPx: number): Vec2 {
+  const s = getState();
+  const v = s.view;
+  const next = { ...v, cx: v.cx + dxPx / v.zoom, cy: v.cy + dyPx / v.zoom };
+  const clamped = s.plan
+    ? clampCenter(next, s.plan.settings.mapWidthM, s.plan.settings.mapHeightM)
+    : next;
+  return { x: (v.cx - clamped.cx) * v.zoom, y: (v.cy - clamped.cy) * v.zoom };
 }

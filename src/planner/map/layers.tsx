@@ -12,11 +12,50 @@ import { getSpecies } from '../../data/index.ts';
 import { bestInk } from '../../lib/color.ts';
 import { formatArea, formatLength, type Units } from '../../lib/format.ts';
 import { footprint } from '../../model/totals.ts';
-import type { AnimalEntry, MapObject, Plan } from '../../model/types.ts';
+import type { AnimalEntry, MapObject } from '../../model/types.ts';
 import { linePath, multiPath, polyPath } from './paths.ts';
 import { patternUrl } from './Patterns.tsx';
-import { objectFill, zoneFill, type FillStyle } from './style.ts';
-import type { ViewBox } from './viewMath.ts';
+import { zoneFill, type FillStyle } from './style.ts';
+import { GRID_MIN_PX, type ViewBox } from './viewMath.ts';
+
+// ───────── Per-shape caches ─────────
+// Shapes are immutable (an edit makes a new object), so everything derived from one can be
+// cached by identity. Zooming re-renders every object; these keep that cheap.
+
+interface ShapeGeometry {
+  d: string;
+  centroid: Vec2;
+  box: BBox;
+  areaM2: number;
+}
+
+const shapeCache = new WeakMap<Shape, ShapeGeometry>();
+const pathStringCache = new WeakMap<object, string>();
+
+function shapeGeometry(shape: Shape): ShapeGeometry {
+  let hit = shapeCache.get(shape);
+  if (!hit) {
+    const poly = shapeToPoly(shape);
+    hit = {
+      d: polyPath(poly),
+      centroid: ringCentroid(poly.outer),
+      box: boxOf(poly.outer),
+      areaM2: polyArea(poly),
+    };
+    shapeCache.set(shape, hit);
+  }
+  return hit;
+}
+
+/** An SVG path string cached against the object it was made from. */
+function cachedPathString(key: object, make: () => string): string {
+  let hit = pathStringCache.get(key);
+  if (hit === undefined) {
+    hit = make();
+    pathStringCache.set(key, hit);
+  }
+  return hit;
+}
 
 // ───────── Ground and grid ─────────
 
@@ -39,9 +78,16 @@ export interface GridProps {
   majorEvery: number;
 }
 
-/** Grid lines inside the visible part of the map, thinned so lines stay ≥ 6 px apart. */
-export const Grid = memo(function Grid({ view, zoom, widthM, heightM, minorM, majorEvery }: GridProps) {
-  const step = visibleGridStep(minorM, zoom);
+/** Grid lines inside the visible part of the map, thinned so lines stay GRID_MIN_PX apart. */
+export const Grid = memo(function Grid({
+  view,
+  zoom,
+  widthM,
+  heightM,
+  minorM,
+  majorEvery,
+}: GridProps) {
+  const step = visibleGridStep(minorM, zoom, GRID_MIN_PX);
   if (step === null) return null;
   const major = step * majorEvery;
   const x0 = Math.max(0, Math.floor(view.x / step) * step);
@@ -89,10 +135,20 @@ function CasedPath({ d, style, poster, clipId }: CasedPathProps) {
     <>
       <path d={d} fill={style.fill} className="obj-fill" clipPath={clip} />
       {style.typePattern !== 'none' && (
-        <path d={d} fill={patternUrl(style.typePattern, style.ink)} className="pattern-strong" clipPath={clip} />
+        <path
+          d={d}
+          fill={patternUrl(style.typePattern, style.ink)}
+          className="pattern-strong"
+          clipPath={clip}
+        />
       )}
       {style.areaPattern !== 'none' && (
-        <path d={d} fill={patternUrl(style.areaPattern, style.ink)} className="pattern-subtle" clipPath={clip} />
+        <path
+          d={d}
+          fill={patternUrl(style.areaPattern, style.ink)}
+          className="pattern-subtle"
+          clipPath={clip}
+        />
       )}
       {!poster && <path d={d} className="casing-outer" clipPath={clip} />}
       <path d={d} className="casing-inner" clipPath={clip} />
@@ -104,7 +160,19 @@ const shapePath = (shape: Shape): string => polyPath(shapeToPoly(shape));
 
 // ───────── Icons, silhouettes, badges ─────────
 
-export function SvgIcon({ id, x, y, size, color }: { id: IconId; x: number; y: number; size: number; color: string }) {
+export function SvgIcon({
+  id,
+  x,
+  y,
+  size,
+  color,
+}: {
+  id: IconId;
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+}) {
   const def = ICONS[id];
   const k = size / 24;
   const stroke = 'stroke' in def && def.stroke;
@@ -145,7 +213,8 @@ export const badgeText = (a: AnimalEntry): string =>
 
 export interface ObjectViewProps {
   o: MapObject;
-  plan: Plan;
+  /** Colours and patterns from cachedObjectFill (stable identity while unchanged). */
+  style: FillStyle | null;
   zoom: number;
   units: Units;
   showAreas: boolean;
@@ -155,7 +224,16 @@ export interface ObjectViewProps {
 }
 
 /** One object. Memoised on its identity, so editing one object re-renders only that one. */
-export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showAreas, poster, phaseOut, label }: ObjectViewProps) {
+export const ObjectView = memo(function ObjectView({
+  o,
+  style: fillStyle,
+  zoom,
+  units,
+  showAreas,
+  poster,
+  phaseOut,
+  label,
+}: ObjectViewProps) {
   const px = 1 / zoom;
   const common = {
     'data-id': o.id,
@@ -168,8 +246,8 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
 
   if (o.type === 'path') {
     const fp = footprint(o) ?? [];
-    const style = objectFill(o, plan) as FillStyle;
-    const d = multiPath(fp);
+    const style = fillStyle as FillStyle;
+    const d = cachedPathString(fp, () => multiPath(fp));
     return (
       <g {...common}>
         <path d={d} fill={style.fill} className="obj-fill" />
@@ -177,18 +255,18 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
         {o.type === 'path' && o.pathType === 'elevated' && (
           <path d={d} className="casing-inner" strokeDasharray="6 4" />
         )}
-        <path d={linePath(o.line.points)} className="hit-line nonscaling" />
+        <path
+          d={cachedPathString(o.line, () => linePath(o.line.points))}
+          className="hit-line nonscaling"
+        />
       </g>
     );
   }
 
   if ('shape' in o) {
-    const style = objectFill(o, plan) as FillStyle;
-    const poly = shapeToPoly(o.shape);
-    const d = polyPath(poly);
+    const style = fillStyle as FillStyle;
+    const { d, centroid, box, areaM2 } = shapeGeometry(o.shape);
     const clipId = `clip-${o.id}`;
-    const centroid = ringCentroid(poly.outer);
-    const box = boxOf(poly.outer);
     const fontPx = 13;
     const font = fontPx * px;
     const children: ReactNode[] = [];
@@ -200,7 +278,12 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
         </clipPath>,
         ...o.zones.map((z) => (
           <g key={z.id} data-zone={z.id} className={`zone zone-${z.kind}`}>
-            <CasedPath d={shapePath(z.shape)} style={zoneFill(z.kind)} poster={poster} clipId={clipId} />
+            <CasedPath
+              d={shapeGeometry(z.shape).d}
+              style={zoneFill(z.kind)}
+              poster={poster}
+              clipId={clipId}
+            />
           </g>
         )),
       );
@@ -208,16 +291,18 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
 
     // On-map labels: name and area for habitats (docs/03 §2.2), name for buildings.
     const labelLines: string[] = [];
-    if (o.type === 'habitat' && showAreas) labelLines.push(o.name, formatArea(polyArea(poly), units));
+    if (o.type === 'habitat' && showAreas) labelLines.push(o.name, formatArea(areaM2, units));
     else if (o.type === 'building' || o.type === 'plaza') labelLines.push(o.name);
     const widthPx = (box.maxX - box.minX) * zoom;
     const heightPx = (box.maxY - box.minY) * zoom;
     const longest = Math.max(0, ...labelLines.map((l) => l.length));
-    const fits = longest * fontPx * 0.6 < widthPx - 8 && labelLines.length * fontPx * 1.3 < heightPx - 8;
+    const fits =
+      longest * fontPx * 0.6 < widthPx - 8 && labelLines.length * fontPx * 1.3 < heightPx - 8;
 
     const animals = o.type === 'habitat' ? o.animals.slice(0, 3) : [];
     const silPx = 22;
-    const showAnimals = animals.length > 0 && widthPx > 60 && heightPx > (fits ? labelLines.length * 17 + 30 : 30);
+    const showAnimals =
+      animals.length > 0 && widthPx > 60 && heightPx > (fits ? labelLines.length * 17 + 30 : 30);
 
     return (
       <g {...common}>
@@ -245,10 +330,19 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
           <g aria-hidden="true">
             {animals.map((a, i) => {
               const cx = centroid.x + (i - (animals.length - 1) / 2) * 70 * px;
-              const cy = centroid.y + (fits ? labelLines.length * font * 0.75 + 4 * px : 0) + silPx * px * 0.5;
+              const cy =
+                centroid.y +
+                (fits ? labelLines.length * font * 0.75 + 4 * px : 0) +
+                silPx * px * 0.5;
               return (
                 <g key={a.id}>
-                  <SvgIcon id={silhouetteFor(a)} x={cx} y={cy} size={silPx * px} color={style.ink} />
+                  <SvgIcon
+                    id={silhouetteFor(a)}
+                    x={cx}
+                    y={cy}
+                    size={silPx * px}
+                    color={style.ink}
+                  />
                   <text
                     className="obj-label"
                     x={cx}
@@ -265,18 +359,27 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
             })}
           </g>
         )}
-        {o.type === 'building' && (() => {
-          const iconId = buildingIcon(o.buildingType);
-          if (!iconId || widthPx < 28 || heightPx < 28) return null;
-          const s = Math.min(28, widthPx * 0.5, heightPx * 0.5) * px;
-          return <SvgIcon id={iconId} x={centroid.x} y={centroid.y + (fits ? font * 1.4 : 0)} size={s} color={style.ink} />;
-        })()}
+        {o.type === 'building' &&
+          (() => {
+            const iconId = buildingIcon(o.buildingType);
+            if (!iconId || widthPx < 28 || heightPx < 28) return null;
+            const s = Math.min(28, widthPx * 0.5, heightPx * 0.5) * px;
+            return (
+              <SvgIcon
+                id={iconId}
+                x={centroid.x}
+                y={centroid.y + (fits ? font * 1.4 : 0)}
+                size={s}
+                color={style.ink}
+              />
+            );
+          })()}
       </g>
     );
   }
 
   if (o.type === 'barrier') {
-    const d = linePath(o.line.points);
+    const d = cachedPathString(o.line, () => linePath(o.line.points));
     return (
       <g {...common}>
         <path d={d} className="barrier-halo nonscaling" />
@@ -290,7 +393,10 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
     const sizeM = o.sizing === 'map' ? o.sizeM : 26 * px;
     const id: IconId = isIconId(o.iconId) ? o.iconId : 'info';
     return (
-      <g {...common} transform={o.rotationDeg ? `rotate(${o.rotationDeg} ${o.at.x} ${o.at.y})` : undefined}>
+      <g
+        {...common}
+        transform={o.rotationDeg ? `rotate(${o.rotationDeg} ${o.at.x} ${o.at.y})` : undefined}
+      >
         <rect
           x={o.at.x - sizeM / 2}
           y={o.at.y - sizeM / 2}
@@ -326,7 +432,7 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
           {o.text}
         </text>
         <rect
-          x={o.at.x - (o.text.length * size * 0.3)}
+          x={o.at.x - o.text.length * size * 0.3}
           y={o.at.y - size * 0.6}
           width={o.text.length * size * 0.6}
           height={size * 1.2}
@@ -354,7 +460,9 @@ export const ObjectView = memo(function ObjectView({ o, plan, zoom, units, showA
         stroke="#FFFFFF"
         strokeWidth={3 * px}
       >
-        {o.mode === 'area' ? formatArea(Math.abs(signedArea(pts)), units) : formatLength(polylineLength(pts), units)}
+        {o.mode === 'area'
+          ? formatArea(Math.abs(signedArea(pts)), units)
+          : formatLength(polylineLength(pts), units)}
       </text>
     </g>
   );
@@ -408,7 +516,7 @@ export interface SelectionProps {
 export function SelectionLayer({ objects, zoom, handles, box, vertexEdit }: SelectionProps) {
   const px = 1 / zoom;
   const outline = (o: MapObject): string => {
-    if ('shape' in o) return shapePath(o.shape);
+    if ('shape' in o) return shapeGeometry(o.shape).d;
     if (o.type === 'path') return multiPath(footprint(o) ?? []);
     if ('line' in o) return linePath(o.line.points);
     if (o.type === 'measure') return linePath(o.points);
@@ -431,12 +539,21 @@ export function SelectionLayer({ objects, zoom, handles, box, vertexEdit }: Sele
         handlePositions(box, px).map(({ id, x, y }) => (
           <g key={id} data-handle={id}>
             {id === 'rotate' && (
-              <path d={`M${(box.minX + box.maxX) / 2} ${box.minY}V${y}`} className="sel-ants nonscaling" />
+              <path
+                d={`M${(box.minX + box.maxX) / 2} ${box.minY}V${y}`}
+                className="sel-ants nonscaling"
+              />
             )}
             {id === 'rotate' ? (
               <circle cx={x} cy={y} r={hs / 1.6} className="handle nonscaling" />
             ) : (
-              <rect x={x - hs / 2} y={y - hs / 2} width={hs} height={hs} className="handle nonscaling" />
+              <rect
+                x={x - hs / 2}
+                y={y - hs / 2}
+                width={hs}
+                height={hs}
+                className="handle nonscaling"
+              />
             )}
             <rect x={x - hit / 2} y={y - hit / 2} width={hit} height={hit} className="handle-hit" />
           </g>
@@ -451,7 +568,13 @@ export function SelectionLayer({ objects, zoom, handles, box, vertexEdit }: Sele
               height={hs}
               className={i === vertexEdit.index ? 'handle active nonscaling' : 'handle nonscaling'}
             />
-            <rect x={p.x - hit / 2} y={p.y - hit / 2} width={hit} height={hit} className="handle-hit" />
+            <rect
+              x={p.x - hit / 2}
+              y={p.y - hit / 2}
+              width={hit}
+              height={hit}
+              className="handle-hit"
+            />
           </g>
         ))}
     </g>
@@ -500,7 +623,15 @@ export interface DraftLayerProps {
   lineWidthM: number | null;
 }
 
-export function DraftLayer({ zoom, points, placedCount, shape, kind, issueEdges, lineWidthM }: DraftLayerProps) {
+export function DraftLayer({
+  zoom,
+  points,
+  placedCount,
+  shape,
+  kind,
+  issueEdges,
+  lineWidthM,
+}: DraftLayerProps) {
   const px = 1 / zoom;
   const d = shape ? shapePath(shape) : linePath(points);
   return (
@@ -517,13 +648,21 @@ export function DraftLayer({ zoom, points, placedCount, shape, kind, issueEdges,
           fill="none"
         />
       )}
-      <path d={shape && shape.kind !== 'polygon' ? d : linePath(points)} className="draft-line-halo nonscaling" />
-      <path d={shape && shape.kind !== 'polygon' ? d : linePath(points)} className="draft-line nonscaling" />
+      <path
+        d={shape && shape.kind !== 'polygon' ? d : linePath(points)}
+        className="draft-line-halo nonscaling"
+      />
+      <path
+        d={shape && shape.kind !== 'polygon' ? d : linePath(points)}
+        className="draft-line nonscaling"
+      />
       {issueEdges &&
         issueEdges.map((i) => {
           const a = points[i];
           const b = points[(i + 1) % Math.max(1, placedCount)];
-          return a && b ? <path key={i} d={`M${a.x} ${a.y}L${b.x} ${b.y}`} className="draft-issue nonscaling" /> : null;
+          return a && b ? (
+            <path key={i} d={`M${a.x} ${a.y}L${b.x} ${b.y}`} className="draft-issue nonscaling" />
+          ) : null;
         })}
       {points.slice(0, placedCount).map((p, i) => (
         <circle key={i} cx={p.x} cy={p.y} r={4 * px} className="draft-point nonscaling" />

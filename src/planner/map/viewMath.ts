@@ -9,6 +9,9 @@ export interface ViewBox {
   h: number;
 }
 
+/** Grid lines closer than this on screen are thinned out (a coarser step is drawn). */
+export const GRID_MIN_PX = 12;
+
 export const clampZoom = (z: number): number => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
 
 export function viewBox(v: ViewState): ViewBox {
@@ -38,7 +41,11 @@ export function clampCenter(v: ViewState, mapW: number, mapH: number): ViewState
 }
 
 /** Zooms by `factor`, keeping the map point under `anchor` (viewport pixels) still. */
-export function zoomAt(v: ViewState, factor: number, anchor: Vec2 = { x: v.width / 2, y: v.height / 2 }): ViewState {
+export function zoomAt(
+  v: ViewState,
+  factor: number,
+  anchor: Vec2 = { x: v.width / 2, y: v.height / 2 },
+): ViewState {
   const before = screenToMap(v, anchor.x, anchor.y);
   const zoom = clampZoom(v.zoom * factor);
   const next = { ...v, zoom };

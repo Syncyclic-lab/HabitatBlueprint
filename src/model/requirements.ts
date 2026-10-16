@@ -5,15 +5,16 @@
  * This is a planning assumption; players should confirm against the in-game Zoopedia (Q7).
  */
 import type { HabitatMeasure } from '../geometry/measure.ts';
-import type {
-  AnimalEntry,
-  AreaRequirement,
-  HabitatObject,
-  SpeciesRequirement,
-} from './types.ts';
+import type { AnimalEntry, AreaRequirement, HabitatObject, SpeciesRequirement } from './types.ts';
 
 export type SpaceType = 'land' | 'water' | 'deepWater' | 'climbing' | 'flying';
-export const SPACE_TYPES: readonly SpaceType[] = ['land', 'water', 'deepWater', 'climbing', 'flying'];
+export const SPACE_TYPES: readonly SpaceType[] = [
+  'land',
+  'water',
+  'deepWater',
+  'climbing',
+  'flying',
+];
 
 export function requiredArea(
   req: AreaRequirement | null,
@@ -84,13 +85,23 @@ export function checkHabitat(
     if (!req) return { animal, species: null, rows: [], status: 'noData' };
     const rows: SpaceRow[] = [];
     for (const space of SPACE_TYPES) {
-      const need = requiredArea(req.requirements[space], animalCount(animal), req.includedInBase, buffer);
+      const need = requiredArea(
+        req.requirements[space],
+        animalCount(animal),
+        req.includedInBase,
+        buffer,
+      );
       if (need === null) continue;
       const have = available(measure, space);
       rows.push({ space, requiredM2: need, availableM2: have, shortM2: Math.max(0, need - have) });
     }
     if (rows.length === 0) return { animal, species: req, rows, status: 'noData' };
-    return { animal, species: req, rows, status: rows.some((r) => r.shortM2 > 0) ? 'short' : 'fits' };
+    return {
+      animal,
+      species: req,
+      rows,
+      status: rows.some((r) => r.shortM2 > 0) ? 'short' : 'fits',
+    };
   });
   const shortM2 = Math.max(0, ...species.flatMap((s) => s.rows.map((r) => r.shortM2)));
   const status: FitStatus = species.some((s) => s.status === 'short')

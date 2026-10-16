@@ -57,4 +57,5 @@ export const formatNumber = (n: number, digits = 2): string =>
 export const toMeters = (value: number, units: Units): number =>
   units === 'imperial' ? value * M_PER_FT : value;
 
-export const fromMeters = (m: number, units: Units): number => (units === 'imperial' ? m / M_PER_FT : m);
+export const fromMeters = (m: number, units: Units): number =>
+  units === 'imperial' ? m / M_PER_FT : m;

@@ -2,6 +2,7 @@
  * Plan checks (docs/03 §4.7). Checks inform; they never block saving or exporting.
  */
 import { intersect, clipToMap, GeometryError } from '../geometry/clip.ts';
+import type { BBox, MultiPoly } from '../geometry/types.ts';
 import { bboxOfMulti, bboxesOverlap, multiArea } from '../geometry/polygon.ts';
 import { getBarrier, getSpecies } from '../data/index.ts';
 import { checkHabitat, findRequirement } from './requirements.ts';
@@ -9,12 +10,7 @@ import { footprint, habitatMeasure } from './totals.ts';
 import type { HabitatObject, Id, Plan } from './types.ts';
 
 export type CheckKind =
-  | 'overlap'
-  | 'short'
-  | 'noAnimals'
-  | 'wrongEnclosure'
-  | 'outsideMap'
-  | 'lowBarrier';
+  'overlap' | 'short' | 'noAnimals' | 'wrongEnclosure' | 'outsideMap' | 'lowBarrier';
 
 export interface PlanCheck {
   kind: CheckKind;
@@ -33,13 +29,15 @@ export function runChecks(plan: Plan): PlanCheck[] {
   const habitats = plan.objects.filter((o): o is HabitatObject => o.type === 'habitat');
 
   // Habitats overlapping each other.
+  const prints = habitats.map((hab) => footprint(hab) ?? []);
+  const boxes = prints.map(bboxOfMulti);
   for (let i = 0; i < habitats.length; i++) {
     for (let j = i + 1; j < habitats.length; j++) {
       const a = habitats[i] as HabitatObject;
       const b = habitats[j] as HabitatObject;
-      const fa = footprint(a) ?? [];
-      const fb = footprint(b) ?? [];
-      if (!bboxesOverlap(bboxOfMulti(fa), bboxOfMulti(fb))) continue;
+      const fa = prints[i] as MultiPoly;
+      const fb = prints[j] as MultiPoly;
+      if (!bboxesOverlap(boxes[i] as BBox, boxes[j] as BBox)) continue;
       try {
         const overlap = multiArea(intersect(fa, fb));
         if (overlap > OVERLAP_SLACK_M2) {
@@ -54,8 +52,10 @@ export function runChecks(plan: Plan): PlanCheck[] {
   for (const hab of habitats) {
     const measure = habitatMeasure(hab, mapM2);
     const check = checkHabitat(hab, measure, plan.speciesLibrary, requirementBufferPct);
-    if (check.status === 'noAnimals') out.push({ kind: 'noAnimals', objectIds: [hab.id], data: {} });
-    if (check.status === 'short') out.push({ kind: 'short', objectIds: [hab.id], data: { m2: check.shortM2 } });
+    if (check.status === 'noAnimals')
+      out.push({ kind: 'noAnimals', objectIds: [hab.id], data: {} });
+    if (check.status === 'short')
+      out.push({ kind: 'short', objectIds: [hab.id], data: { m2: check.shortM2 } });
 
     for (const animal of hab.animals) {
       const species = animal.catalogId ? getSpecies(animal.catalogId) : undefined;
@@ -84,7 +84,8 @@ export function runChecks(plan: Plan): PlanCheck[] {
     if (!fp) continue;
     try {
       const inside = multiArea(clipToMap(fp, w, h));
-      if (multiArea(fp) - inside > 0.01) out.push({ kind: 'outsideMap', objectIds: [o.id], data: {} });
+      if (multiArea(fp) - inside > 0.01)
+        out.push({ kind: 'outsideMap', objectIds: [o.id], data: {} });
     } catch (error) {
       if (!(error instanceof GeometryError)) throw error;
     }

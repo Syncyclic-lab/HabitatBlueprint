@@ -14,7 +14,9 @@ export interface NewPlanInput {
   presetId?: string;
 }
 
-export function defaultSettings(input: Pick<NewPlanInput, 'mode' | 'biomeId' | 'presetId'>): PlanSettings {
+export function defaultSettings(
+  input: Pick<NewPlanInput, 'mode' | 'biomeId' | 'presetId'>,
+): PlanSettings {
   const preset = getPreset(input.presetId ?? DEFAULT_PRESET.id) ?? DEFAULT_PRESET;
   return {
     mapPresetId: preset.id,
@@ -24,7 +26,14 @@ export function defaultSettings(input: Pick<NewPlanInput, 'mode' | 'biomeId' | '
     biomeId: input.biomeId ?? DEFAULT_BIOME.id,
     units: 'metric',
     grid: { visible: true, minorM: 5, majorEvery: 10 },
-    snap: { enabled: true, grid: true, vertices: true, edges: true, angleStepDeg: 15, guides: false },
+    snap: {
+      enabled: true,
+      grid: true,
+      vertices: true,
+      edges: true,
+      angleStepDeg: 15,
+      guides: false,
+    },
     display: { showAreasOnMap: true, style: 'clear', patterns: true },
     requirementBufferPct: 10,
   };
@@ -62,4 +71,11 @@ export function nextName(objects: readonly MapObject[], prefix: string): string 
 }
 
 /** Object types that cover ground and so count toward the planned area (docs/03 §2.2). */
-export const GROUND_TYPES: readonly ObjectType[] = ['habitat', 'building', 'path', 'plaza', 'water', 'planting'];
+export const GROUND_TYPES: readonly ObjectType[] = [
+  'habitat',
+  'building',
+  'path',
+  'plaza',
+  'water',
+  'planting',
+];

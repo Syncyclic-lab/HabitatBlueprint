@@ -60,7 +60,12 @@ export function objectFill(o: MapObject, plan: Plan): FillStyle | null {
     case 'water': {
       const z = getSubZoneStyle(o.deep ? 'deepWater' : 'water');
       const fill = z?.fill ?? '#3FB7E0';
-      return { fill, ink: bestInk(fill), typePattern: o.deep ? 'waves-dense' : 'waves', areaPattern: 'none' };
+      return {
+        fill,
+        ink: bestInk(fill),
+        typePattern: o.deep ? 'waves-dense' : 'waves',
+        areaPattern: 'none',
+      };
     }
     case 'planting': {
       const fill = getOtherType('planting')?.fill ?? '#3E8E41';
@@ -76,7 +81,34 @@ export function objectFill(o: MapObject, plan: Plan): FillStyle | null {
   }
 }
 
+const fillCache = new WeakMap<
+  MapObject,
+  { areas: Plan['areas']; display: Plan['settings']['display']; style: FillStyle | null }
+>();
+
+/**
+ * objectFill, but returns the same object while the inputs are unchanged, so memoised map
+ * shapes don't re-render when an unrelated part of the plan changes.
+ */
+export function cachedObjectFill(o: MapObject, plan: Plan): FillStyle | null {
+  const hit = fillCache.get(o);
+  if (hit && hit.areas === plan.areas && hit.display === plan.settings.display) return hit.style;
+  const style = objectFill(o, plan);
+  fillCache.set(o, { areas: plan.areas, display: plan.settings.display, style });
+  return style;
+}
+
+const zoneFillCache = new Map<ZoneKind, FillStyle>();
+
 export function zoneFill(kind: ZoneKind): FillStyle {
+  const hit = zoneFillCache.get(kind);
+  if (hit) return hit;
+  const style = computeZoneFill(kind);
+  zoneFillCache.set(kind, style);
+  return style;
+}
+
+function computeZoneFill(kind: ZoneKind): FillStyle {
   const z = getSubZoneStyle(kind);
   const fill = z?.fill ?? '#3FB7E0';
   return { fill, ink: bestInk(fill), typePattern: z?.pattern ?? 'none', areaPattern: 'none' };

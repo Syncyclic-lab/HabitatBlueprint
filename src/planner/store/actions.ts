@@ -32,7 +32,8 @@ import { getState, setState } from './store.ts';
 
 const t = en.planner;
 
-export const objectById = (plan: Plan, id: Id): MapObject | undefined => plan.objects.find((o) => o.id === id);
+export const objectById = (plan: Plan, id: Id): MapObject | undefined =>
+  plan.objects.find((o) => o.id === id);
 
 function selected(ids: readonly Id[] = getState().selection): MapObject[] {
   const plan = getState().plan;
@@ -42,7 +43,9 @@ function selected(ids: readonly Id[] = getState().selection): MapObject[] {
 
 /** History label for a set of objects: its name, or "3 objects". */
 function labelFor(objects: readonly MapObject[]): string {
-  return objects.length === 1 ? (objects[0] as MapObject).name : t.history.selection(objects.length);
+  return objects.length === 1
+    ? (objects[0] as MapObject).name
+    : t.history.selection(objects.length);
 }
 
 /** Objects that may be changed: locked ones are skipped (and the user is told). */
@@ -106,15 +109,23 @@ export function selectNext(direction: 1 | -1): boolean {
 // ───────── Create, edit, delete ─────────
 
 export function addObject(o: MapObject, options: { select?: boolean } = {}): void {
-  commit(t.history.create(o.name), (d) => {
-    d.objects.push(o as Draft<MapObject>);
-  }, options.select === false ? {} : { select: [o.id] });
+  commit(
+    t.history.create(o.name),
+    (d) => {
+      d.objects.push(o as Draft<MapObject>);
+    },
+    options.select === false ? {} : { select: [o.id] },
+  );
 }
 
 export function addObjects(objects: MapObject[], label: string): void {
-  commit(label, (d) => {
-    d.objects.push(...(objects as Draft<MapObject>[]));
-  }, { select: objects.map((o) => o.id) });
+  commit(
+    label,
+    (d) => {
+      d.objects.push(...(objects as Draft<MapObject>[]));
+    },
+    { select: objects.map((o) => o.id) },
+  );
 }
 
 /** Edits one object through a recipe. */
@@ -142,9 +153,13 @@ export function deleteSelection(ids: Id[] = getState().selection): void {
   const targets = editable(selected(ids));
   if (targets.length === 0) return;
   const gone = new Set(targets.map((o) => o.id));
-  commit(t.history.delete(labelFor(targets)), (d) => {
-    d.objects = d.objects.filter((o) => !gone.has(o.id));
-  }, { select: [] });
+  commit(
+    t.history.delete(labelFor(targets)),
+    (d) => {
+      d.objects = d.objects.filter((o) => !gone.has(o.id));
+    },
+    { select: [] },
+  );
   announce(t.actions.deleted(targets.length));
 }
 
@@ -155,16 +170,24 @@ export function duplicateSelection(ids: Id[] = getState().selection): void {
   const step = plan.settings.grid.minorM;
   const copies = targets.map((o) => {
     const moved = translateObject(o, step, step);
-    const copy: MapObject = { ...moved, id: newId(), name: nextName(plan.objects, o.name.replace(/ \d+$/, '')) };
+    const copy: MapObject = {
+      ...moved,
+      id: newId(),
+      name: nextName(plan.objects, o.name.replace(/ \d+$/, '')),
+    };
     if (copy.type === 'habitat') {
       copy.zones = copy.zones.map((z) => ({ ...z, id: newId() }));
       copy.animals = copy.animals.map((a) => ({ ...a, id: newId() }));
     }
     return copy;
   });
-  commit(t.history.duplicate(labelFor(targets)), (d) => {
-    d.objects.push(...(copies as Draft<MapObject>[]));
-  }, { select: copies.map((c) => c.id) });
+  commit(
+    t.history.duplicate(labelFor(targets)),
+    (d) => {
+      d.objects.push(...(copies as Draft<MapObject>[]));
+    },
+    { select: copies.map((c) => c.id) },
+  );
   announce(t.actions.duplicated(copies.length));
 }
 
@@ -175,10 +198,15 @@ export function moveSelection(dx: number, dy: number, ids: Id[] = getState().sel
   const targets = editable(selected(ids));
   if (!plan || targets.length === 0) return;
   const box = objectsBBox(targets);
-  const d = box ? clampDelta(box, dx, dy, plan.settings.mapWidthM, plan.settings.mapHeightM) : { x: dx, y: dy };
+  const d = box
+    ? clampDelta(box, dx, dy, plan.settings.mapWidthM, plan.settings.mapHeightM)
+    : { x: dx, y: dy };
   if (d.x === 0 && d.y === 0) return;
   commit(t.history.move(labelFor(targets)), (draft) =>
-    replaceObjects(draft, targets.map((o) => translateObject(o, d.x, d.y))),
+    replaceObjects(
+      draft,
+      targets.map((o) => translateObject(o, d.x, d.y)),
+    ),
   );
 }
 
@@ -188,7 +216,10 @@ export function rotateSelection(deg: number, ids: Id[] = getState().selection): 
   if (!box || targets.length === 0) return;
   const pivot = bboxCenter(box);
   commit(t.history.rotate(labelFor(targets)), (d) =>
-    replaceObjects(d, targets.map((o) => rotateObject(o, deg, pivot))),
+    replaceObjects(
+      d,
+      targets.map((o) => rotateObject(o, deg, pivot)),
+    ),
   );
 }
 
@@ -198,7 +229,10 @@ export function scaleSelection(factor: number, ids: Id[] = getState().selection)
   if (!box || targets.length === 0 || !(factor > 0)) return;
   const origin = bboxCenter(box);
   commit(t.history.resize(labelFor(targets)), (d) =>
-    replaceObjects(d, targets.map((o) => scaleObject(o, factor, origin))),
+    replaceObjects(
+      d,
+      targets.map((o) => scaleObject(o, factor, origin)),
+    ),
   );
 }
 
@@ -208,7 +242,10 @@ export function mirrorSelection(axis: 'h' | 'v', ids: Id[] = getState().selectio
   if (!box || targets.length === 0) return;
   const pivot = bboxCenter(box);
   commit(t.history.mirror(labelFor(targets)), (d) =>
-    replaceObjects(d, targets.map((o) => mirrorObject(o, axis, pivot))),
+    replaceObjects(
+      d,
+      targets.map((o) => mirrorObject(o, axis, pivot)),
+    ),
   );
 }
 
@@ -314,7 +351,11 @@ export function addAnimal(habitatId: Id, entry: Omit<AnimalEntry, 'id'>): Id {
   return id;
 }
 
-export function updateAnimal(habitatId: Id, animalId: Id, patch: Partial<Omit<AnimalEntry, 'id'>>): void {
+export function updateAnimal(
+  habitatId: Id,
+  animalId: Id,
+  patch: Partial<Omit<AnimalEntry, 'id'>>,
+): void {
   const plan = getState().plan;
   const hab = plan ? objectById(plan, habitatId) : undefined;
   commit(t.history.animals(hab?.name ?? ''), (d) => {

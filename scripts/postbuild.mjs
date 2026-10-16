@@ -59,6 +59,40 @@ for (const file of htmlFiles) {
   }
 }
 
+/**
+ * The planner's loading screen shows real download progress. Give it the exact total: the
+ * island's component and renderer plus every module they import statically.
+ */
+function initialBytes(html) {
+  const queue = [...html.matchAll(/(?:component-url|renderer-url)="([^"]+)"/g)].map((m) => m[1]);
+  const seen = new Set();
+  let total = 0;
+  while (queue.length > 0) {
+    const url = queue.shift();
+    if (seen.has(url)) continue;
+    seen.add(url);
+    const code = readFileSync(join(dist, url.slice(base.length)), 'utf8');
+    total += Buffer.byteLength(code);
+    for (const m of code.matchAll(/(?:\bimport|\bfrom)\s*["']([^"'\s]+\.js)["']/g)) {
+      queue.push(new URL(m[1], `http://x${url}`).pathname);
+    }
+  }
+  return total;
+}
+
+for (const file of htmlFiles) {
+  const html = readFileSync(file, 'utf8');
+  if (!html.includes('id="boot-screen"') || !html.includes('client="progress"')) continue;
+  const bytes = initialBytes(html);
+  writeFileSync(
+    file,
+    html.replace('id="boot-screen"', `id="boot-screen" data-boot-bytes="${bytes}"`),
+  );
+  console.log(
+    `${relative(dist, file)}: planner download ${Math.round(bytes / 1024)} kB before compression`,
+  );
+}
+
 if (problems.length > 0) {
   console.error('Post-build check failed:');
   for (const p of problems) console.error(`  ${p}`);

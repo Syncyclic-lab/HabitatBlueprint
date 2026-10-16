@@ -71,17 +71,25 @@ export default defineConfig(
   },
   {
     files: ['**/*.tsx'],
-    plugins: { 'jsx-a11y': jsxA11y, 'react-hooks': reactHooks },
+    plugins: { 'jsx-a11y-x': jsxA11y, 'react-hooks': reactHooks },
     languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
     rules: {
       ...jsxA11y.configs.strict.rules,
       ...reactHooks.configs.recommended.rules,
-      'jsx-a11y/no-redundant-roles': ['error', { nav: ['navigation'], ul: ['list'], ol: ['list'] }],
+      'jsx-a11y-x/no-redundant-roles': [
+        'error',
+        { nav: ['navigation'], ul: ['list'], ol: ['list'] },
+      ],
     },
   },
   {
     // The zod wrapper itself, config files and scripts may use defaults and the raw package.
-    files: ['src/lib/zod.ts', '*.config.{ts,js}', 'astro.config.ts'],
+    files: [
+      'src/lib/zod.ts',
+      '*.config.{ts,js}',
+      'astro.config.ts',
+      'src/planner/boot/directive.ts',
+    ],
     rules: { 'no-restricted-imports': 'off', 'no-restricted-syntax': 'off' },
   },
   {

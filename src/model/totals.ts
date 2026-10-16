@@ -1,13 +1,14 @@
 /**
  * Plan-wide measurements (docs/05 PlanTotals). Per-object results are cached by object identity
  * (plans are immutable: an edited object is a new object), so recomputing totals after one edit
- * only re-measures that object plus the final union.
+ * only re-measures that object plus the union of the cluster it sits in (geometry/union-area).
  */
-import type { MultiPoly } from '../geometry/types.ts';
+import type { BBox, MultiPoly } from '../geometry/types.ts';
 import { shapeToPoly } from '../geometry/flatten.ts';
-import { bufferPolyline, polylineLength } from '../geometry/buffer.ts';
-import { clipToMap, GeometryError, unionAll } from '../geometry/clip.ts';
+import { bufferPolyline, polylineLength, roughPathSurface } from '../geometry/buffer.ts';
+import { GeometryError } from '../geometry/clip.ts';
 import { multiArea, multiPerimeter, bboxOfMulti, bboxesOverlap } from '../geometry/polygon.ts';
+import { unionArea } from '../geometry/union-area.ts';
 import { measureHabitat, type HabitatMeasure } from '../geometry/measure.ts';
 import { sharedEdgeLength } from '../geometry/shared.ts';
 import { getBarrier, getSpecies } from '../data/index.ts';
@@ -21,8 +22,15 @@ export function footprint(o: MapObject): MultiPoly | null {
   const cached = footprintCache.get(o);
   if (cached !== undefined) return cached;
   let fp: MultiPoly | null = null;
-  if (o.type === 'path') fp = bufferPolyline(o.line.points, o.widthM, o.cap, o.line.smooth);
-  else if ('shape' in o && GROUND_TYPES.includes(o.type)) fp = [shapeToPoly(o.shape)];
+  if (o.type === 'path') {
+    try {
+      fp = bufferPolyline(o.line.points, o.widthM, o.cap, o.line.smooth);
+    } catch (error) {
+      if (!(error instanceof GeometryError)) throw error;
+      // Never let one awkward path break the map: draw a plain version of it instead.
+      fp = roughPathSurface(o.line.points, o.widthM);
+    }
+  } else if ('shape' in o && GROUND_TYPES.includes(o.type)) fp = [shapeToPoly(o.shape)];
   footprintCache.set(o, fp);
   return fp;
 }
@@ -77,7 +85,8 @@ export interface PlanTotals {
 }
 
 /** Barrier grade of a habitat, or 0 if it has no barrier set. */
-const gradeOf = (h: HabitatObject): number => (h.barrier ? (getBarrier(h.barrier.barrierId)?.grade ?? 0) : 0);
+const gradeOf = (h: HabitatObject): number =>
+  h.barrier ? (getBarrier(h.barrier.barrierId)?.grade ?? 0) : 0;
 
 const totalsCache = new WeakMap<MapObject[], { w: number; h: number; t: PlanTotals }>();
 
@@ -105,7 +114,8 @@ export function planTotals(plan: Plan): PlanTotals {
       areaByType[o.type] = (areaByType[o.type] ?? 0) + multiArea(fp);
     }
     if (o.type === 'path') {
-      pathLengthByType[o.pathType] = (pathLengthByType[o.pathType] ?? 0) + polylineLength(o.line.points);
+      pathLengthByType[o.pathType] =
+        (pathLengthByType[o.pathType] ?? 0) + polylineLength(o.line.points);
     } else if (o.type === 'barrier') {
       const len = polylineLength(o.line.points);
       const grade = String(getBarrier(o.barrierId)?.grade ?? 0);
@@ -134,21 +144,24 @@ export function planTotals(plan: Plan): PlanTotals {
   // Habitat walls: each habitat's perimeter, with walls shared between two habitats counted
   // once and assigned to the stronger (higher-grade) barrier.
   let habitatWallM = 0;
+  const habitatBoxes = habitatPolys.map(bboxOfMulti);
   habitats.forEach((hab, i) => {
     const poly = habitatPolys[i] as MultiPoly;
     let own = multiPerimeter(poly);
     habitats.forEach((other, j) => {
       if (i === j) return;
       const otherPoly = habitatPolys[j] as MultiPoly;
-      if (!bboxesOverlap(bboxOfMulti(poly), bboxOfMulti(otherPoly))) return;
+      if (!bboxesOverlap(habitatBoxes[i] as BBox, habitatBoxes[j] as BBox)) return;
       const shared = sharedEdgeLength(poly[0]?.outer ?? [], otherPoly[0]?.outer ?? []);
-      const keep = gradeOf(hab) > gradeOf(other) || (gradeOf(hab) === gradeOf(other) && hab.id < other.id);
+      const keep =
+        gradeOf(hab) > gradeOf(other) || (gradeOf(hab) === gradeOf(other) && hab.id < other.id);
       if (!keep) own -= shared;
     });
     habitatWallM += own;
     if (hab.barrier) {
       const grade = String(gradeOf(hab));
-      barrierLengthByType[hab.barrier.barrierId] = (barrierLengthByType[hab.barrier.barrierId] ?? 0) + own;
+      barrierLengthByType[hab.barrier.barrierId] =
+        (barrierLengthByType[hab.barrier.barrierId] ?? 0) + own;
       barrierLengthByGrade[grade] = (barrierLengthByGrade[grade] ?? 0) + own;
     }
   });
@@ -157,12 +170,15 @@ export function planTotals(plan: Plan): PlanTotals {
   let habitatM2: number;
   let approximate = false;
   try {
-    plannedM2 = multiArea(clipToMap(unionAll(ground), w, h));
-    habitatM2 = multiArea(unionAll(habitatPolys));
+    plannedM2 = unionArea(ground, { w, h });
+    habitatM2 = unionArea(habitatPolys);
   } catch (error) {
     if (!(error instanceof GeometryError)) throw error;
     approximate = true;
-    plannedM2 = Math.min(mapM2, ground.reduce((s, g) => s + multiArea(g), 0));
+    plannedM2 = Math.min(
+      mapM2,
+      ground.reduce((s, g) => s + multiArea(g), 0),
+    );
     habitatM2 = habitatPolys.reduce((s, g) => s + multiArea(g), 0);
   }
 

@@ -193,12 +193,12 @@ a:hover {
   font-size: var(--t-small);
 }
 
+/* Disabled controls are exempt from contrast rules (WCAG 1.4.3); fading them is the familiar
+   signal, and the disabled state itself is exposed to assistive tech. */
 .btn[aria-disabled='true'],
 .btn:disabled {
   cursor: not-allowed;
-  border-style: dashed;
-  background: var(--surface);
-  color: var(--ink);
+  opacity: 0.5;
 }
 
 /* ───────── Forms ───────── */

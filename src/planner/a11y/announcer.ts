@@ -24,6 +24,20 @@ export function onAnnounce(listener: Listener): () => void {
 
 export const POLITE_THROTTLE_MS = 750;
 
+type TimerId = ReturnType<typeof setTimeout>;
+
+export interface Timers {
+  set: (fn: () => void, ms: number) => TimerId;
+  clear: (id: TimerId) => void;
+}
+
+// Wrapped rather than stored as `{ set: setTimeout }`: browsers throw "Illegal invocation"
+// when setTimeout is called as a method of another object.
+const browserTimers: Timers = {
+  set: (fn, ms) => setTimeout(fn, ms),
+  clear: (id) => clearTimeout(id),
+};
+
 /**
  * Throttles a stream of messages: the first goes out at once, then at most one per `ms`,
  * always the latest. Returns a push function and a cancel function.
@@ -31,10 +45,10 @@ export const POLITE_THROTTLE_MS = 750;
 export function createThrottle(
   emit: (text: string) => void,
   ms: number = POLITE_THROTTLE_MS,
-  timers: { set: typeof setTimeout; clear: typeof clearTimeout } = { set: setTimeout, clear: clearTimeout },
+  timers: Timers = browserTimers,
 ): { push: (text: string) => void; cancel: () => void } {
   let pending: string | null = null;
-  let timer: ReturnType<typeof setTimeout> | null = null;
+  let timer: TimerId | null = null;
   const tick = () => {
     if (pending === null) {
       timer = null;

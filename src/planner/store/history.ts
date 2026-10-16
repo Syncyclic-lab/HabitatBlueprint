@@ -9,6 +9,7 @@ import { announce } from '../a11y/announcer.ts';
 import { nowIso } from '../../model/factory.ts';
 import type { Id, Plan } from '../../model/types.ts';
 import { getState, MAX_HISTORY, setState, type HistoryEntry } from './store.ts';
+import { applyPendingFit } from './view.ts';
 
 const t = en.planner.history;
 
@@ -39,12 +40,19 @@ export function commit(label: string, recipe: Recipe, options: { select?: Id[] }
   if (!s.plan) return false;
   if (s.txn) {
     // Inside a transaction: fold into it; the transaction records the step.
-    setState({ plan: apply(s.plan, recipe), ...(options.select ? { selection: options.select } : {}) });
+    setState({
+      plan: apply(s.plan, recipe),
+      ...(options.select ? { selection: options.select } : {}),
+    });
     return true;
   }
   const before = s.plan;
   const after = apply(before, recipe);
-  if (after.objects === before.objects && after.settings === before.settings && sameMeta(before, after)) {
+  if (
+    after.objects === before.objects &&
+    after.settings === before.settings &&
+    sameMeta(before, after)
+  ) {
     return false;
   }
   const selectionAfter = options.select ?? liveSelection(after, s.selection);
@@ -89,7 +97,11 @@ export function endTransaction(label?: string): void {
   if (!s.txn || !s.plan) return;
   const { base } = s.txn;
   setState({ txn: null });
-  if (s.plan.objects === base.objects && s.plan.settings === base.settings && sameMeta(base, s.plan)) {
+  if (
+    s.plan.objects === base.objects &&
+    s.plan.settings === base.settings &&
+    sameMeta(base, s.plan)
+  ) {
     setState({ plan: base });
     return;
   }
@@ -154,5 +166,7 @@ export function loadPlan(plan: Plan | null): void {
     selection: [],
     vertexEdit: null,
     draft: null,
+    fitPending: true,
   });
+  applyPendingFit();
 }

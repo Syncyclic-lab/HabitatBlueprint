@@ -10,7 +10,14 @@ import { shapeToPoly } from '../../geometry/flatten.ts';
 import { polyArea, ringPerimeter, signedArea } from '../../geometry/polygon.ts';
 import { polylineLength } from '../../geometry/buffer.ts';
 import { simplify } from '../../geometry/simplify.ts';
-import { clampToMap, snapAngle, snapPoint, snapToGrid, type SnapKind, type SnapTargets } from '../../geometry/snap.ts';
+import {
+  clampToMap,
+  snapAngle,
+  snapPoint,
+  snapToGrid,
+  type SnapKind,
+  type SnapTargets,
+} from '../../geometry/snap.ts';
 import { shapeVertices } from '../../geometry/transform.ts';
 import { distance, roundPoint } from '../../geometry/vec.ts';
 import { formatNumber, speakArea, speakLength } from '../../lib/format.ts';
@@ -19,7 +26,13 @@ import { newId, nextName } from '../../model/factory.ts';
 import { footprint } from '../../model/totals.ts';
 import type { HabitatObject, MapObject, Plan, SubZone } from '../../model/types.ts';
 import { addObject, addZone, objectById, select } from '../store/actions.ts';
-import { getState, setState, type ShapeMode, type ToolId, type ToolOptions } from '../store/store.ts';
+import {
+  getState,
+  setState,
+  type ShapeMode,
+  type ToolId,
+  type ToolOptions,
+} from '../store/store.ts';
 import { revealPoint } from '../store/view.ts';
 import { shapeModeFor, toolDef, toolKind } from './tools.ts';
 
@@ -42,7 +55,9 @@ export function setTool(tool: ToolId, options: { announce?: boolean } = {}): voi
   const plan = s.plan;
   const grid = plan?.settings.grid.minorM ?? 1;
   const centre = snapToGrid({ x: view.cx, y: view.cy }, grid);
-  const crosshair = plan ? clampToMap(centre, plan.settings.mapWidthM, plan.settings.mapHeightM) : centre;
+  const crosshair = plan
+    ? clampToMap(centre, plan.settings.mapWidthM, plan.settings.mapHeightM)
+    : centre;
   setState({
     tool,
     draft: null,
@@ -138,7 +153,12 @@ export function livePoint(): Vec2 | null {
 }
 
 /** A rectangle from two opposite corners, or an ellipse from centre and a radius point. */
-export function twoPointShape(mode: 'rect' | 'ellipse', a: Vec2, b: Vec2, constrain: boolean): Shape | null {
+export function twoPointShape(
+  mode: 'rect' | 'ellipse',
+  a: Vec2,
+  b: Vec2,
+  constrain: boolean,
+): Shape | null {
   const dx = b.x - a.x;
   const dy = b.y - a.y;
   if (mode === 'rect') {
@@ -152,7 +172,8 @@ export function twoPointShape(mode: 'rect' | 'ellipse', a: Vec2, b: Vec2, constr
   }
   const r = Math.hypot(dx, dy);
   if (r === 0) return null;
-  if (constrain || dx === 0 || dy === 0) return { kind: 'ellipse', cx: a.x, cy: a.y, rx: r, ry: r, rotationDeg: 0 };
+  if (constrain || dx === 0 || dy === 0)
+    return { kind: 'ellipse', cx: a.x, cy: a.y, rx: r, ry: r, rotationDeg: 0 };
   return { kind: 'ellipse', cx: a.x, cy: a.y, rx: Math.abs(dx), ry: Math.abs(dy), rotationDeg: 0 };
 }
 
@@ -174,11 +195,24 @@ export function draftPreview(): DraftPreview | null {
   const placed = s.draft?.points ?? [];
   const live = livePoint();
   const last = placed.at(-1);
-  const liveSnapped = live ? snapForDrawing(live, last).point : null;
+  const liveSnapped = live
+    ? s.inputMode === 'keyboard'
+      ? live
+      : snapForDrawing(live, last).point
+    : null;
   const points = liveSnapped ? [...placed, liveSnapped] : placed;
-  if (kind === 'point') return { kind, mode: null, points, shape: null, areaM2: null, perimeterM: null, lengthM: null };
+  if (kind === 'point')
+    return { kind, mode: null, points, shape: null, areaM2: null, perimeterM: null, lengthM: null };
   if (kind === 'line') {
-    return { kind, mode: null, points, shape: null, areaM2: null, perimeterM: null, lengthM: polylineLength(points) };
+    return {
+      kind,
+      mode: null,
+      points,
+      shape: null,
+      areaM2: null,
+      perimeterM: null,
+      lengthM: polylineLength(points),
+    };
   }
   const mode = shapeModeFor(s.tool, s.options);
   let shape: Shape | null = null;
@@ -210,7 +244,8 @@ function announcePoint(n: number, p: Vec2, snapKind: SnapKind): void {
   const preview = draftPreviewForPlaced();
   if (preview?.areaM2) parts.push(t.draw.areaSoFar(speakArea(preview.areaM2, units)));
   if (preview?.lengthM) parts.push(t.draw.lengthSoFar(speakLength(preview.lengthM, units)));
-  if (snapKind !== 'none' && snapKind !== 'grid') parts.push(t.draw.snapped(t.draw.snapTargets[snapKind]));
+  if (snapKind !== 'none' && snapKind !== 'grid')
+    parts.push(t.draw.snapped(t.draw.snapTargets[snapKind]));
   announce(parts.join(' '));
 }
 
@@ -220,7 +255,8 @@ function draftPreviewForPlaced(): { areaM2: number | null; lengthM: number | nul
   const pts = s.draft?.points ?? [];
   const kind = toolKind(s.tool, s.options);
   if (kind === 'line') return { areaM2: null, lengthM: polylineLength(pts) };
-  if (kind === 'shape' && pts.length >= 3) return { areaM2: Math.abs(signedArea(pts)), lengthM: null };
+  if (kind === 'shape' && pts.length >= 3)
+    return { areaM2: Math.abs(signedArea(pts)), lengthM: null };
   return null;
 }
 
@@ -232,7 +268,15 @@ export function placePoint(raw: Vec2, source: 'pointer' | 'keyboard'): void {
   const kind = toolKind(s.tool, s.options);
   if (kind === 'select') return;
   const placed = s.draft?.points ?? [];
-  const { point, kind: snapKind } = snapForDrawing(raw, placed.at(-1));
+  // The keyboard crosshair already moves in grid steps, so its points go exactly where it is
+  // shown. Vertex and edge snapping (sized in screen pixels) is for pointer input only.
+  const { point, kind: snapKind } =
+    source === 'keyboard'
+      ? {
+          point: roundPoint(clampToMap(raw, plan.settings.mapWidthM, plan.settings.mapHeightM)),
+          kind: 'none' as SnapKind,
+        }
+      : snapForDrawing(raw, placed.at(-1));
 
   if (kind === 'point') {
     createAtPoint(point);
@@ -262,7 +306,12 @@ export function placePoint(raw: Vec2, source: 'pointer' | 'keyboard'): void {
     }
     // Polygon / freehand-by-keyboard: clicking near the first point closes the shape.
     const first = placed[0];
-    if (source === 'pointer' && first && placed.length >= 3 && distance(first, point) <= 10 / s.view.zoom) {
+    if (
+      source === 'pointer' &&
+      first &&
+      placed.length >= 3 &&
+      distance(first, point) <= 10 / s.view.zoom
+    ) {
       finishDraft();
       return;
     }
@@ -325,7 +374,9 @@ export function finishDraft(): void {
 export function finishFreehand(stroke: Vec2[]): void {
   const plan = getState().plan;
   if (!plan) return;
-  const clamped = stroke.map((p) => roundPoint(clampToMap(p, plan.settings.mapWidthM, plan.settings.mapHeightM)));
+  const clamped = stroke.map((p) =>
+    roundPoint(clampToMap(p, plan.settings.mapWidthM, plan.settings.mapHeightM)),
+  );
   const points = simplify(clamped, 0.5);
   setState({ draft: { points } });
   finishDraft();
@@ -336,7 +387,13 @@ export function moveCrosshair(dx: number, dy: number): void {
   const plan = s.plan;
   if (!plan) return;
   const base = s.crosshair ?? { x: s.view.cx, y: s.view.cy };
-  const next = roundPoint(clampToMap({ x: base.x + dx, y: base.y + dy }, plan.settings.mapWidthM, plan.settings.mapHeightM));
+  const next = roundPoint(
+    clampToMap(
+      { x: base.x + dx, y: base.y + dy },
+      plan.settings.mapWidthM,
+      plan.settings.mapHeightM,
+    ),
+  );
   setState({ crosshair: next, inputMode: 'keyboard' });
   revealPoint(next);
 }
@@ -344,21 +401,41 @@ export function moveCrosshair(dx: number, dy: number): void {
 // ───────── Creating objects ─────────
 
 function baseFields(plan: Plan, prefix: string) {
-  return { id: newId(), name: nextName(plan.objects, prefix), phase: 1, locked: false, hidden: false };
+  return {
+    id: newId(),
+    name: nextName(plan.objects, prefix),
+    phase: 1,
+    locked: false,
+    hidden: false,
+  };
 }
 
 function announceCreated(o: MapObject, plan: Plan): void {
   const units = plan.settings.units;
   const fp = footprint(o);
   const mapM2 = plan.settings.mapWidthM * plan.settings.mapHeightM;
-  if (o.type === 'path' || o.type === 'barrier' || (o.type === 'measure' && o.mode === 'distance')) {
+  if (
+    o.type === 'path' ||
+    o.type === 'barrier' ||
+    (o.type === 'measure' && o.mode === 'distance')
+  ) {
     const len = polylineLength('line' in o ? o.line.points : o.points);
-    announce(o.type === 'measure' ? t.draw.measured(speakLength(len, units)) : t.draw.createdLine(o.name, speakLength(len, units)));
+    announce(
+      o.type === 'measure'
+        ? t.draw.measured(speakLength(len, units))
+        : t.draw.createdLine(o.name, speakLength(len, units)),
+    );
     return;
   }
   if (fp) {
     const area = fp.reduce((sum, p) => sum + polyArea(p), 0);
-    announce(t.draw.created(o.name, speakArea(area, units), `${formatNumber((area / mapM2) * 100, 2)} percent`));
+    announce(
+      t.draw.created(
+        o.name,
+        speakArea(area, units),
+        `${formatNumber((area / mapM2) * 100, 2)} percent`,
+      ),
+    );
     return;
   }
   if (o.type === 'measure') {
@@ -403,7 +480,12 @@ function createFromShape(shape: Shape): void {
     }
     case 'building': {
       const label = getBuildingType(o.buildingType)?.label ?? t.types.building;
-      finishCreate({ ...baseFields(plan, label), type: 'building', buildingType: o.buildingType, shape });
+      finishCreate({
+        ...baseFields(plan, label),
+        type: 'building',
+        buildingType: o.buildingType,
+        shape,
+      });
       return;
     }
     case 'path':
@@ -447,9 +529,19 @@ function createFromLine(points: Vec2[]): void {
     });
   } else if (s.tool === 'barrier') {
     const label = getBarrier(o.barrierId)?.label ?? t.types.barrier;
-    finishCreate({ ...baseFields(plan, label), type: 'barrier', barrierId: o.barrierId, line: { points, smooth: false } });
+    finishCreate({
+      ...baseFields(plan, label),
+      type: 'barrier',
+      barrierId: o.barrierId,
+      line: { points, smooth: false },
+    });
   } else if (s.tool === 'measure') {
-    finishCreate({ ...baseFields(plan, t.types.measure), type: 'measure', mode: 'distance', points });
+    finishCreate({
+      ...baseFields(plan, t.types.measure),
+      type: 'measure',
+      mode: 'distance',
+      points,
+    });
   }
 }
 
@@ -485,9 +577,13 @@ function createAtPoint(at: Vec2): void {
 }
 
 /** Suggested widths for the chosen path type (shown as a hint). */
-export const pathWidthHint = (pathType: string): { min: number; max: number; source: string } | null => {
+export const pathWidthHint = (
+  pathType: string,
+): { min: number; max: number; source: string } | null => {
   const p = getPathType(pathType);
-  return p ? { min: p.suggestedWidthRangeM[0], max: p.suggestedWidthRangeM[1], source: p.suggestionSource } : null;
+  return p
+    ? { min: p.suggestedWidthRangeM[0], max: p.suggestedWidthRangeM[1], source: p.suggestionSource }
+    : null;
 };
 
 export const WIDTH_LIMITS = OBJECT_TYPES.widthLimitsM;

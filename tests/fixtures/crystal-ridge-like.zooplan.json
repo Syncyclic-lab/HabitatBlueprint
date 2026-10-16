@@ -1,0 +1,4167 @@
+{
+ "format": "habitat-blueprint-plan",
+ "formatVersion": 1,
+ "exportedAt": "2026-10-15T00:00:00.000Z",
+ "app": {
+  "name": "HabitatBlueprint",
+  "version": "0.1.0"
+ },
+ "plan": {
+  "schemaVersion": 1,
+  "id": "fixture-crystal-ridge",
+  "name": "Crystal Ridge (test)",
+  "createdAt": "2026-10-15T00:00:00.000Z",
+  "updatedAt": "2026-10-15T00:00:00.000Z",
+  "settings": {
+   "mapPresetId": "pz2-flat-standard",
+   "mapWidthM": 1000,
+   "mapHeightM": 1000,
+   "mode": "sandbox",
+   "biomeId": "grassland",
+   "units": "metric",
+   "grid": {
+    "visible": true,
+    "minorM": 5,
+    "majorEvery": 10
+   },
+   "snap": {
+    "enabled": true,
+    "grid": true,
+    "vertices": true,
+    "edges": true,
+    "angleStepDeg": 15,
+    "guides": false
+   },
+   "display": {
+    "showAreasOnMap": true,
+    "style": "clear",
+    "patterns": true
+   },
+   "requirementBufferPct": 10
+  },
+  "areas": [
+   {
+    "id": "area-north",
+    "name": "Northern trail",
+    "swatchId": "forest"
+   },
+   {
+    "id": "area-south",
+    "name": "Savannah loop",
+    "swatchId": "savanna"
+   }
+  ],
+  "objects": [
+   {
+    "id": "o-0001",
+    "name": "Guest path 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "guest",
+    "line": {
+     "points": [
+      {
+       "x": 800,
+       "y": 500
+      },
+      {
+       "x": 789.78,
+       "y": 562.12
+      },
+      {
+       "x": 759.81,
+       "y": 620
+      },
+      {
+       "x": 712.13,
+       "y": 669.71
+      },
+      {
+       "x": 650,
+       "y": 707.85
+      },
+      {
+       "x": 577.65,
+       "y": 731.82
+      },
+      {
+       "x": 500,
+       "y": 740
+      },
+      {
+       "x": 422.35,
+       "y": 731.82
+      },
+      {
+       "x": 350,
+       "y": 707.85
+      },
+      {
+       "x": 287.87,
+       "y": 669.71
+      },
+      {
+       "x": 240.19,
+       "y": 620
+      },
+      {
+       "x": 210.22,
+       "y": 562.12
+      },
+      {
+       "x": 200,
+       "y": 500
+      },
+      {
+       "x": 210.22,
+       "y": 437.88
+      },
+      {
+       "x": 240.19,
+       "y": 380
+      },
+      {
+       "x": 287.87,
+       "y": 330.29
+      },
+      {
+       "x": 350,
+       "y": 292.15
+      },
+      {
+       "x": 422.35,
+       "y": 268.18
+      },
+      {
+       "x": 500,
+       "y": 260
+      },
+      {
+       "x": 577.65,
+       "y": 268.18
+      },
+      {
+       "x": 650,
+       "y": 292.15
+      },
+      {
+       "x": 712.13,
+       "y": 330.29
+      },
+      {
+       "x": 759.81,
+       "y": 380
+      },
+      {
+       "x": 789.78,
+       "y": 437.88
+      },
+      {
+       "x": 800,
+       "y": 500
+      }
+     ],
+     "smooth": true
+    },
+    "widthM": 6,
+    "cap": "round"
+   },
+   {
+    "id": "o-0002",
+    "name": "Plaza 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 460,
+     "y": 750,
+     "w": 80,
+     "h": 40,
+     "rotationDeg": 0,
+     "cornerRadiusM": 6
+    }
+   },
+   {
+    "id": "o-0003",
+    "name": "Entrance 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "entrance",
+    "shape": {
+     "kind": "rect",
+     "x": 485,
+     "y": 790,
+     "w": 30,
+     "h": 12,
+     "rotationDeg": 0
+    }
+   },
+   {
+    "id": "o-0004",
+    "name": "Guest path 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "guest",
+    "line": {
+     "points": [
+      {
+       "x": 786.6,
+       "y": 570.92
+      },
+      {
+       "x": 600.31,
+       "y": 524.82
+      }
+     ],
+     "smooth": false
+    },
+    "widthM": 5,
+    "cap": "flat"
+   },
+   {
+    "id": "o-0005",
+    "name": "Guest path 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "guest",
+    "line": {
+     "points": [
+      {
+       "x": 566.52,
+       "y": 734.03
+      },
+      {
+       "x": 523.28,
+       "y": 581.91
+      }
+     ],
+     "smooth": false
+    },
+    "widthM": 5,
+    "cap": "flat"
+   },
+   {
+    "id": "o-0006",
+    "name": "Guest path 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "staff",
+    "line": {
+     "points": [
+      {
+       "x": 279.92,
+       "y": 663.1
+      },
+      {
+       "x": 422.97,
+       "y": 557.09
+      }
+     ],
+     "smooth": false
+    },
+    "widthM": 4,
+    "cap": "flat"
+   },
+   {
+    "id": "o-0007",
+    "name": "Guest path 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "guest",
+    "line": {
+     "points": [
+      {
+       "x": 213.4,
+       "y": 429.08
+      },
+      {
+       "x": 399.69,
+       "y": 475.18
+      }
+     ],
+     "smooth": false
+    },
+    "widthM": 5,
+    "cap": "flat"
+   },
+   {
+    "id": "o-0008",
+    "name": "Guest path 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "guest",
+    "line": {
+     "points": [
+      {
+       "x": 433.48,
+       "y": 265.97
+      },
+      {
+       "x": 476.72,
+       "y": 418.09
+      }
+     ],
+     "smooth": false
+    },
+    "widthM": 5,
+    "cap": "flat"
+   },
+   {
+    "id": "o-0009",
+    "name": "Guest path 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "path",
+    "pathType": "staff",
+    "line": {
+     "points": [
+      {
+       "x": 720.08,
+       "y": 336.9
+      },
+      {
+       "x": 577.03,
+       "y": 442.91
+      }
+     ],
+     "smooth": false
+    },
+    "widthM": 4,
+    "cap": "flat"
+   },
+   {
+    "id": "o-0010",
+    "name": "Plaza 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 500,
+     "cy": 500,
+     "rx": 30,
+     "ry": 30,
+     "rotationDeg": 0
+    }
+   },
+   {
+    "id": "o-0011",
+    "name": "Water 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": false,
+    "shape": {
+     "kind": "ellipse",
+     "cx": 500,
+     "cy": 500,
+     "rx": 12,
+     "ry": 12,
+     "rotationDeg": 0
+    }
+   },
+   {
+    "id": "o-0012",
+    "name": "Habitat 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "rect",
+     "x": 835,
+     "y": 475,
+     "w": 70,
+     "h": 50,
+     "rotationDeg": 0
+    },
+    "zones": [
+     {
+      "id": "z-0",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 870,
+       "cy": 500,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-0",
+      "catalogId": "aardvark",
+      "displayName": "aardvark",
+      "males": 1,
+      "females": 2,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0013",
+    "name": "Habitat 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 886.85,
+       "y": 602.61
+      },
+      {
+       "x": 872.9,
+       "y": 627.2
+      },
+      {
+       "x": 837.85,
+       "y": 636.11
+      },
+      {
+       "x": 814.15,
+       "y": 615.17
+      },
+      {
+       "x": 807.75,
+       "y": 587.65
+      },
+      {
+       "x": 839.92,
+       "y": 576.13
+      },
+      {
+       "x": 871.52,
+       "y": 579.36
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0014",
+    "name": "Habitat 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 783.44,
+     "cy": 692.84,
+     "rx": 38,
+     "ry": 28,
+     "rotationDeg": 0
+    },
+    "zones": [
+     {
+      "id": "z-2",
+      "kind": "water",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 783.44,
+       "cy": 692.84,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-2",
+      "catalogId": "black-wildebeest",
+      "displayName": "black-wildebeest",
+      "males": 3,
+      "females": 4,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0015",
+    "name": "Habitat 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "rect",
+     "x": 650,
+     "y": 734.81,
+     "w": 70,
+     "h": 50,
+     "rotationDeg": 60
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0016",
+    "name": "Habitat 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "aviary",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 605.86,
+       "y": 795.44
+      },
+      {
+       "x": 589.16,
+       "y": 819.74
+      },
+      {
+       "x": 556.02,
+       "y": 823.48
+      },
+      {
+       "x": 529.13,
+       "y": 808.6
+      },
+      {
+       "x": 527.65,
+       "y": 781.73
+      },
+      {
+       "x": 556.09,
+       "y": 767.62
+      },
+      {
+       "x": 585.87,
+       "y": 774.35
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-4",
+      "kind": "water",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 564.25,
+       "cy": 795.44,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-4",
+      "catalogId": "clown-triggerfish",
+      "displayName": "clown-triggerfish",
+      "males": 2,
+      "females": 2,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0017",
+    "name": "Habitat 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 435.75,
+     "cy": 795.44,
+     "rx": 38,
+     "ry": 28,
+     "rotationDeg": 0
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0018",
+    "name": "Habitat 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "rect",
+     "x": 280,
+     "y": 734.81,
+     "w": 70,
+     "h": 50,
+     "rotationDeg": 30
+    },
+    "zones": [
+     {
+      "id": "z-6",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 315,
+       "cy": 759.81,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-6",
+      "catalogId": "eurasian-lynx",
+      "displayName": "eurasian-lynx",
+      "males": 1,
+      "females": 4,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0019",
+    "name": "Habitat 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 256.42,
+       "y": 692.84
+      },
+      {
+       "x": 239.7,
+       "y": 715.4
+      },
+      {
+       "x": 206.66,
+       "y": 726.59
+      },
+      {
+       "x": 181.62,
+       "y": 705.93
+      },
+      {
+       "x": 183.57,
+       "y": 680.48
+      },
+      {
+       "x": 206.94,
+       "y": 660.04
+      },
+      {
+       "x": 240.66,
+       "y": 669.34
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0020",
+    "name": "Habitat 9",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 152.31,
+     "cy": 602.61,
+     "rx": 38,
+     "ry": 28,
+     "rotationDeg": 0
+    },
+    "zones": [
+     {
+      "id": "z-8",
+      "kind": "water",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 152.31,
+       "cy": 602.61,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-8",
+      "catalogId": "gila-monster",
+      "displayName": "gila-monster",
+      "males": 3,
+      "females": 2,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-south",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0021",
+    "name": "Habitat 10",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "rect",
+     "x": 95,
+     "y": 475,
+     "w": 70,
+     "h": 50,
+     "rotationDeg": 0
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0022",
+    "name": "Habitat 11",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 190.62,
+       "y": 397.39
+      },
+      {
+       "x": 177.42,
+       "y": 421.88
+      },
+      {
+       "x": 144.44,
+       "y": 424.24
+      },
+      {
+       "x": 120.45,
+       "y": 409.33
+      },
+      {
+       "x": 115.21,
+       "y": 383.49
+      },
+      {
+       "x": 142.83,
+       "y": 365.08
+      },
+      {
+       "x": 175.26,
+       "y": 375.01
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-10",
+      "kind": "water",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 152.31,
+       "cy": 397.39,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-10",
+      "catalogId": "indian-ocean-oriental-sweetlips",
+      "displayName": "indian-ocean-oriental-sweetlips",
+      "males": 2,
+      "females": 4,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0023",
+    "name": "Habitat 12",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 216.56,
+     "cy": 307.16,
+     "rx": 38,
+     "ry": 28,
+     "rotationDeg": 0
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0024",
+    "name": "Habitat 13",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "rect",
+     "x": 280,
+     "y": 215.19,
+     "w": 70,
+     "h": 50,
+     "rotationDeg": 60
+    },
+    "zones": [
+     {
+      "id": "z-12",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 315,
+       "cy": 240.19,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-12",
+      "catalogId": "meerkat",
+      "displayName": "meerkat",
+      "males": 1,
+      "females": 2,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0025",
+    "name": "Habitat 14",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "aviary",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 469.6,
+       "y": 204.56
+      },
+      {
+       "x": 459.93,
+       "y": 228.14
+      },
+      {
+       "x": 426.55,
+       "y": 235.92
+      },
+      {
+       "x": 404.98,
+       "y": 216.08
+      },
+      {
+       "x": 395.53,
+       "y": 189.49
+      },
+      {
+       "x": 426.43,
+       "y": 172.81
+      },
+      {
+       "x": 457.43,
+       "y": 183.41
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0026",
+    "name": "Habitat 15",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 564.25,
+     "cy": 204.56,
+     "rx": 38,
+     "ry": 28,
+     "rotationDeg": 0
+    },
+    "zones": [
+     {
+      "id": "z-14",
+      "kind": "water",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 564.25,
+       "cy": 204.56,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-14",
+      "catalogId": "palette-surgeonfish",
+      "displayName": "palette-surgeonfish",
+      "males": 3,
+      "females": 4,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0027",
+    "name": "Habitat 16",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "rect",
+     "x": 650,
+     "y": 215.19,
+     "w": 70,
+     "h": 50,
+     "rotationDeg": 30
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0028",
+    "name": "Habitat 17",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 822.51,
+       "y": 307.16
+      },
+      {
+       "x": 808.34,
+       "y": 331.45
+      },
+      {
+       "x": 774.84,
+       "y": 336.45
+      },
+      {
+       "x": 747.26,
+       "y": 320.71
+      },
+      {
+       "x": 747.39,
+       "y": 293.66
+      },
+      {
+       "x": 775.68,
+       "y": 280.72
+      },
+      {
+       "x": 808.89,
+       "y": 282.34
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-16",
+      "kind": "water",
+      "shape": {
+       "kind": "ellipse",
+       "cx": 783.44,
+       "cy": 307.16,
+       "rx": 8,
+       "ry": 6,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-16",
+      "catalogId": "schooling-bannerfish",
+      "displayName": "schooling-bannerfish",
+      "males": 2,
+      "females": 2,
+      "juveniles": 0
+     }
+    ],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0029",
+    "name": "Habitat 18",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "ellipse",
+     "cx": 847.69,
+     "cy": 397.39,
+     "rx": 38,
+     "ry": 28,
+     "rotationDeg": 0
+    },
+    "zones": [],
+    "animals": [],
+    "areaId": "area-north",
+    "barrier": {
+     "barrierId": "hedge"
+    }
+   },
+   {
+    "id": "o-0030",
+    "name": "Habitat 19",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 763.97,
+       "y": 551.42
+      },
+      {
+       "x": 753.2,
+       "y": 567.21
+      },
+      {
+       "x": 729.93,
+       "y": 567.29
+      },
+      {
+       "x": 720.54,
+       "y": 551.42
+      },
+      {
+       "x": 730.78,
+       "y": 536.69
+      },
+      {
+       "x": 753.85,
+       "y": 534.74
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-18",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "rect",
+       "x": 736.6,
+       "y": 547.42,
+       "w": 10,
+       "h": 8,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-18",
+      "catalogId": "toco-toucan",
+      "displayName": "toco-toucan",
+      "males": 1,
+      "females": 4,
+      "juveniles": 0
+     }
+    ]
+   },
+   {
+    "id": "o-0031",
+    "name": "Habitat 20",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 703.57,
+       "y": 641.17
+      },
+      {
+       "x": 690.77,
+       "y": 659.78
+      },
+      {
+       "x": 665.52,
+       "y": 656.92
+      },
+      {
+       "x": 653.16,
+       "y": 641.17
+      },
+      {
+       "x": 665.56,
+       "y": 625.47
+      },
+      {
+       "x": 688.52,
+       "y": 625.62
+      }
+     ]
+    },
+    "zones": [],
+    "animals": []
+   },
+   {
+    "id": "o-0032",
+    "name": "Habitat 21",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 590.11,
+       "y": 693.09
+      },
+      {
+       "x": 577.63,
+       "y": 710.09
+      },
+      {
+       "x": 553.29,
+       "y": 709.21
+      },
+      {
+       "x": 542.16,
+       "y": 693.09
+      },
+      {
+       "x": 552.5,
+       "y": 675.89
+      },
+      {
+       "x": 578.81,
+       "y": 674.48
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [
+     {
+      "id": "a-20",
+      "catalogId": "african-tigerfish",
+      "displayName": "african-tigerfish",
+      "males": 3,
+      "females": 2,
+      "juveniles": 0
+     }
+    ]
+   },
+   {
+    "id": "o-0033",
+    "name": "Habitat 22",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 459.51,
+       "y": 693.28
+      },
+      {
+       "x": 448.58,
+       "y": 710.76
+      },
+      {
+       "x": 424.59,
+       "y": 708.43
+      },
+      {
+       "x": 407.76,
+       "y": 693.28
+      },
+      {
+       "x": 424.55,
+       "y": 678.06
+      },
+      {
+       "x": 448.24,
+       "y": 676.25
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-21",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "rect",
+       "x": 430.73,
+       "y": 689.28,
+       "w": 10,
+       "h": 8,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": []
+   },
+   {
+    "id": "o-0034",
+    "name": "Habitat 23",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "aviary",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 344.71,
+       "y": 641.68
+      },
+      {
+       "x": 335.21,
+       "y": 657.56
+      },
+      {
+       "x": 311.94,
+       "y": 657.46
+      },
+      {
+       "x": 301.08,
+       "y": 641.68
+      },
+      {
+       "x": 311.42,
+       "y": 625.17
+      },
+      {
+       "x": 335.45,
+       "y": 625.48
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [
+     {
+      "id": "a-22",
+      "catalogId": "blue-wildebeest",
+      "displayName": "blue-wildebeest",
+      "males": 2,
+      "females": 4,
+      "juveniles": 0
+     }
+    ]
+   },
+   {
+    "id": "o-0035",
+    "name": "Habitat 24",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 285.31,
+       "y": 552.11
+      },
+      {
+       "x": 270.39,
+       "y": 568.1
+      },
+      {
+       "x": 247.69,
+       "y": 567.01
+      },
+      {
+       "x": 236.17,
+       "y": 552.11
+      },
+      {
+       "x": 247.58,
+       "y": 537.07
+      },
+      {
+       "x": 270.77,
+       "y": 535.6
+      }
+     ]
+    },
+    "zones": [],
+    "animals": []
+   },
+   {
+    "id": "o-0036",
+    "name": "Habitat 25",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 285.41,
+       "y": 448.58
+      },
+      {
+       "x": 270.11,
+       "y": 464.51
+      },
+      {
+       "x": 245.95,
+       "y": 465.53
+      },
+      {
+       "x": 234.21,
+       "y": 448.58
+      },
+      {
+       "x": 245.76,
+       "y": 431.38
+      },
+      {
+       "x": 270.01,
+       "y": 432.79
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-24",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "rect",
+       "x": 253.4,
+       "y": 444.58,
+       "w": 10,
+       "h": 8,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": [
+     {
+      "id": "a-24",
+      "catalogId": "common-rudd",
+      "displayName": "common-rudd",
+      "males": 1,
+      "females": 2,
+      "juveniles": 0
+     }
+    ]
+   },
+   {
+    "id": "o-0037",
+    "name": "Habitat 26",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 350.76,
+       "y": 358.83
+      },
+      {
+       "x": 334.02,
+       "y": 373.95
+      },
+      {
+       "x": 312.12,
+       "y": 373.51
+      },
+      {
+       "x": 297.93,
+       "y": 358.83
+      },
+      {
+       "x": 312.35,
+       "y": 344.47
+      },
+      {
+       "x": 333.51,
+       "y": 344.41
+      }
+     ]
+    },
+    "zones": [],
+    "animals": []
+   },
+   {
+    "id": "o-0038",
+    "name": "Habitat 27",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 457.34,
+       "y": 306.91
+      },
+      {
+       "x": 448.09,
+       "y": 324.92
+      },
+      {
+       "x": 420.95,
+       "y": 325.84
+      },
+      {
+       "x": 411.3,
+       "y": 306.91
+      },
+      {
+       "x": 422.51,
+       "y": 290.1
+      },
+      {
+       "x": 448.64,
+       "y": 288.15
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [
+     {
+      "id": "a-26",
+      "catalogId": "galapagos-giant-tortoise",
+      "displayName": "galapagos-giant-tortoise",
+      "males": 3,
+      "females": 4,
+      "juveniles": 0
+     }
+    ]
+   },
+   {
+    "id": "o-0039",
+    "name": "Habitat 28",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 591.44,
+       "y": 306.72
+      },
+      {
+       "x": 575.55,
+       "y": 322.07
+      },
+      {
+       "x": 553.06,
+       "y": 321.97
+      },
+      {
+       "x": 540.92,
+       "y": 306.72
+      },
+      {
+       "x": 553.65,
+       "y": 292.27
+      },
+      {
+       "x": 575.77,
+       "y": 291.07
+      }
+     ]
+    },
+    "zones": [
+     {
+      "id": "z-27",
+      "kind": "deepWater",
+      "shape": {
+       "kind": "rect",
+       "x": 559.27,
+       "y": 302.72,
+       "w": 10,
+       "h": 8,
+       "rotationDeg": 0
+      }
+     }
+    ],
+    "animals": []
+   },
+   {
+    "id": "o-0040",
+    "name": "Habitat 29",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 703.47,
+       "y": 358.32
+      },
+      {
+       "x": 689.75,
+       "y": 376.41
+      },
+      {
+       "x": 665.62,
+       "y": 373.07
+      },
+      {
+       "x": 650.69,
+       "y": 358.32
+      },
+      {
+       "x": 663.9,
+       "y": 341.24
+      },
+      {
+       "x": 689.14,
+       "y": 341.07
+      }
+     ]
+    },
+    "zones": [],
+    "animals": [
+     {
+      "id": "a-28",
+      "catalogId": "golden-trevally",
+      "displayName": "golden-trevally",
+      "males": 2,
+      "females": 2,
+      "juveniles": 0
+     }
+    ]
+   },
+   {
+    "id": "o-0041",
+    "name": "Habitat 30",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "habitat",
+    "kind": "habitat",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 765.61,
+       "y": 447.89
+      },
+      {
+       "x": 753.89,
+       "y": 464.93
+      },
+      {
+       "x": 730.17,
+       "y": 463.12
+      },
+      {
+       "x": 716.51,
+       "y": 447.89
+      },
+      {
+       "x": 728.11,
+       "y": 429.86
+      },
+      {
+       "x": 752.5,
+       "y": 432.73
+      }
+     ]
+    },
+    "zones": [],
+    "animals": []
+   },
+   {
+    "id": "o-0042",
+    "name": "Building 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "restrooms",
+    "shape": {
+     "kind": "rect",
+     "x": 805.45,
+     "y": 532.96,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 8.59
+    }
+   },
+   {
+    "id": "o-0043",
+    "name": "Building 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "food",
+    "shape": {
+     "kind": "rect",
+     "x": 775.57,
+     "y": 608.71,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 26.59
+    }
+   },
+   {
+    "id": "o-0044",
+    "name": "Building 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "drinks",
+    "shape": {
+     "kind": "rect",
+     "x": 718.02,
+     "y": 673.33,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 44.59
+    }
+   },
+   {
+    "id": "o-0045",
+    "name": "Building 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "shop",
+    "shape": {
+     "kind": "rect",
+     "x": 638.45,
+     "y": 720.49,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 62.59
+    }
+   },
+   {
+    "id": "o-0046",
+    "name": "Building 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "information",
+    "shape": {
+     "kind": "rect",
+     "x": 544.64,
+     "y": 745.59,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 80.59
+    }
+   },
+   {
+    "id": "o-0047",
+    "name": "Building 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "staff",
+    "shape": {
+     "kind": "rect",
+     "x": 445.78,
+     "y": 746.15,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 98.59
+    }
+   },
+   {
+    "id": "o-0048",
+    "name": "Building 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "research",
+    "shape": {
+     "kind": "rect",
+     "x": 351.54,
+     "y": 722.13,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 116.59
+    }
+   },
+   {
+    "id": "o-0049",
+    "name": "Building 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "vet",
+    "shape": {
+     "kind": "rect",
+     "x": 271.14,
+     "y": 675.87,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 134.59
+    }
+   },
+   {
+    "id": "o-0050",
+    "name": "Building 9",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "guest-building",
+    "shape": {
+     "kind": "rect",
+     "x": 212.46,
+     "y": 611.91,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 152.59
+    }
+   },
+   {
+    "id": "o-0051",
+    "name": "Building 10",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "animal-house",
+    "shape": {
+     "kind": "rect",
+     "x": 181.25,
+     "y": 536.51,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 170.59
+    }
+   },
+   {
+    "id": "o-0052",
+    "name": "Building 11",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "restrooms",
+    "shape": {
+     "kind": "rect",
+     "x": 180.55,
+     "y": 457.04,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 188.59
+    }
+   },
+   {
+    "id": "o-0053",
+    "name": "Building 12",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "food",
+    "shape": {
+     "kind": "rect",
+     "x": 210.43,
+     "y": 381.29,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 206.59
+    }
+   },
+   {
+    "id": "o-0054",
+    "name": "Building 13",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "drinks",
+    "shape": {
+     "kind": "rect",
+     "x": 267.98,
+     "y": 316.67,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 224.59
+    }
+   },
+   {
+    "id": "o-0055",
+    "name": "Building 14",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "shop",
+    "shape": {
+     "kind": "rect",
+     "x": 347.55,
+     "y": 269.51,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 242.59
+    }
+   },
+   {
+    "id": "o-0056",
+    "name": "Building 15",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "information",
+    "shape": {
+     "kind": "rect",
+     "x": 441.36,
+     "y": 244.41,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 260.59
+    }
+   },
+   {
+    "id": "o-0057",
+    "name": "Building 16",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "staff",
+    "shape": {
+     "kind": "rect",
+     "x": 540.22,
+     "y": 243.85,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 278.59
+    }
+   },
+   {
+    "id": "o-0058",
+    "name": "Building 17",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "research",
+    "shape": {
+     "kind": "rect",
+     "x": 634.46,
+     "y": 267.87,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 296.59
+    }
+   },
+   {
+    "id": "o-0059",
+    "name": "Building 18",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "vet",
+    "shape": {
+     "kind": "rect",
+     "x": 714.86,
+     "y": 314.13,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 314.59
+    }
+   },
+   {
+    "id": "o-0060",
+    "name": "Building 19",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "guest-building",
+    "shape": {
+     "kind": "rect",
+     "x": 773.54,
+     "y": 378.09,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 332.59
+    }
+   },
+   {
+    "id": "o-0061",
+    "name": "Building 20",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "building",
+    "buildingType": "animal-house",
+    "shape": {
+     "kind": "rect",
+     "x": 804.75,
+     "y": 453.49,
+     "w": 14,
+     "h": 10,
+     "rotationDeg": 350.59
+    }
+   },
+   {
+    "id": "o-0062",
+    "name": "Water 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": false,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 788.28,
+       "y": 106.36
+      },
+      {
+       "x": 776.4,
+       "y": 121.24
+      },
+      {
+       "x": 752.48,
+       "y": 124.25
+      },
+      {
+       "x": 735.3,
+       "y": 113.85
+      },
+      {
+       "x": 737.42,
+       "y": 99.56
+      },
+      {
+       "x": 752.43,
+       "y": 88.34
+      },
+      {
+       "x": 775,
+       "y": 92.66
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0063",
+    "name": "Water 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": true,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 723.77,
+       "y": 96.02
+      },
+      {
+       "x": 714.98,
+       "y": 110.57
+      },
+      {
+       "x": 692.03,
+       "y": 112.23
+      },
+      {
+       "x": 676.6,
+       "y": 102.75
+      },
+      {
+       "x": 676.09,
+       "y": 89.12
+      },
+      {
+       "x": 691.26,
+       "y": 77.57
+      },
+      {
+       "x": 713.08,
+       "y": 83.05
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0064",
+    "name": "Water 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": false,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 938.01,
+       "y": 76.95
+      },
+      {
+       "x": 931.52,
+       "y": 90.34
+      },
+      {
+       "x": 909.19,
+       "y": 95.38
+      },
+      {
+       "x": 890.36,
+       "y": 85.03
+      },
+      {
+       "x": 891.37,
+       "y": 69.21
+      },
+      {
+       "x": 909.67,
+       "y": 59.91
+      },
+      {
+       "x": 930.75,
+       "y": 64.21
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0065",
+    "name": "Water 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": true,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 643.14,
+       "y": 146.38
+      },
+      {
+       "x": 627.37,
+       "y": 158.2
+      },
+      {
+       "x": 607.79,
+       "y": 162.28
+      },
+      {
+       "x": 587.28,
+       "y": 154.72
+      },
+      {
+       "x": 592.49,
+       "y": 139.73
+      },
+      {
+       "x": 608.16,
+       "y": 131.56
+      },
+      {
+       "x": 631.06,
+       "y": 131.48
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0066",
+    "name": "Water 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": false,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 277.62,
+       "y": 127.18
+      },
+      {
+       "x": 263.27,
+       "y": 139.26
+      },
+      {
+       "x": 242.64,
+       "y": 145.22
+      },
+      {
+       "x": 224.7,
+       "y": 134.93
+      },
+      {
+       "x": 226.58,
+       "y": 120.04
+      },
+      {
+       "x": 243.78,
+       "y": 112.47
+      },
+      {
+       "x": 265.75,
+       "y": 113.03
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0067",
+    "name": "Water 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": true,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 720.61,
+       "y": 89.29
+      },
+      {
+       "x": 711.62,
+       "y": 101.53
+      },
+      {
+       "x": 691.51,
+       "y": 105.29
+      },
+      {
+       "x": 676.1,
+       "y": 96
+      },
+      {
+       "x": 670.5,
+       "y": 80.79
+      },
+      {
+       "x": 691.89,
+       "y": 74.4
+      },
+      {
+       "x": 711.86,
+       "y": 76.86
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0068",
+    "name": "Water 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": false,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 126,
+       "y": 105.36
+      },
+      {
+       "x": 114.74,
+       "y": 120.81
+      },
+      {
+       "x": 90.26,
+       "y": 122.89
+      },
+      {
+       "x": 73.02,
+       "y": 112.83
+      },
+      {
+       "x": 71.17,
+       "y": 97.31
+      },
+      {
+       "x": 91.07,
+       "y": 90.21
+      },
+      {
+       "x": 114.19,
+       "y": 90.37
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0069",
+    "name": "Water 9",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "water",
+    "deep": true,
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 204.09,
+       "y": 157.54
+      },
+      {
+       "x": 198.99,
+       "y": 172.72
+      },
+      {
+       "x": 174.68,
+       "y": 175.54
+      },
+      {
+       "x": 155.42,
+       "y": 165.7
+      },
+      {
+       "x": 154.55,
+       "y": 149.1
+      },
+      {
+       "x": 175.81,
+       "y": 142.85
+      },
+      {
+       "x": 195.16,
+       "y": 145.57
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0070",
+    "name": "Planting 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 100.04,
+       "y": 854.46
+      },
+      {
+       "x": 94.23,
+       "y": 868.11
+      },
+      {
+       "x": 73.42,
+       "y": 867.01
+      },
+      {
+       "x": 66.65,
+       "y": 854.46
+      },
+      {
+       "x": 74.71,
+       "y": 843.52
+      },
+      {
+       "x": 92.72,
+       "y": 842.71
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0071",
+    "name": "Planting 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 404.44,
+       "y": 903.78
+      },
+      {
+       "x": 394.88,
+       "y": 917.32
+      },
+      {
+       "x": 374.13,
+       "y": 916.38
+      },
+      {
+       "x": 362.81,
+       "y": 903.78
+      },
+      {
+       "x": 374.67,
+       "y": 891.87
+      },
+      {
+       "x": 392.51,
+       "y": 893.24
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0072",
+    "name": "Planting 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 165.83,
+       "y": 900.41
+      },
+      {
+       "x": 153.69,
+       "y": 910.93
+      },
+      {
+       "x": 135.11,
+       "y": 913.29
+      },
+      {
+       "x": 127.77,
+       "y": 900.41
+      },
+      {
+       "x": 135.52,
+       "y": 888.05
+      },
+      {
+       "x": 154.8,
+       "y": 888.48
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0073",
+    "name": "Planting 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 599.18,
+       "y": 832.32
+      },
+      {
+       "x": 591.99,
+       "y": 844.3
+      },
+      {
+       "x": 574.12,
+       "y": 842.84
+      },
+      {
+       "x": 561.24,
+       "y": 832.32
+      },
+      {
+       "x": 571.51,
+       "y": 818.5
+      },
+      {
+       "x": 593.46,
+       "y": 818.48
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0074",
+    "name": "Planting 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 845.98,
+       "y": 923.03
+      },
+      {
+       "x": 835.66,
+       "y": 934.89
+      },
+      {
+       "x": 817.9,
+       "y": 933.53
+      },
+      {
+       "x": 808.42,
+       "y": 923.03
+      },
+      {
+       "x": 817.94,
+       "y": 912.58
+      },
+      {
+       "x": 836.53,
+       "y": 910.06
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0075",
+    "name": "Planting 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 378.79,
+       "y": 886.1
+      },
+      {
+       "x": 369.98,
+       "y": 899.13
+      },
+      {
+       "x": 348.96,
+       "y": 899.54
+      },
+      {
+       "x": 340.01,
+       "y": 886.1
+      },
+      {
+       "x": 349.34,
+       "y": 873.13
+      },
+      {
+       "x": 368.86,
+       "y": 874.47
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0076",
+    "name": "Planting 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 120.21,
+       "y": 920.39
+      },
+      {
+       "x": 113.1,
+       "y": 933.13
+      },
+      {
+       "x": 93.47,
+       "y": 932.37
+      },
+      {
+       "x": 85.61,
+       "y": 920.39
+      },
+      {
+       "x": 92.91,
+       "y": 907.7
+      },
+      {
+       "x": 111.43,
+       "y": 909.75
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0077",
+    "name": "Planting 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 625.33,
+       "y": 890.46
+      },
+      {
+       "x": 615.22,
+       "y": 903.18
+      },
+      {
+       "x": 594.81,
+       "y": 903.44
+      },
+      {
+       "x": 585.61,
+       "y": 890.46
+      },
+      {
+       "x": 595.97,
+       "y": 878.93
+      },
+      {
+       "x": 614.06,
+       "y": 879.2
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0078",
+    "name": "Planting 9",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 869.82,
+       "y": 938.16
+      },
+      {
+       "x": 860.55,
+       "y": 950.24
+      },
+      {
+       "x": 841.68,
+       "y": 949.85
+      },
+      {
+       "x": 831.36,
+       "y": 938.16
+      },
+      {
+       "x": 841.64,
+       "y": 926.42
+      },
+      {
+       "x": 861.38,
+       "y": 925.03
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0079",
+    "name": "Planting 10",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 122.31,
+       "y": 866.18
+      },
+      {
+       "x": 114.05,
+       "y": 877.89
+      },
+      {
+       "x": 96.12,
+       "y": 877.06
+      },
+      {
+       "x": 86.1,
+       "y": 866.18
+      },
+      {
+       "x": 94.87,
+       "y": 853.73
+      },
+      {
+       "x": 114.96,
+       "y": 853.34
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0080",
+    "name": "Planting 11",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 366.47,
+       "y": 889.69
+      },
+      {
+       "x": 354.62,
+       "y": 900.67
+      },
+      {
+       "x": 335.83,
+       "y": 902.38
+      },
+      {
+       "x": 327.95,
+       "y": 889.69
+      },
+      {
+       "x": 335.52,
+       "y": 876.61
+      },
+      {
+       "x": 355.17,
+       "y": 878.01
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0081",
+    "name": "Planting 12",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 496.41,
+       "y": 896.84
+      },
+      {
+       "x": 490.48,
+       "y": 910.21
+      },
+      {
+       "x": 470.13,
+       "y": 909.11
+      },
+      {
+       "x": 458.65,
+       "y": 896.84
+      },
+      {
+       "x": 470.03,
+       "y": 884.44
+      },
+      {
+       "x": 490.68,
+       "y": 883.22
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0082",
+    "name": "Planting 13",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 878.87,
+       "y": 909.62
+      },
+      {
+       "x": 869.55,
+       "y": 922.01
+      },
+      {
+       "x": 849.42,
+       "y": 922.6
+      },
+      {
+       "x": 838.86,
+       "y": 909.62
+      },
+      {
+       "x": 851.19,
+       "y": 898.88
+      },
+      {
+       "x": 868.53,
+       "y": 898.53
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0083",
+    "name": "Planting 14",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 704.11,
+       "y": 837.45
+      },
+      {
+       "x": 695.52,
+       "y": 849.69
+      },
+      {
+       "x": 675.36,
+       "y": 850.61
+      },
+      {
+       "x": 665.57,
+       "y": 837.45
+      },
+      {
+       "x": 675.19,
+       "y": 824.07
+      },
+      {
+       "x": 695.46,
+       "y": 825.29
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0084",
+    "name": "Planting 15",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 204.49,
+       "y": 933.03
+      },
+      {
+       "x": 194.9,
+       "y": 944.58
+      },
+      {
+       "x": 176.32,
+       "y": 944.89
+      },
+      {
+       "x": 166.19,
+       "y": 933.03
+      },
+      {
+       "x": 175.27,
+       "y": 919.85
+      },
+      {
+       "x": 194.52,
+       "y": 921.95
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0085",
+    "name": "Planting 16",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "planting",
+    "shape": {
+     "kind": "polygon",
+     "points": [
+      {
+       "x": 831.26,
+       "y": 840.71
+      },
+      {
+       "x": 825.08,
+       "y": 853.89
+      },
+      {
+       "x": 803.93,
+       "y": 854.17
+      },
+      {
+       "x": 796.21,
+       "y": 840.71
+      },
+      {
+       "x": 805.24,
+       "y": 828.9
+      },
+      {
+       "x": 823.28,
+       "y": 829.79
+      }
+     ]
+    }
+   },
+   {
+    "id": "o-0086",
+    "name": "Plaza 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 100,
+     "y": 120,
+     "w": 26,
+     "h": 18,
+     "rotationDeg": 0,
+     "cornerRadiusM": 3
+    }
+   },
+   {
+    "id": "o-0087",
+    "name": "Plaza 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 223.33,
+     "y": 120,
+     "w": 26,
+     "h": 18,
+     "rotationDeg": 0,
+     "cornerRadiusM": 3
+    }
+   },
+   {
+    "id": "o-0088",
+    "name": "Plaza 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 346.67,
+     "y": 120,
+     "w": 26,
+     "h": 18,
+     "rotationDeg": 0,
+     "cornerRadiusM": 3
+    }
+   },
+   {
+    "id": "o-0089",
+    "name": "Plaza 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 470,
+     "y": 120,
+     "w": 26,
+     "h": 18,
+     "rotationDeg": 0,
+     "cornerRadiusM": 3
+    }
+   },
+   {
+    "id": "o-0090",
+    "name": "Plaza 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 593.33,
+     "y": 120,
+     "w": 26,
+     "h": 18,
+     "rotationDeg": 0,
+     "cornerRadiusM": 3
+    }
+   },
+   {
+    "id": "o-0091",
+    "name": "Plaza 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "plaza",
+    "shape": {
+     "kind": "rect",
+     "x": 716.67,
+     "y": 120,
+     "w": 26,
+     "h": 18,
+     "rotationDeg": 0,
+     "cornerRadiusM": 3
+    }
+   },
+   {
+    "id": "o-0092",
+    "name": "Barrier 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "hedge",
+    "line": {
+     "points": [
+      {
+       "x": 40,
+       "y": 970
+      },
+      {
+       "x": 70,
+       "y": 960
+      },
+      {
+       "x": 100,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0093",
+    "name": "Barrier 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "fabric-netting",
+    "line": {
+     "points": [
+      {
+       "x": 132,
+       "y": 970
+      },
+      {
+       "x": 162,
+       "y": 960
+      },
+      {
+       "x": 192,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0094",
+    "name": "Barrier 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "hedge",
+    "line": {
+     "points": [
+      {
+       "x": 224,
+       "y": 970
+      },
+      {
+       "x": 254,
+       "y": 960
+      },
+      {
+       "x": 284,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0095",
+    "name": "Barrier 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "fabric-netting",
+    "line": {
+     "points": [
+      {
+       "x": 316,
+       "y": 970
+      },
+      {
+       "x": 346,
+       "y": 960
+      },
+      {
+       "x": 376,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0096",
+    "name": "Barrier 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "hedge",
+    "line": {
+     "points": [
+      {
+       "x": 408,
+       "y": 970
+      },
+      {
+       "x": 438,
+       "y": 960
+      },
+      {
+       "x": 468,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0097",
+    "name": "Barrier 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "fabric-netting",
+    "line": {
+     "points": [
+      {
+       "x": 500,
+       "y": 970
+      },
+      {
+       "x": 530,
+       "y": 960
+      },
+      {
+       "x": 560,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0098",
+    "name": "Barrier 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "hedge",
+    "line": {
+     "points": [
+      {
+       "x": 592,
+       "y": 970
+      },
+      {
+       "x": 622,
+       "y": 960
+      },
+      {
+       "x": 652,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0099",
+    "name": "Barrier 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "fabric-netting",
+    "line": {
+     "points": [
+      {
+       "x": 684,
+       "y": 970
+      },
+      {
+       "x": 714,
+       "y": 960
+      },
+      {
+       "x": 744,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0100",
+    "name": "Barrier 9",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "hedge",
+    "line": {
+     "points": [
+      {
+       "x": 776,
+       "y": 970
+      },
+      {
+       "x": 806,
+       "y": 960
+      },
+      {
+       "x": 836,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0101",
+    "name": "Barrier 10",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "barrier",
+    "barrierId": "fabric-netting",
+    "line": {
+     "points": [
+      {
+       "x": 868,
+       "y": 970
+      },
+      {
+       "x": 898,
+       "y": 960
+      },
+      {
+       "x": 928,
+       "y": 970
+      }
+     ],
+     "smooth": false
+    }
+   },
+   {
+    "id": "o-0102",
+    "name": "Icon 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "restroom",
+    "at": {
+     "x": 791.64,
+     "y": 511.6
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0103",
+    "name": "Icon 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "food",
+    "at": {
+     "x": 785.52,
+     "y": 548.61
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0104",
+    "name": "Icon 3",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "drink",
+    "at": {
+     "x": 772.01,
+     "y": 584.37
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0105",
+    "name": "Icon 4",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "gift",
+    "at": {
+     "x": 751.45,
+     "y": 617.95
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0106",
+    "name": "Icon 5",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "info",
+    "at": {
+     "x": 724.38,
+     "y": 648.47
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0107",
+    "name": "Icon 6",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "first-aid",
+    "at": {
+     "x": 691.5,
+     "y": 675.14
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0108",
+    "name": "Icon 7",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "bench",
+    "at": {
+     "x": 653.66,
+     "y": 697.28
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0109",
+    "name": "Icon 8",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "photo",
+    "at": {
+     "x": 611.84,
+     "y": 714.31
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0110",
+    "name": "Icon 9",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "trash",
+    "at": {
+     "x": 567.12,
+     "y": 725.79
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0111",
+    "name": "Icon 10",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "viewing",
+    "at": {
+     "x": 520.67,
+     "y": 731.42
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0112",
+    "name": "Icon 11",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "education",
+    "at": {
+     "x": 473.67,
+     "y": 731.06
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0113",
+    "name": "Icon 12",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "tree",
+    "at": {
+     "x": 427.37,
+     "y": 724.71
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0114",
+    "name": "Icon 13",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "restroom",
+    "at": {
+     "x": 382.94,
+     "y": 712.54
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0115",
+    "name": "Icon 14",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "food",
+    "at": {
+     "x": 341.54,
+     "y": 694.87
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0116",
+    "name": "Icon 15",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "drink",
+    "at": {
+     "x": 304.25,
+     "y": 672.15
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0117",
+    "name": "Icon 16",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "gift",
+    "at": {
+     "x": 272.03,
+     "y": 644.97
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0118",
+    "name": "Icon 17",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "info",
+    "at": {
+     "x": 245.71,
+     "y": 614.04
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0119",
+    "name": "Icon 18",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "first-aid",
+    "at": {
+     "x": 225.98,
+     "y": 580.16
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0120",
+    "name": "Icon 19",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "bench",
+    "at": {
+     "x": 213.35,
+     "y": 544.19
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0121",
+    "name": "Icon 20",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "photo",
+    "at": {
+     "x": 208.14,
+     "y": 507.09
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0122",
+    "name": "Icon 21",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "trash",
+    "at": {
+     "x": 210.48,
+     "y": 469.8
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0123",
+    "name": "Icon 22",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "viewing",
+    "at": {
+     "x": 220.33,
+     "y": 433.29
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0124",
+    "name": "Icon 23",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "education",
+    "at": {
+     "x": 237.42,
+     "y": 398.51
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0125",
+    "name": "Icon 24",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "tree",
+    "at": {
+     "x": 261.31,
+     "y": 366.36
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0126",
+    "name": "Icon 25",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "restroom",
+    "at": {
+     "x": 291.39,
+     "y": 337.67
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0127",
+    "name": "Icon 26",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "food",
+    "at": {
+     "x": 326.86,
+     "y": 313.18
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0128",
+    "name": "Icon 27",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "drink",
+    "at": {
+     "x": 366.82,
+     "y": 293.54
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0129",
+    "name": "Icon 28",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "gift",
+    "at": {
+     "x": 410.23,
+     "y": 279.24
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0130",
+    "name": "Icon 29",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "info",
+    "at": {
+     "x": 455.96,
+     "y": 270.65
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0131",
+    "name": "Icon 30",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "first-aid",
+    "at": {
+     "x": 502.84,
+     "y": 268.01
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0132",
+    "name": "Icon 31",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "bench",
+    "at": {
+     "x": 549.64,
+     "y": 271.38
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0133",
+    "name": "Icon 32",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "photo",
+    "at": {
+     "x": 595.16,
+     "y": 280.66
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0134",
+    "name": "Icon 33",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "trash",
+    "at": {
+     "x": 638.21,
+     "y": 295.63
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0135",
+    "name": "Icon 34",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "viewing",
+    "at": {
+     "x": 677.68,
+     "y": 315.89
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0136",
+    "name": "Icon 35",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "education",
+    "at": {
+     "x": 712.55,
+     "y": 340.92
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0137",
+    "name": "Icon 36",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "tree",
+    "at": {
+     "x": 741.91,
+     "y": 370.07
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0138",
+    "name": "Icon 37",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "restroom",
+    "at": {
+     "x": 765.01,
+     "y": 402.59
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0139",
+    "name": "Icon 38",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "food",
+    "at": {
+     "x": 781.25,
+     "y": 437.62
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0140",
+    "name": "Icon 39",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "icon",
+    "iconId": "drink",
+    "at": {
+     "x": 790.2,
+     "y": 474.28
+    },
+    "sizing": "screen",
+    "sizeM": 6,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0141",
+    "name": "North trail",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "North trail",
+    "at": {
+     "x": 920,
+     "y": 500
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0142",
+    "name": "Savannah loop",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Savannah loop",
+    "at": {
+     "x": 726.93,
+     "y": 777.69
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0143",
+    "name": "Lake",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Lake",
+    "at": {
+     "x": 325.22,
+     "y": 800.07
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0144",
+    "name": "Staff yard",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Staff yard",
+    "at": {
+     "x": 84.2,
+     "y": 546.57
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0145",
+    "name": "Entrance",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Entrance",
+    "at": {
+     "x": 225.47,
+     "y": 250.26
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0146",
+    "name": "Aviary walk",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Aviary walk",
+    "at": {
+     "x": 619.14,
+     "y": 183.55
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0147",
+    "name": "Nocturnal house",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Nocturnal house",
+    "at": {
+     "x": 903.27,
+     "y": 407.79
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0148",
+    "name": "Kids zone",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "label",
+    "text": "Kids zone",
+    "at": {
+     "x": 816.64,
+     "y": 716.81
+    },
+    "sizing": "screen",
+    "size": 16,
+    "rotationDeg": 0
+   },
+   {
+    "id": "o-0149",
+    "name": "Measure 1",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "measure",
+    "mode": "distance",
+    "points": [
+     {
+      "x": 200,
+      "y": 500
+     },
+     {
+      "x": 800,
+      "y": 500
+     }
+    ]
+   },
+   {
+    "id": "o-0150",
+    "name": "Measure 2",
+    "phase": 1,
+    "locked": false,
+    "hidden": false,
+    "type": "measure",
+    "mode": "area",
+    "points": [
+     {
+      "x": 20,
+      "y": 20
+     },
+     {
+      "x": 80,
+      "y": 20
+     },
+     {
+      "x": 80,
+      "y": 60
+     },
+     {
+      "x": 20,
+      "y": 60
+     }
+    ]
+   }
+  ],
+  "speciesLibrary": [],
+  "titleBlock": {
+   "showLegend": true,
+   "showScale": true,
+   "showNorth": true
+  },
+  "snapshots": []
+ }
+}

@@ -26,7 +26,11 @@ export const LIMITS = {
   mapMaxM: 100_000,
 } as const;
 
-const id = z.string().min(1).max(LIMITS.idChars).regex(/^[\w-]+$/);
+const id = z
+  .string()
+  .min(1)
+  .max(LIMITS.idChars)
+  .regex(/^[\w-]+$/);
 const text = (max: number) => z.string().max(max);
 const num = z.number();
 const nonNeg = z.number().min(0);
@@ -147,7 +151,9 @@ export const objectSchema = z.discriminatedUnion('type', [
   }),
 ]);
 
-const areaRequirement = z.strictObject({ baseM2: nonNeg.max(1e7), perExtraM2: nonNeg.max(1e7) }).nullable();
+const areaRequirement = z
+  .strictObject({ baseM2: nonNeg.max(1e7), perExtraM2: nonNeg.max(1e7) })
+  .nullable();
 
 export const speciesRequirementSchema = z.strictObject({
   id,
@@ -164,13 +170,18 @@ export const speciesRequirementSchema = z.strictObject({
   }),
   includedInBase: z.number().int().min(1).max(999),
   groupSize: z.strictObject({ min: count, max: count }).optional(),
-  temperatureC: z.strictObject({ min: z.number().min(-100).max(100), max: z.number().min(-100).max(100) }).optional(),
+  temperatureC: z
+    .strictObject({ min: z.number().min(-100).max(100), max: z.number().min(-100).max(100) })
+    .optional(),
   barrierGrade: z.number().int().min(1).max(6).optional(),
   origin: z.enum(['user', 'starter']),
   verified: z.boolean(),
 });
 
-const iso = z.string().max(40).regex(/^\d{4}-\d{2}-\d{2}T[\d:.]+Z$/);
+const iso = z
+  .string()
+  .max(40)
+  .regex(/^\d{4}-\d{2}-\d{2}T[\d:.]+Z$/);
 
 export const planSettingsSchema = z.strictObject({
   mapPresetId: id,
@@ -233,7 +244,9 @@ const planShape = z.strictObject({
       heightPx: z.number().int().positive().max(20_000),
     })
     .optional(),
-  snapshots: z.array(z.strictObject({ id, name: text(LIMITS.nameChars), createdAt: iso })).max(LIMITS.snapshots),
+  snapshots: z
+    .array(z.strictObject({ id, name: text(LIMITS.nameChars), createdAt: iso }))
+    .max(LIMITS.snapshots),
 });
 
 /** Every point a plan stores, for the bounds check. */
@@ -260,14 +273,19 @@ const BOUNDS_SLACK_M = 1;
 export const planSchema = planShape.superRefine((plan, ctx) => {
   const { mapWidthM: w, mapHeightM: h } = plan.settings;
   const outside = planPoints(plan.objects as MapObject[]).find(
-    (p) => p.x < -BOUNDS_SLACK_M || p.y < -BOUNDS_SLACK_M || p.x > w + BOUNDS_SLACK_M || p.y > h + BOUNDS_SLACK_M,
+    (p) =>
+      p.x < -BOUNDS_SLACK_M ||
+      p.y < -BOUNDS_SLACK_M ||
+      p.x > w + BOUNDS_SLACK_M ||
+      p.y > h + BOUNDS_SLACK_M,
   );
   if (outside) {
     ctx.addIssue({ code: 'custom', message: 'A point lies outside the map', path: ['objects'] });
   }
   const ids = new Set<string>();
   for (const o of plan.objects) {
-    if (ids.has(o.id)) ctx.addIssue({ code: 'custom', message: 'Duplicate object id', path: ['objects'] });
+    if (ids.has(o.id))
+      ctx.addIssue({ code: 'custom', message: 'Duplicate object id', path: ['objects'] });
     ids.add(o.id);
   }
 });
@@ -279,7 +297,13 @@ export const planFileSchema = z.strictObject({
   app: z.strictObject({ name: text(LIMITS.shortText), version: text(20) }),
   plan: planSchema,
   assets: z
-    .record(id, z.string().max(LIMITS.fileBytes).regex(/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/))
+    .record(
+      id,
+      z
+        .string()
+        .max(LIMITS.fileBytes)
+        .regex(/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/),
+    )
     .optional(),
 });
 

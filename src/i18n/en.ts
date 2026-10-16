@@ -35,6 +35,19 @@ export const en = {
       noscriptBody:
         'The planner runs entirely in your browser, so it needs JavaScript turned on. Nothing is sent to a server.',
       loading: 'Loading the planner…',
+      boot: {
+        heading: 'Opening the planner',
+        progress: 'Loading progress',
+        download: 'Downloading the planner',
+        start: 'Starting up',
+        storage: 'Checking this browser’s storage',
+        open: 'Opening your plan',
+        draw: 'Drawing the map',
+        ready: 'Ready',
+        error: 'The planner couldn’t start. Check your connection and try again.',
+        reload: 'Reload the page',
+        artLabel: 'A habitat being traced on a small zoo map',
+      },
     },
     help: {
       title: 'Help',
@@ -246,6 +259,12 @@ export const en = {
   planner: {
     appLabel: 'Zoo planner',
     loadingError: 'The planner couldn’t start. Try reloading the page.',
+    crash: {
+      title: 'Something went wrong',
+      body: 'The planner hit a problem it couldn’t recover from. Your plan was saved in this browser a moment ago. Save a copy to a file, then reload.',
+      save: 'Save plan file',
+      reload: 'Reload the planner',
+    },
     regions: {
       topBar: 'Plan',
       tools: 'Tools',
@@ -262,7 +281,7 @@ export const en = {
       zoomIn: 'Zoom in',
       zoomOut: 'Zoom out',
       fit: 'Fit map',
-      minimap: 'Overview map. Select a point to jump there.',
+      minimap: 'Overview map. Click a point to jump there, or press Enter to show the whole map.',
       minimapHide: 'Hide overview',
       minimapShow: 'Show overview',
       scaleBar: (label: string) => `Scale: this bar is ${label}`,
@@ -289,7 +308,6 @@ export const en = {
       export: 'Export',
       mapSettings: 'Map settings',
       shortcuts: 'Keyboard shortcuts',
-      help: 'Help',
       saving: 'Saving…',
       saved: 'Saved',
       notSaved: 'Not saved yet',
@@ -310,7 +328,12 @@ export const en = {
       label: 'Label',
       measure: 'Measure',
       optionsLabel: 'Tool options',
-      shapeModes: { polygon: 'Polygon', rect: 'Rectangle', ellipse: 'Ellipse', freehand: 'Freehand' },
+      shapeModes: {
+        polygon: 'Polygon',
+        rect: 'Rectangle',
+        ellipse: 'Ellipse',
+        freehand: 'Freehand',
+      },
       shape: 'Shape',
       kind: 'Kind',
       type: 'Type',
@@ -348,16 +371,25 @@ export const en = {
       lengthSoFar: (len: string) => `Length so far ${len}.`,
       pointRemoved: (n: number) => `Removed point. ${n} left.`,
       cancelled: 'Drawing cancelled.',
-      created: (name: string, area: string, pct: string) => `${name} created. ${area}, ${pct} of the map.`,
+      created: (name: string, area: string, pct: string) =>
+        `${name} created. ${area}, ${pct} of the map.`,
       createdLine: (name: string, length: string) => `${name} created. ${length} long.`,
       createdPoint: (name: string) => `${name} placed.`,
-      measured: (value: string) => `Measured ${value}. Press Enter to keep it on the map or Escape to discard it.`,
-      selfIntersects: 'The outline crosses itself, so the shape can’t be finished. Move or remove a point.',
+      measured: (value: string) =>
+        `Measured ${value}. Press Enter to keep it on the map or Escape to discard it.`,
+      selfIntersects:
+        'The outline crosses itself, so the shape can’t be finished. Move or remove a point.',
       tooFewPoints: 'Place at least 3 points to make a shape.',
       noArea: 'The points are in a line, so the shape has no area.',
       needTwoPoints: 'Place at least 2 points.',
       snapped: (target: string) => `Snapped to ${target}.`,
-      snapTargets: { vertex: 'a corner', midpoint: 'the middle of an edge', edge: 'an edge', grid: 'the grid', none: '' },
+      snapTargets: {
+        vertex: 'a corner',
+        midpoint: 'the middle of an edge',
+        edge: 'an edge',
+        grid: 'the grid',
+        none: '',
+      },
       readoutArea: 'Area so far',
       readoutPerimeter: 'Perimeter',
       readoutLength: 'Length so far',
@@ -410,11 +442,13 @@ export const en = {
       selected: (description: string) => `Selected ${description}.`,
       selectedMany: (n: number) => `${n} objects selected.`,
       cleared: 'Selection cleared.',
-      locked: (name: string) => `${name} is locked. Unlock it in the Objects panel or Inspector to change it.`,
+      locked: (name: string) =>
+        `${name} is locked. Unlock it in the Objects panel or Inspector to change it.`,
       end: 'Last object. Press Tab again to leave the map.',
       vertexMode: (name: string, n: number) =>
         `Editing points of ${name}. ${n} points. Tab moves between points, arrow keys move a point, Insert adds a point, Delete removes one, Escape finishes.`,
-      vertex: (i: number, n: number, x: string, y: string) => `Point ${i} of ${n} at ${x}, ${y} meters.`,
+      vertex: (i: number, n: number, x: string, y: string) =>
+        `Point ${i} of ${n} at ${x}, ${y} meters.`,
       vertexDone: 'Finished editing points.',
     },
     describe: {
@@ -453,7 +487,12 @@ export const en = {
       shelter: 'Shelter footprint',
       flying: 'Flying area',
     },
-    habitatKinds: { habitat: 'Habitat', aviary: 'Aviary', aquarium: 'Aquarium', exhibit: 'Exhibit' },
+    habitatKinds: {
+      habitat: 'Habitat',
+      aviary: 'Aviary',
+      aquarium: 'Aquarium',
+      exhibit: 'Exhibit',
+    },
     inspector: {
       tab: 'Inspector',
       heading: 'Inspector',
@@ -485,7 +524,8 @@ export const en = {
       rotateBy: 'Rotate by (°)',
       rotate: 'Rotate',
       points: 'Points',
-      pointsCaption: (name: string) => `Points of ${name}, in meters from the map’s top-left corner`,
+      pointsCaption: (name: string) =>
+        `Points of ${name}, in meters from the map’s top-left corner`,
       point: (n: number) => `Point ${n}`,
       pointX: (n: number) => `Point ${n} x (m)`,
       pointY: (n: number) => `Point ${n} y (m)`,
@@ -529,7 +569,8 @@ export const en = {
       requirementShort: (area: string) => `Short by ${area}`,
       requirementNoData: 'No space needs entered',
       enterNeeds: (name: string) => `Enter space needs for ${name}`,
-      requiredRow: (space: string, need: string, have: string) => `${space}: needs ${need}, has ${have}`,
+      requiredRow: (space: string, need: string, have: string) =>
+        `${space}: needs ${need}, has ${have}`,
       barrierHeading: 'Barrier',
       barrierType: 'Barrier around the habitat',
       barrierNone: 'None',
@@ -588,10 +629,12 @@ export const en = {
       tab: 'Objects',
       heading: 'Objects',
       caption: 'Everything on the map, grouped by themed area',
-      name: 'Name',
-      type: 'Type',
+      nameAndType: 'Name and type',
+      statusLabels: { fits: 'Big enough', noData: 'No space data', noAnimals: 'No animals' },
+      statusShortBy: (area: string) => `${area} short`,
+      /** The line under an object's name: its type, then its animals if it has any. */
+      meta: (type: string, animals: string) => (animals ? `${type}, ${animals}` : type),
       size: 'Size',
-      animals: 'Animals',
       status: 'Status',
       actions: 'Actions',
       unassigned: 'Not in an area',
@@ -614,7 +657,8 @@ export const en = {
     areas: {
       tab: 'Areas',
       heading: 'Themed areas and legend',
-      intro: 'Group habitats and buildings into areas such as “African grasslands”. The legend builds itself from them.',
+      intro:
+        'Group habitats and buildings into areas such as “African grasslands”. The legend builds itself from them.',
       add: 'Add area',
       newName: (n: number) => `Area ${n}`,
       name: 'Area name',
@@ -664,7 +708,8 @@ export const en = {
       status: 'Space check',
       pathsCaption: 'Path length by type',
       length: 'Length',
-      barriersCaption: 'Barrier length by grade (habitat walls shared by two habitats counted once)',
+      barriersCaption:
+        'Barrier length by grade (habitat walls shared by two habitats counted once)',
       grade: 'Grade',
       censusCaption: 'Animal census',
       species: 'Species',
@@ -703,6 +748,7 @@ export const en = {
       snapSuspended: 'Off (Alt held)',
       map: 'Map',
       planned: 'Planned',
+      plannedValue: (area: string, percent: string) => `${area}, ${percent} of the map`,
       toggleSnap: 'Turn snapping on or off',
     },
     dialogs: {
@@ -712,7 +758,8 @@ export const en = {
       apply: 'Apply',
       done: 'Done',
       required: (label: string) => `${label} is required.`,
-      range: (label: string, min: string, max: string) => `${label} must be between ${min} and ${max}.`,
+      range: (label: string, min: string, max: string) =>
+        `${label} must be between ${min} and ${max}.`,
       number: (label: string) => `${label} must be a number.`,
       tooLong: (label: string, max: number) => `${label} can be at most ${max} characters.`,
       errorSummary: 'Please fix the highlighted fields.',
@@ -743,7 +790,8 @@ export const en = {
       area: 'Area (m²)',
       areaImperial: 'Area (ft²)',
       aspect: 'Width to height ratio',
-      aspectHelp: '1 makes a square, circle or regular polygon. 2 makes it twice as wide as it is tall.',
+      aspectHelp:
+        '1 makes a square, circle or regular polygon. 2 makes it twice as wide as it is tall.',
       sides: 'Number of sides',
       rotation: 'Rotation (°)',
       position: 'Place it at',
@@ -819,7 +867,8 @@ export const en = {
       bufferHelp: 'Added to every space requirement. 10% by default; 0 to 50%.',
       shortcuts: 'Keyboard shortcuts',
       singleKeys: 'Single-key shortcuts (such as H for Habitat)',
-      singleKeysHelp: 'They only work while the map has focus. Turn them off if they get in the way of speech input or other keyboard tools.',
+      singleKeysHelp:
+        'They only work while the map has focus. Turn them off if they get in the way of speech input or other keyboard tools.',
       remap: 'Change shortcut keys',
       remapLabel: (action: string) => `Key for ${action}`,
       remapHelp: 'One letter, digit or symbol. Leave blank for the default.',
@@ -830,10 +879,12 @@ export const en = {
     },
     shortcutsDialog: {
       title: 'Keyboard shortcuts',
-      intro: 'Single-key shortcuts only work while the map has focus. On a Mac, use ⌘ for Ctrl and ⌥ for Alt.',
+      intro:
+        'Single-key shortcuts only work while the map has focus. On a Mac, use ⌘ for Ctrl and ⌥ for Alt.',
       key: 'Key',
       action: 'Action',
       off: 'Single-key shortcuts are off. Turn them on in Map settings.',
+      offTag: '(off)',
     },
     plans: {
       title: 'Your plans',
@@ -843,6 +894,7 @@ export const en = {
       objects: 'Objects',
       actions: 'Actions',
       open: (name: string) => `Open ${name}`,
+      openButton: 'Open',
       duplicate: (name: string) => `Duplicate ${name}`,
       rename: (name: string) => `Rename ${name}`,
       delete: (name: string) => `Delete ${name}`,
@@ -892,11 +944,13 @@ export const en = {
       svg: 'SVG picture',
       print: 'Print or save as PDF',
       summary: 'Text summary',
-      summaryHelp: 'Every area, habitat, size and species, as a document that works with screen readers.',
+      summaryHelp:
+        'Every area, habitat, size and species, as a document that works with screen readers.',
       share: 'Share link',
       shareHelp:
         'The whole plan goes inside the link, after the # sign, so it never reaches a server. Anyone with the link can see the plan. Tracing images are never included.',
-      shareTooLong: (n: string) => `This link is ${n} characters long, which some apps cut short. Saving a file is more reliable.`,
+      shareTooLong: (n: string) =>
+        `This link is ${n} characters long, which some apps cut short. Saving a file is more reliable.`,
       copy: 'Copy link',
       copied: 'Link copied.',
       copyFailed: 'Couldn’t copy. Select the link and copy it yourself.',
@@ -935,7 +989,8 @@ export const en = {
       base: (space: string) => `${space}: base area (m²)`,
       extra: (space: string) => `${space}: each extra animal (m²)`,
       includedInBase: 'Animals covered by the base area',
-      includedHelp: 'We don’t yet know whether the game’s base area covers one animal or a whole group. 1 is the default.',
+      includedHelp:
+        'We don’t yet know whether the game’s base area covers one animal or a whole group. 1 is the default.',
       barrierGrade: 'Barrier grade needed',
       verified: 'I checked these numbers in the game',
       remove: (name: string) => `Remove ${name}`,
@@ -943,9 +998,16 @@ export const en = {
       empty: 'No species added yet.',
       edit: (name: string) => `Edit ${name}`,
       save: 'Save species',
-      spaces: { land: 'Land', water: 'Water', deepWater: 'Deep water', climbing: 'Climbing', flying: 'Flying' },
+      spaces: {
+        land: 'Land',
+        water: 'Water',
+        deepWater: 'Deep water',
+        climbing: 'Climbing',
+        flying: 'Flying',
+      },
       optional: 'Leave blank if the species doesn’t need this kind of space.',
-      formula: 'Required area = (base + extra animals × area per extra animal) × (1 + safety margin).',
+      formula:
+        'Required area = (base + extra animals × area per extra animal) × (1 + safety margin).',
     },
     templates: {
       title: 'Insert template',
@@ -976,7 +1038,8 @@ export const en = {
     },
     tracing: {
       title: 'Tracing image',
-      intro: 'Put your own top-down screenshot under the map to trace over. It stays on this device and is never uploaded or put in share links.',
+      intro:
+        'Put your own top-down screenshot under the map to trace over. It stays on this device and is never uploaded or put in share links.',
       choose: 'Choose image…',
       replace: 'Replace image…',
       remove: 'Remove image',

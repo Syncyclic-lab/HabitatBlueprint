@@ -1,0 +1,222 @@
+/* The planner's loading screen (static HTML in planner.astro). */
+
+.planner-host {
+  position: relative;
+  min-height: calc(100dvh - 3.5rem);
+}
+
+.boot-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: var(--s-5);
+  background: var(--paper);
+  transition: opacity 400ms var(--ease-out);
+}
+
+.boot-screen.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.boot-card {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
+  width: min(26rem, 100%);
+  padding: var(--s-6) var(--s-5);
+  border: var(--border-strong);
+  border-radius: var(--r-panel);
+  background: var(--surface);
+  text-align: center;
+}
+
+.boot-card h1 {
+  font-size: var(--t-h3);
+}
+
+.boot-art {
+  width: 11rem;
+  height: auto;
+}
+
+.boot-art .ground {
+  fill: var(--grass);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.boot-art .path {
+  fill: none;
+  stroke: #e8eced;
+  stroke-width: 5;
+}
+
+.boot-art .done-habitat {
+  fill: var(--savanna);
+  stroke: #13201a;
+  stroke-width: 2;
+}
+
+.boot-art .pond {
+  fill: #3fb7e0;
+  stroke: #13201a;
+  stroke-width: 1.5;
+}
+
+.boot-art .tracing {
+  fill: var(--savanna);
+  fill-opacity: 0;
+  stroke: #13201a;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation:
+    boot-trace 2.4s var(--ease-out) infinite,
+    boot-fill 2.4s var(--ease-out) infinite;
+}
+
+.boot-art .vertex {
+  fill: #ffffff;
+  stroke: #13201a;
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: boot-vertex 2.4s steps(1) infinite;
+}
+
+.boot-art .vertex:nth-of-type(2) {
+  animation-delay: 0.35s;
+}
+
+.boot-art .vertex:nth-of-type(3) {
+  animation-delay: 0.7s;
+}
+
+.boot-art .vertex:nth-of-type(4) {
+  animation-delay: 1.05s;
+}
+
+@keyframes boot-trace {
+  0% {
+    stroke-dashoffset: 220;
+  }
+  60%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes boot-fill {
+  0%,
+  55% {
+    fill-opacity: 0;
+  }
+  70%,
+  92% {
+    fill-opacity: 1;
+  }
+  100% {
+    fill-opacity: 0;
+  }
+}
+
+@keyframes boot-vertex {
+  0% {
+    opacity: 0;
+  }
+  5%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.boot-progress {
+  display: grid;
+  gap: var(--s-2);
+  width: 100%;
+}
+
+.boot-progress progress {
+  appearance: none;
+  width: 100%;
+  height: 0.875rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--tint);
+  overflow: hidden;
+}
+
+.boot-progress progress::-webkit-progress-bar {
+  background: var(--tint);
+}
+
+.boot-progress progress::-webkit-progress-value {
+  background: var(--keeper);
+  transition: width 200ms linear;
+}
+
+.boot-progress progress::-moz-progress-bar {
+  background: var(--keeper);
+}
+
+.boot-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-weight: 700;
+}
+
+.boot-row [data-boot-pct] {
+  font-family: var(--font-mono);
+}
+
+.boot-detail {
+  min-height: 1.4em;
+  color: var(--ink-muted);
+  font-size: var(--t-small);
+  font-variant-numeric: tabular-nums;
+}
+
+.boot-error {
+  display: none;
+}
+
+.boot-screen.is-error .boot-error {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: center;
+}
+
+.boot-screen.is-error .boot-art .tracing,
+.boot-screen.is-error .boot-art .vertex {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-art .tracing {
+    animation: none;
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+  }
+
+  .boot-art .vertex {
+    animation: none;
+    opacity: 1;
+  }
+
+  .boot-screen {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .boot-progress progress {
+    border-color: CanvasText;
+  }
+}

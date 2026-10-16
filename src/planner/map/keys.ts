@@ -36,7 +36,14 @@ import {
   setTool,
 } from '../tools/drawing.ts';
 import { isDrawingTool } from '../tools/tools.ts';
-import { deleteVertex, enterVertexMode, exitVertexMode, insertVertex, nextVertex, nudgeVertex } from './vertexMode.ts';
+import {
+  deleteVertex,
+  enterVertexMode,
+  exitVertexMode,
+  insertVertex,
+  nextVertex,
+  nudgeVertex,
+} from './vertexMode.ts';
 
 const t = en.planner;
 
